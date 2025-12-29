@@ -1,58 +1,74 @@
-# Svelte library
+# Bref: a truly Svelte-esque UI Component Library
 
-Everything you need to build a Svelte library, powered by [`sv`](https://npmjs.com/package/sv).
+Bref is a Svelte UI component library designed to be minimal, flexible, and easy to use.
+Think of it as, what if `Shadcn/ui` was built specifically for Svelte, used only CSS styling and no Tailwind CSS, fully embracing Svelte's unique capabilities and idioms.
 
-Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
+## Installation
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```sh
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+```
+npm install bref-ui
 ```
 
-## Developing
+## Usage
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```tsx
+<script lang="ts">
+  import { Button } from 'bref-ui';
+</script>
+<Button onclick={() => console.log('Clicked!')}>Click Me</Button>
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+## Why Bref?
 
-## Building
+There are excellent Svelte component libraries out there. [Flowbite Svelte](https://github.com/themesberg/flowbite-svelte) and [shadcn-svelte](https://github.com/huntabyte/shadcn-svelte) are doing great work, and you should check them out.
 
-To build your library:
+Bref takes a different approach:
 
-```sh
-npm pack
-```
+- **Pure CSS**: Uses Svelte's built-in scoped styling instead of Tailwind CSS. If you chose Svelte for its elegant styling solution, Bref keeps that promise.
+- **Minimal**: Only essential components, nothing extra.
+- **Flexible**: Use as an npm package or copy components directly into your project with our CLI tool (WIP).
 
-To create a production version of your showcase app:
+## Base Components
 
-```sh
-npm run build
-```
+- Buttons
+  - [ ] IconButton
+  - [ ] Button
+- [ ] TextField
+- [ ] Avatar
+- [ ] Skeleton
+- [ ] Spinner
+- Progress
+  - [ ] CircularProgress
+  - [ ] LinearProgress
+- [ ] Pill
+- [ ] Badge
+- [ ] Popover
+- [ ] Tooltip
+- [ ] Select
+- [ ] Radio
+- [ ] Checkbox
+- [ ] Switch
 
-You can preview the production build with `npm run preview`.
+## Section Components
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- [ ] Navbar
+- [ ] Sidebar
+- [ ] Card
+- [ ] Modal
+- [ ] Accordion
+- [ ] Tabs
+- [ ] Table
+- [ ] Form
+- [ ] Toast
 
-## Publishing
+## Marketing Components
 
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
+- [ ] Hero
+- [ ] Features
+- [ ] Pricing
+- [ ] FAQ
+- [ ] Testimonials
+- [ ] Call to Action
+- [ ] Footer
 
-To publish your library to [npm](https://www.npmjs.com):
-
-```sh
-npm publish
-```
+> If you need something you don't see here, feel free to open an issue or a PR!
