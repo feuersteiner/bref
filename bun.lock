@@ -11,7 +11,7 @@
       "devDependencies": {
         "@eslint/compat": "^1.4.0",
         "@eslint/js": "^9.39.1",
-        "@fontsource-variable/jost": "^5.2.8",
+        "@fontsource/meow-script": "^5.2.8",
         "@sveltejs/adapter-auto": "^7.0.0",
         "@sveltejs/kit": "^2.49.1",
         "@sveltejs/package": "^2.5.7",
@@ -108,11 +108,11 @@
 
     "@eslint/plugin-kit": ["@eslint/plugin-kit@0.4.1", "", { "dependencies": { "@eslint/core": "^0.17.0", "levn": "^0.4.1" } }, "sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA=="],
 
-    "@fontsource-variable/jost": ["@fontsource-variable/jost@5.2.8", "", {}, "sha512-+VDDHpbhgZ9A8KeHb7/LUMRR1LILVKIscNhVRSDzn3tFXoi1mFA/OhO8CZL/u2OujoGjZANjOdUZIgaxclxyjw=="],
-
     "@fontsource-variable/material-symbols-outlined": ["@fontsource-variable/material-symbols-outlined@5.2.30", "", {}, "sha512-BjSx7nqvISJs2Pjd8sBH583AnD4k6dD4Em7AVISoLXzbX3PIFWAE2GPm13LlCys8u8idkyUd62L8yn6ts6DdbA=="],
 
     "@fontsource-variable/material-symbols-rounded": ["@fontsource-variable/material-symbols-rounded@5.2.30", "", {}, "sha512-gBzw/YCbbz9j4nJXx8Qsp6fsoTAc1VctB5dRlpcGi4i17lETUENsRNudp/ba5p7SVEsvV/MmnUvMJUUWcSzzYQ=="],
+
+    "@fontsource/meow-script": ["@fontsource/meow-script@5.2.8", "", {}, "sha512-CU9fHmlE4FAhTmL0AA0hH9N0CkEfyDTMbMLYd7cRJhk/s95jng0PrgZ4tkUOczHieCzPMWJ7FQLja/VmK20NAQ=="],
 
     "@humanfs/core": ["@humanfs/core@0.19.1", "", {}, "sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA=="],
 
