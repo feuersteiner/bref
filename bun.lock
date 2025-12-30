@@ -12,6 +12,7 @@
         "@eslint/compat": "^1.4.0",
         "@eslint/js": "^9.39.1",
         "@fontsource/meow-script": "^5.2.8",
+        "@fontsource/spectral": "^5.2.8",
         "@sveltejs/adapter-auto": "^7.0.0",
         "@sveltejs/kit": "^2.49.1",
         "@sveltejs/package": "^2.5.7",
@@ -113,6 +114,8 @@
     "@fontsource-variable/material-symbols-rounded": ["@fontsource-variable/material-symbols-rounded@5.2.30", "", {}, "sha512-gBzw/YCbbz9j4nJXx8Qsp6fsoTAc1VctB5dRlpcGi4i17lETUENsRNudp/ba5p7SVEsvV/MmnUvMJUUWcSzzYQ=="],
 
     "@fontsource/meow-script": ["@fontsource/meow-script@5.2.8", "", {}, "sha512-CU9fHmlE4FAhTmL0AA0hH9N0CkEfyDTMbMLYd7cRJhk/s95jng0PrgZ4tkUOczHieCzPMWJ7FQLja/VmK20NAQ=="],
+
+    "@fontsource/spectral": ["@fontsource/spectral@5.2.8", "", {}, "sha512-0CqZ8/z8A38BdeSz5t2NSd5tCO1R9P1k7SF2VpRLMbZTMSSR6+2Dk0ZBMfEQK/IrBLQS1HgHLMqpdTwRpnKpGQ=="],
 
     "@humanfs/core": ["@humanfs/core@0.19.1", "", {}, "sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA=="],
 
