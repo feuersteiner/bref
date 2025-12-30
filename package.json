@@ -53,13 +53,15 @@
 		"svelte-check": "^4.3.4",
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.48.1",
-		"vite": "^7.2.6"
+		"vite": "^7.2.6",
+		"lodash-es": "^4.17.22"
 	},
 	"keywords": [
 		"svelte"
 	],
 	"dependencies": {
 		"@fontsource-variable/material-symbols-outlined": "^5.2.30",
-		"@fontsource-variable/material-symbols-rounded": "^5.2.30"
+		"@fontsource-variable/material-symbols-rounded": "^5.2.30",
+		"colord": "^2.9.3"
 	}
 }
