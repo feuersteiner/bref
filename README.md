@@ -37,6 +37,19 @@ Bref takes a different approach:
 - **Pure CSS**: Uses Svelte's built-in scoped styling instead of Tailwind CSS. If you chose Svelte for its elegant styling solution, Bref keeps that promise.
 - **Minimal**: Only essential components, nothing extra.
 - **Flexible**: Use as an npm package or copy components directly into your project with our CLI tool (WIP).
+- **Batteries included theming**: Just provide your base colors and we handle the rest (see below).
+
+## Theming: Just Bring Your Colors
+
+Bref is a **batteries included** theming solution. You don't need to be a color theory expert or spend hours crafting the perfect palette.
+
+Simply provide your base theme colors, and Bref automatically generates all the necessary CSS variables with proper contrast ratios, hover states, and luminance variations. No more manually calculating shades, tints, or ensuring accessibility compliance.
+
+Bref handles:
+- **Shade generation**: Automatically creates lighter and darker variants
+- **Contrast calculation**: Ensures text remains readable on all backgrounds
+- **State variations**: Hover, active, and disabled states just work
+- **Dark mode**: Seamlessly adapts your palette for dark themes
 
 ## Base Components
 
