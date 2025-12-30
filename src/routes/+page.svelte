@@ -11,6 +11,7 @@
 
 	<DemoSection title="Table of Contents">
 		<ul>
+			<li><a href="#types">Types</a></li>
 			<li><a href="#icons">Icons</a></li>
 			<li><a href="#buttons">Buttons</a></li>
 		</ul>
@@ -20,6 +21,18 @@
 </main>
 
 <style>
+	a {
+		text-decoration: none;
+		color: inherit;
+		display: inline-block;
+		width: 5rem;
+		height: 1.5rem;
+	}
+
+	a:hover {
+		font-weight: bold;
+	}
+
 	main {
 		width: 100vw;
 		min-height: 100vh;
