@@ -31,8 +31,9 @@
 		padding: 1rem;
 		gap: 1rem;
 		flex-direction: column;
-		border-radius: 1rem;
-		background-color: color-mix(in srgb, var(--color-background, gray) 10%, transparent);
+		border-radius: 0.5rem;
+		background-color: white;
+		border: 1px solid #e0e0e0;
 	}
 	code {
 		white-space: pre-wrap;
