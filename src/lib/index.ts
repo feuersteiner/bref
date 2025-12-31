@@ -3,3 +3,4 @@ import '@fontsource-variable/material-symbols-rounded/fill.css';
 import '@fontsource-variable/material-symbols-outlined';
 
 // Reexport your entry components here
+export * from './base/index.ts';

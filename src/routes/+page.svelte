@@ -1,20 +1,29 @@
 <script lang="ts">
+	import { initializeThemeMode, toggleThemeMode } from '../lib/base/theme/mode.ts';
+	import type { ThemeMode } from '../lib/base/theme/types.ts';
 	import DemoAuthor from '$lib/internal/demo-author.svelte';
 	import DemoHeader from '$lib/internal/demo-header.svelte';
 	import DemoIconSection from '$lib/internal/demo-icon-section.svelte';
 	import DemoSection from '$lib/internal/demo-section.svelte';
 	import DemoTypes from '$lib/internal/demo-types.svelte';
+
+	let themeMode: ThemeMode = $state(initializeThemeMode());
+	const onThemeToggle = () => {
+		const newMode = themeMode === 'dark' ? 'light' : 'dark';
+		toggleThemeMode(newMode);
+		themeMode = newMode;
+	};
 </script>
 
 <main>
 	<DemoHeader />
-
 	<DemoSection title="Table of Contents">
 		<ul>
 			<li><a href="#types">Types</a></li>
 			<li><a href="#icons">Icons</a></li>
 			<li><a href="#buttons">Buttons</a></li>
 		</ul>
+		<button onclick={onThemeToggle}>Toggle Theme</button>
 	</DemoSection>
 	<DemoTypes />
 	<DemoIconSection />
