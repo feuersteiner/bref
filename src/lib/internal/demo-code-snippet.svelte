@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { delay } from 'lodash-es';
 	const {
 		snippet
 	}: {
@@ -11,7 +10,7 @@
 	const onCopyClick = () => {
 		navigator.clipboard.writeText(snippet).then(() => {
 			hasCopied = true;
-			delay(() => (hasCopied = false), 3000);
+			setTimeout(() => (hasCopied = false), 3000);
 		});
 	};
 </script>

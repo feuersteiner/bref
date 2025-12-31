@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { cloneDeep, map } from 'lodash-es';
 	import { initializeThemeMode } from './mode.ts';
 	import { DEFAULT_THEME, type ThemeMode, type ThemeProps } from './types.js';
 	import { onMount, type Snippet } from 'svelte';
@@ -19,8 +18,8 @@
 	let ready = $state(false);
 
 	onMount(() => {
-		const lightTheme: ThemeProps = cloneDeep(theme);
-		const darkTheme: ThemeProps = cloneDeep(theme);
+		const lightTheme: ThemeProps = structuredClone(theme);
+		const darkTheme: ThemeProps = structuredClone(theme);
 		const darkBackground = lightTheme.surfaceHex.background;
 		const lightForeground = lightTheme.surfaceHex.foreground;
 
@@ -28,19 +27,19 @@
 		darkTheme.surfaceHex.foreground = darkBackground;
 
 		const lightMode: ThemeMode = 'light';
-		map(lightTheme.paletteHex, (value, color) =>
+		Object.entries(lightTheme.paletteHex).forEach(([color, value]) =>
 			setCSSProperty(`--color-${lightMode}-${color}`, value)
 		);
-		map(lightTheme.surfaceHex, (value, surface) =>
+		Object.entries(lightTheme.surfaceHex).forEach(([surface, value]) =>
 			setCSSProperty(`--color-${lightMode}-${surface}`, value)
 		);
 		setCSSProperty(`--color-${lightMode}-border`, lightTheme.border.colorHex);
 
 		const darkMode: ThemeMode = 'dark';
-		map(darkTheme.paletteHex, (value, color) =>
+		Object.entries(darkTheme.paletteHex).forEach(([color, value]) =>
 			setCSSProperty(`--color-${darkMode}-${color}`, value)
 		);
-		map(darkTheme.surfaceHex, (value, surface) =>
+		Object.entries(darkTheme.surfaceHex).forEach(([surface, value]) =>
 			setCSSProperty(`--color-${darkMode}-${surface}`, value)
 		);
 		setCSSProperty(`--color-${darkMode}-border`, darkTheme.border.colorHex);
