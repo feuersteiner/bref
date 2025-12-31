@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Icon from '$lib/base/icon/icon.svelte';
+	import DemoAuthor from '$lib/internal/demo-author.svelte';
 	import DemoHeader from '$lib/internal/demo-header.svelte';
 	import DemoIconSection from '$lib/internal/demo-icon-section.svelte';
 	import DemoSection from '$lib/internal/demo-section.svelte';
@@ -18,6 +18,7 @@
 	</DemoSection>
 	<DemoTypes />
 	<DemoIconSection />
+	<DemoAuthor />
 </main>
 
 <style>
@@ -32,7 +33,6 @@
 	a:hover {
 		font-weight: bold;
 	}
-
 	main {
 		width: 100vw;
 		min-height: 100vh;
