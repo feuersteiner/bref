@@ -32,8 +32,8 @@
 		gap: 1rem;
 		flex-direction: column;
 		border-radius: 0.75rem;
-		background: rgba(255, 255, 255, 0.6);
-		border: 1px solid rgba(180, 170, 150, 0.3);
+		background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+		border: 1px solid color-mix(in srgb, var(--color-border) 30%, transparent);
 		backdrop-filter: blur(8px);
 	}
 	code {

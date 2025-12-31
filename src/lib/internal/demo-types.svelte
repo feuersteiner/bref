@@ -54,8 +54,8 @@
 		font-family: monospace;
 		font-size: 0.8125rem;
 		padding: 0.25rem 0.5rem;
-		background: #f5f5f5;
-		border: 1px solid #e0e0e0;
+		background: color-mix(in srgb, var(--color-background) 80%, var(--color-foreground));
+		border: 1px solid var(--color-border);
 		border-radius: 0.5rem;
 	}
 </style>

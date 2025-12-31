@@ -24,6 +24,6 @@
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
-		color: gray;
+		color: color-mix(in srgb, var(--color-foreground) 50%, var(--color-background));
 	}
 </style>
