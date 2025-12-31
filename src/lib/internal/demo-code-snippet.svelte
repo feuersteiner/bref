@@ -31,9 +31,10 @@
 		padding: 1rem;
 		gap: 1rem;
 		flex-direction: column;
-		border-radius: 0.5rem;
-		background-color: white;
-		border: 1px solid #e0e0e0;
+		border-radius: 0.75rem;
+		background: rgba(255, 255, 255, 0.6);
+		border: 1px solid rgba(180, 170, 150, 0.3);
+		backdrop-filter: blur(8px);
 	}
 	code {
 		white-space: pre-wrap;
@@ -42,10 +43,12 @@
 		font-family: monospace;
 		font-weight: 400;
 		text-align: left;
+		opacity: 60%;
+		font-size: small;
 	}
 	code,
 	pre {
-		width: 100%; 
+		width: 100%;
 		height: fit-content;
 	}
 	pre {
