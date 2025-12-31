@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '@fontsource-variable/material-symbols-rounded/fill.css';
-	import '@fontsource-variable/material-symbols-outlined';
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import type { IconProps } from './types.ts';
 
@@ -19,8 +18,8 @@
 
 <style>
 	span {
-		font-family: 'Material Symbols Outlined Variable';
-		font-weight: normal;
+		font-family: 'Material Symbols Rounded Variable';
+		font-weight: 200;
 		font-style: normal;
 		display: inline-block;
 		line-height: 1;
@@ -33,7 +32,8 @@
 	}
 
 	.filled {
-		font-family: 'Material Symbols Rounded Variable';
+		font-variation-settings: 'FILL' 1;
+		font-weight: 500;
 	}
 
 	.x-small {
