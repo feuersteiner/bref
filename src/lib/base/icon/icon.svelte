@@ -52,27 +52,27 @@
 		font-size: 3rem;
 	}
 	.foreground {
-		color: var(--color-foreground-base);
+		color: var(--color-foreground);
 	}
 	.primary {
-		color: var(--color-primary-base);
+		color: var(--color-primary);
 	}
 	.secondary {
-		color: var(--color-secondary-base);
+		color: var(--color-secondary);
 	}
 	.success {
-		color: var(--color-success-base);
+		color: var(--color-success);
 	}
 	.warning {
-		color: var(--color-warning-base);
+		color: var(--color-warning);
 	}
 	.danger {
-		color: var(--color-danger-base);
+		color: var(--color-danger);
 	}
 	.background {
-		color: var(--color-background-base);
+		color: var(--color-background);
 	}
 	.info {
-		color: var(--color-info-base);
+		color: var(--color-info);
 	}
 </style>
