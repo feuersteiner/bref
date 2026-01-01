@@ -55,24 +55,24 @@
 		color: var(--color-foreground);
 	}
 	.primary {
-		color: var(--color-primary);
+		color: var(--color-primary-base);
 	}
 	.secondary {
-		color: var(--color-secondary);
+		color: var(--color-secondary-base);
 	}
 	.success {
-		color: var(--color-success);
+		color: var(--color-success-base);
 	}
 	.warning {
-		color: var(--color-warning);
+		color: var(--color-warning-base);
 	}
 	.danger {
-		color: var(--color-danger);
+		color: var(--color-danger-base);
 	}
 	.background {
 		color: var(--color-background);
 	}
 	.info {
-		color: var(--color-info);
+		color: var(--color-info-base);
 	}
 </style>
