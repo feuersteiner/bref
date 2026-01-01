@@ -43,6 +43,9 @@
 			setCSSProperty(`--color-${lightMode}-${surface}`, value)
 		);
 		setCSSProperty(`--color-${lightMode}-border`, lightTheme.border.colorHex);
+		setCSSProperty(`--border-width`, `${theme.border.widthPx}px`);
+		setCSSProperty(`--border-radius`, `${theme.border.radiusRem}rem`);
+		setCSSProperty(`--spacing`, `${theme.spacingRem}rem`);
 
 		const darkMode: ThemeMode = 'dark';
 		Object.entries(darkTheme.paletteHex).forEach(([color, value]) => {
@@ -111,6 +114,19 @@
 		transition:
 			background-color 100ms,
 			color 100ms;
+	}
+
+	:global(*) {
+		color: var(--color-foreground);
+	}
+
+	:global(body),
+	:global(div) {
+		background-color: var(--color-background);
+	}
+
+	:global(div) {
+		gap: var(--spacing);
 	}
 
 	:global(:root[data-theme='dark']) {
