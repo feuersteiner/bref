@@ -55,25 +55,25 @@ Bref handles:
 
 ## Base Components
 
-- [ ] Icon
-- [ ] Button
-- [ ] Icon Button
+- [x] Icon
+- [x] Button
+- [x] Icon Button
+- [ ] Spinner
 - [ ] Input
 - [ ] Textarea
+- [ ] Avatar
+- [ ] Progress
 - [ ] Select
+- [ ] Slider
+- [ ] Skeleton
 - [ ] Checkbox
+- [ ] Badge
+- [ ] Popover
 - [ ] Radio
 - [ ] Switch
-- [ ] Avatar
 - [ ] Img
-- [ ] Icon
-- [ ] Progress
 - [ ] Meter
-- [ ] Skeleton
-- [ ] Spinner
-- [ ] Badge
 - [ ] Tooltip
-- [ ] Popover
 - [ ] Dialog
 
 ## Section Components
