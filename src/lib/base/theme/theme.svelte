@@ -37,7 +37,6 @@
 	:global(:root),
 	:global(:root[data-theme='light']) {
 		color-scheme: light;
-		--hover-mix: var(--color-foreground);
 		--color-background: var(--color-light-background);
 		--color-background-soft: var(--color-light-background-soft);
 		--color-background-saturated: var(--color-light-background-saturated);
@@ -63,7 +62,6 @@
 
 	:global(:root[data-theme='dark']) {
 		color-scheme: dark;
-		--hover-mix: var(--color-foreground);
 		--color-background: var(--color-dark-background);
 		--color-background-soft: var(--color-dark-background-soft);
 		--color-background-saturated: var(--color-dark-background-saturated);
@@ -77,7 +75,6 @@
 	@media (prefers-color-scheme: dark) {
 		:global(:root:not([data-theme='light'])) {
 			color-scheme: dark;
-			--hover-mix: var(--color-foreground);
 			--color-background: var(--color-dark-background);
 			--color-background-soft: var(--color-dark-background-soft);
 			--color-background-saturated: var(--color-dark-background-saturated);
