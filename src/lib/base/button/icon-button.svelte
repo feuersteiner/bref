@@ -18,14 +18,7 @@
 </script>
 
 <button {...rest} class={`${size} ${color} ${variant}`} class:rounded {disabled} onclick={onClick}>
-	<Icon
-		name={name}
-		contrastMode={variant === 'filled'}
-		{color}
-		filled={filled}
-		ariaLabel={ariaLabel}
-		{size}
-	/>
+	<Icon {name} contrastMode={variant === 'filled'} {color} {filled} {ariaLabel} {size} />
 </button>
 
 <style>
@@ -53,27 +46,27 @@
 	.x-small {
 		width: 1.5rem;
 		height: 1.5rem;
-		border-radius: calc(var(--border-radius) * 0.5);
+		border-radius: calc(var(--border-radius) * 0.75);
 	}
 	.small {
 		width: 2rem;
 		height: 2rem;
-		border-radius: calc(var(--border-radius) * 0.65);
+		border-radius: calc(var(--border-radius));
 	}
 	.medium {
 		width: 2.5rem;
 		height: 2.5rem;
-		border-radius: var(--border-radius);
+		border-radius: calc(var(--border-radius) * 1.25);
 	}
 	.large {
 		width: 3rem;
 		height: 3rem;
-		border-radius: calc(var(--border-radius) * 1.25);
+		border-radius: calc(var(--border-radius) * 1.5);
 	}
 	.x-large {
 		width: 4rem;
 		height: 4rem;
-		border-radius: calc(var(--border-radius) * 1.5);
+		border-radius: calc(var(--border-radius) * 2);
 	}
 
 	.rounded {
