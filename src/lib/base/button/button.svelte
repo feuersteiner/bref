@@ -18,7 +18,14 @@
 
 <button {...rest} class={`${size} ${color} ${variant}`} class:wide {disabled} onclick={onClick}>
 	{#if icon}
-		<Icon name={icon.name} contrastMode={variant === 'filled'} {color} filled={icon.filled} ariaLabel={icon.ariaLabel} {size} />
+		<Icon
+			name={icon.name}
+			contrastMode={variant === 'filled'}
+			{color}
+			filled={icon.filled}
+			ariaLabel={icon.ariaLabel}
+			{size}
+		/>
 	{/if}
 	<span>{label}</span>
 </button>
@@ -31,10 +38,15 @@
 		gap: 0.5em;
 		border: none;
 		cursor: pointer;
-		font-weight: 500;
+		font-weight: 600;
 		transition:
 			background-color 0.15s ease,
 			transform 0.08s cubic-bezier(0.34, 1.56, 0.64, 1);
+	}
+	span {
+		cursor: inherit;
+		color: inherit;
+		display: inline-block;
 	}
 
 	button:disabled {
