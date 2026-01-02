@@ -1,5 +1,7 @@
 # Bref: a truly Svelte-esque UI Component Library
 
+**[Live Demo](https://feuersteiner.github.io/bref/)**
+
 Bref is a Svelte UI component library designed to be minimal, flexible, and easy to use.
 Think of it as, what if `Shadcn/ui` was built specifically for Svelte, used only CSS styling and no Tailwind CSS, fully embracing Svelte's unique capabilities and idioms.
 

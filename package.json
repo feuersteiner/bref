@@ -1,6 +1,6 @@
 {
 	"name": "bref-ui",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"description": "A truly Svelte-esque UI component library - minimal, flexible, pure CSS, no Tailwind",
 	"license": "MIT",
 	"author": "feuerstein",
@@ -8,7 +8,7 @@
 		"type": "git",
 		"url": "git+https://github.com/feuersteiner/bref.git"
 	},
-	"homepage": "https://github.com/feuersteiner/bref#readme",
+	"homepage": "https://feuersteiner.github.io/bref/",
 	"bugs": {
 		"url": "https://github.com/feuersteiner/bref/issues"
 	},
