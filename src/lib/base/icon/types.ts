@@ -3793,4 +3793,5 @@ export interface IconProps {
 	size?: Size;
 	color?: Color;
 	ariaLabel?: string;
+	contrastMode?: boolean;
 }
