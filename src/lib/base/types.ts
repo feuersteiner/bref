@@ -9,3 +9,4 @@ export type Color =
 	| 'foreground'
 	| 'background';
 export type Variant = 'filled' | 'soft' | 'ghost';
+export type Speed = 'slow' | 'normal' | 'fast';
