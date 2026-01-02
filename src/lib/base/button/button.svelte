@@ -38,7 +38,7 @@
 		gap: 0.5em;
 		border: none;
 		cursor: pointer;
-		font-weight: 600;
+		font-weight: 500;
 		transition:
 			background-color 0.15s ease,
 			transform 0.08s cubic-bezier(0.34, 1.56, 0.64, 1);
