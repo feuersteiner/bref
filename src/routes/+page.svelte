@@ -3,6 +3,7 @@
 	import type { ThemeMode } from '../lib/base/theme/types.ts';
 	import DemoAuthor from '$lib/internal/demo-author.svelte';
 	import DemoHeader from '$lib/internal/demo-header.svelte';
+	import DemoIconButton from '$lib/internal/demo-icon-button.svelte';
 	import DemoIconSection from '$lib/internal/demo-icon-section.svelte';
 	import DemoSection from '$lib/internal/demo-section.svelte';
 	import DemoTypes from '$lib/internal/demo-types.svelte';
@@ -27,6 +28,7 @@
 	</DemoSection>
 	<DemoTypes />
 	<DemoIconSection />
+	<DemoIconButton />
 	<DemoAuthor />
 </main>
 
