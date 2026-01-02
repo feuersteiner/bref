@@ -4,7 +4,9 @@
 	import Icon from '../icon/icon.svelte';
 
 	const {
-		icon,
+		name,
+		filled,
+		ariaLabel,
 		size = 'medium',
 		color = 'primary',
 		variant = 'filled',
@@ -17,11 +19,11 @@
 
 <button {...rest} class={`${size} ${color} ${variant}`} class:rounded {disabled} onclick={onClick}>
 	<Icon
-		name={icon.name}
+		name={name}
 		contrastMode={variant === 'filled'}
 		{color}
-		filled={icon.filled}
-		ariaLabel={icon.ariaLabel}
+		filled={filled}
+		ariaLabel={ariaLabel}
 		{size}
 	/>
 </button>
@@ -80,166 +82,166 @@
 
 	/* Filled variant */
 	.filled.primary {
-		background-color: var(--color-primary-base);
+		background-color: var(--color-primary);
 		color: var(--color-primary-contrast);
 	}
 	.filled.primary:not(:disabled):hover {
-		background-color: color-mix(in oklch, var(--color-primary-base) 85%, black);
+		background-color: color-mix(in oklch, var(--color-primary) 85%, var(--hover-mix));
 	}
 	.filled.primary:not(:disabled):active {
-		background-color: color-mix(in oklch, var(--color-primary-base) 70%, black);
+		background-color: color-mix(in oklch, var(--color-primary) 70%, var(--hover-mix));
 	}
 	.filled.secondary {
-		background-color: var(--color-secondary-base);
+		background-color: var(--color-secondary);
 		color: var(--color-secondary-contrast);
 	}
 	.filled.secondary:not(:disabled):hover {
-		background-color: color-mix(in oklch, var(--color-secondary-base) 85%, black);
+		background-color: color-mix(in oklch, var(--color-secondary) 85%, var(--hover-mix));
 	}
 	.filled.secondary:not(:disabled):active {
-		background-color: color-mix(in oklch, var(--color-secondary-base) 70%, black);
+		background-color: color-mix(in oklch, var(--color-secondary) 70%, var(--hover-mix));
 	}
 	.filled.success {
-		background-color: var(--color-success-base);
+		background-color: var(--color-success);
 		color: var(--color-success-contrast);
 	}
 	.filled.success:not(:disabled):hover {
-		background-color: color-mix(in oklch, var(--color-success-base) 85%, black);
+		background-color: color-mix(in oklch, var(--color-success) 85%, var(--hover-mix));
 	}
 	.filled.success:not(:disabled):active {
-		background-color: color-mix(in oklch, var(--color-success-base) 70%, black);
+		background-color: color-mix(in oklch, var(--color-success) 70%, var(--hover-mix));
 	}
 	.filled.warning {
-		background-color: var(--color-warning-base);
+		background-color: var(--color-warning);
 		color: var(--color-warning-contrast);
 	}
 	.filled.warning:not(:disabled):hover {
-		background-color: color-mix(in oklch, var(--color-warning-base) 85%, black);
+		background-color: color-mix(in oklch, var(--color-warning) 85%, var(--hover-mix));
 	}
 	.filled.warning:not(:disabled):active {
-		background-color: color-mix(in oklch, var(--color-warning-base) 70%, black);
+		background-color: color-mix(in oklch, var(--color-warning) 70%, var(--hover-mix));
 	}
 	.filled.danger {
-		background-color: var(--color-danger-base);
+		background-color: var(--color-danger);
 		color: var(--color-danger-contrast);
 	}
 	.filled.danger:not(:disabled):hover {
-		background-color: color-mix(in oklch, var(--color-danger-base) 85%, black);
+		background-color: color-mix(in oklch, var(--color-danger) 85%, var(--hover-mix));
 	}
 	.filled.danger:not(:disabled):active {
-		background-color: color-mix(in oklch, var(--color-danger-base) 70%, black);
+		background-color: color-mix(in oklch, var(--color-danger) 70%, var(--hover-mix));
 	}
 	.filled.info {
-		background-color: var(--color-info-base);
+		background-color: var(--color-info);
 		color: var(--color-info-contrast);
 	}
 	.filled.info:not(:disabled):hover {
-		background-color: color-mix(in oklch, var(--color-info-base) 85%, black);
+		background-color: color-mix(in oklch, var(--color-info) 85%, var(--hover-mix));
 	}
 	.filled.info:not(:disabled):active {
-		background-color: color-mix(in oklch, var(--color-info-base) 70%, black);
+		background-color: color-mix(in oklch, var(--color-info) 70%, var(--hover-mix));
 	}
 	.filled.foreground {
 		background-color: var(--color-foreground);
 		color: var(--color-background);
 	}
 	.filled.foreground:not(:disabled):hover {
-		background-color: color-mix(in oklch, var(--color-foreground) 85%, black);
+		background-color: color-mix(in oklch, var(--color-foreground) 85%, var(--hover-mix));
 	}
 	.filled.foreground:not(:disabled):active {
-		background-color: color-mix(in oklch, var(--color-foreground) 70%, black);
+		background-color: color-mix(in oklch, var(--color-foreground) 70%, var(--hover-mix));
 	}
 	.filled.background {
 		background-color: var(--color-background);
 		color: var(--color-foreground);
 	}
 	.filled.background:not(:disabled):hover {
-		background-color: color-mix(in oklch, var(--color-background) 85%, black);
+		background-color: color-mix(in oklch, var(--color-background) 85%, var(--hover-mix));
 	}
 	.filled.background:not(:disabled):active {
-		background-color: color-mix(in oklch, var(--color-background) 70%, black);
+		background-color: color-mix(in oklch, var(--color-background) 70%, var(--hover-mix));
 	}
 
 	/* Soft variant */
 	.soft.primary {
 		background-color: var(--color-primary-soft);
-		color: var(--color-primary-base);
+		color: var(--color-primary);
 	}
 	.soft.primary:not(:disabled):hover {
-		background-color: color-mix(in oklch, var(--color-primary-soft) 85%, black);
+		background-color: color-mix(in oklch, var(--color-primary-soft) 85%, var(--hover-mix));
 	}
 	.soft.primary:not(:disabled):active {
-		background-color: color-mix(in oklch, var(--color-primary-soft) 70%, black);
+		background-color: color-mix(in oklch, var(--color-primary-soft) 70%, var(--hover-mix));
 	}
 	.soft.secondary {
 		background-color: var(--color-secondary-soft);
-		color: var(--color-secondary-base);
+		color: var(--color-secondary);
 	}
 	.soft.secondary:not(:disabled):hover {
-		background-color: color-mix(in oklch, var(--color-secondary-soft) 85%, black);
+		background-color: color-mix(in oklch, var(--color-secondary-soft) 85%, var(--hover-mix));
 	}
 	.soft.secondary:not(:disabled):active {
-		background-color: color-mix(in oklch, var(--color-secondary-soft) 70%, black);
+		background-color: color-mix(in oklch, var(--color-secondary-soft) 70%, var(--hover-mix));
 	}
 	.soft.success {
 		background-color: var(--color-success-soft);
-		color: var(--color-success-base);
+		color: var(--color-success);
 	}
 	.soft.success:not(:disabled):hover {
-		background-color: color-mix(in oklch, var(--color-success-soft) 85%, black);
+		background-color: color-mix(in oklch, var(--color-success-soft) 85%, var(--hover-mix));
 	}
 	.soft.success:not(:disabled):active {
-		background-color: color-mix(in oklch, var(--color-success-soft) 70%, black);
+		background-color: color-mix(in oklch, var(--color-success-soft) 70%, var(--hover-mix));
 	}
 	.soft.warning {
 		background-color: var(--color-warning-soft);
-		color: var(--color-warning-base);
+		color: var(--color-warning);
 	}
 	.soft.warning:not(:disabled):hover {
-		background-color: color-mix(in oklch, var(--color-warning-soft) 85%, black);
+		background-color: color-mix(in oklch, var(--color-warning-soft) 85%, var(--hover-mix));
 	}
 	.soft.warning:not(:disabled):active {
-		background-color: color-mix(in oklch, var(--color-warning-soft) 70%, black);
+		background-color: color-mix(in oklch, var(--color-warning-soft) 70%, var(--hover-mix));
 	}
 	.soft.danger {
 		background-color: var(--color-danger-soft);
-		color: var(--color-danger-base);
+		color: var(--color-danger);
 	}
 	.soft.danger:not(:disabled):hover {
-		background-color: color-mix(in oklch, var(--color-danger-soft) 85%, black);
+		background-color: color-mix(in oklch, var(--color-danger-soft) 85%, var(--hover-mix));
 	}
 	.soft.danger:not(:disabled):active {
-		background-color: color-mix(in oklch, var(--color-danger-soft) 70%, black);
+		background-color: color-mix(in oklch, var(--color-danger-soft) 70%, var(--hover-mix));
 	}
 	.soft.info {
 		background-color: var(--color-info-soft);
-		color: var(--color-info-base);
+		color: var(--color-info);
 	}
 	.soft.info:not(:disabled):hover {
-		background-color: color-mix(in oklch, var(--color-info-soft) 85%, black);
+		background-color: color-mix(in oklch, var(--color-info-soft) 85%, var(--hover-mix));
 	}
 	.soft.info:not(:disabled):active {
-		background-color: color-mix(in oklch, var(--color-info-soft) 70%, black);
+		background-color: color-mix(in oklch, var(--color-info-soft) 70%, var(--hover-mix));
 	}
 	.soft.foreground {
 		background-color: var(--color-foreground-soft);
 		color: var(--color-foreground);
 	}
 	.soft.foreground:not(:disabled):hover {
-		background-color: color-mix(in oklch, var(--color-foreground-soft) 85%, black);
+		background-color: color-mix(in oklch, var(--color-foreground-soft) 85%, var(--hover-mix));
 	}
 	.soft.foreground:not(:disabled):active {
-		background-color: color-mix(in oklch, var(--color-foreground-soft) 70%, black);
+		background-color: color-mix(in oklch, var(--color-foreground-soft) 70%, var(--hover-mix));
 	}
 	.soft.background {
 		background-color: var(--color-background-soft);
 		color: var(--color-background);
 	}
 	.soft.background:not(:disabled):hover {
-		background-color: color-mix(in oklch, var(--color-background-soft) 85%, black);
+		background-color: color-mix(in oklch, var(--color-background-soft) 85%, var(--hover-mix));
 	}
 	.soft.background:not(:disabled):active {
-		background-color: color-mix(in oklch, var(--color-background-soft) 70%, black);
+		background-color: color-mix(in oklch, var(--color-background-soft) 70%, var(--hover-mix));
 	}
 
 	/* Ghost variant */
@@ -247,7 +249,7 @@
 		background-color: transparent;
 	}
 	.ghost.primary {
-		color: var(--color-primary-base);
+		color: var(--color-primary);
 	}
 	.ghost.primary:not(:disabled):hover {
 		background-color: color-mix(in srgb, var(--color-primary-soft) 50%, transparent);
@@ -256,7 +258,7 @@
 		background-color: var(--color-primary-soft);
 	}
 	.ghost.secondary {
-		color: var(--color-secondary-base);
+		color: var(--color-secondary);
 	}
 	.ghost.secondary:not(:disabled):hover {
 		background-color: color-mix(in srgb, var(--color-secondary-soft) 50%, transparent);
@@ -265,7 +267,7 @@
 		background-color: var(--color-secondary-soft);
 	}
 	.ghost.success {
-		color: var(--color-success-base);
+		color: var(--color-success);
 	}
 	.ghost.success:not(:disabled):hover {
 		background-color: color-mix(in srgb, var(--color-success-soft) 50%, transparent);
@@ -274,7 +276,7 @@
 		background-color: var(--color-success-soft);
 	}
 	.ghost.warning {
-		color: var(--color-warning-base);
+		color: var(--color-warning);
 	}
 	.ghost.warning:not(:disabled):hover {
 		background-color: color-mix(in srgb, var(--color-warning-soft) 50%, transparent);
@@ -283,7 +285,7 @@
 		background-color: var(--color-warning-soft);
 	}
 	.ghost.danger {
-		color: var(--color-danger-base);
+		color: var(--color-danger);
 	}
 	.ghost.danger:not(:disabled):hover {
 		background-color: color-mix(in srgb, var(--color-danger-soft) 50%, transparent);
@@ -292,7 +294,7 @@
 		background-color: var(--color-danger-soft);
 	}
 	.ghost.info {
-		color: var(--color-info-base);
+		color: var(--color-info);
 	}
 	.ghost.info:not(:disabled):hover {
 		background-color: color-mix(in srgb, var(--color-info-soft) 50%, transparent);

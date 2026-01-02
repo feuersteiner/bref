@@ -9,8 +9,8 @@ export interface BaseButtonProps {
 	variant?: Variant;
 }
 
-export interface IconButtonProps extends BaseButtonProps {
-	icon: Pick<IconProps, 'name' | 'filled' | 'ariaLabel'>;
+export interface IconButtonProps
+	extends BaseButtonProps, Pick<IconProps, 'name' | 'filled' | 'ariaLabel'> {
 	rounded?: boolean;
 }
 
