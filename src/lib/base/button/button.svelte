@@ -57,6 +57,10 @@
 		border: none;
 		cursor: pointer;
 		font-weight: 500;
+		width: fit-content;
+		min-width: fit-content;
+		height: fit-content;
+		min-height: fit-content;
 		padding: var(--internal-btn-padding-y) var(--internal-btn-padding-x);
 		font-size: var(--internal-btn-font-size);
 		border-radius: var(--internal-btn-radius);
