@@ -55,14 +55,15 @@ Bref handles:
 
 ## Base Components
 
+- [ ] Icon
 - [ ] Button
+- [ ] Icon Button
 - [ ] Input
 - [ ] Textarea
 - [ ] Select
 - [ ] Checkbox
 - [ ] Radio
 - [ ] Switch
-- [ ] Label
 - [ ] Avatar
 - [ ] Img
 - [ ] Icon
