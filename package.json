@@ -1,6 +1,6 @@
 {
 	"name": "bref-ui",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"description": "A truly Svelte-esque UI component library - minimal, flexible, pure CSS, no Tailwind",
 	"license": "MIT",
 	"author": "feuerstein",
@@ -15,6 +15,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run prepack",
+		"demo-site-build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"prepack": "svelte-kit sync && svelte-package && publint",
@@ -46,9 +47,10 @@
 	"devDependencies": {
 		"@eslint/compat": "^1.4.0",
 		"@eslint/js": "^9.39.1",
-		"@fontsource/spectral": "^5.2.8",
 		"@fontsource/meow-script": "^5.2.8",
+		"@fontsource/spectral": "^5.2.8",
 		"@sveltejs/adapter-auto": "^7.0.0",
+		"@sveltejs/adapter-static": "^3.0.10",
 		"@sveltejs/kit": "^2.49.1",
 		"@sveltejs/package": "^2.5.7",
 		"@sveltejs/vite-plugin-svelte": "^6.2.1",
