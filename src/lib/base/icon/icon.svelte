@@ -8,11 +8,18 @@
 		filled = false,
 		size = 'medium',
 		color = 'foreground',
+		ariaLabel,
 		...rest
 	}: IconProps & SvelteHTMLElements['span'] = $props();
 </script>
 
-<span {...rest} class:filled class={`${size} ${color}`} aria-hidden="true">
+<span
+	{...rest}
+	class:filled
+	class={`${size} ${color}`}
+	aria-label={ariaLabel}
+	aria-hidden={ariaLabel ? 'false' : 'true'}
+>
 	{name}
 </span>
 
