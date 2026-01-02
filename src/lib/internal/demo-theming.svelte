@@ -7,6 +7,7 @@
 	} from '../base/theme/index.ts';
 	import Button from '../base/button/button.svelte';
 	import DemoSection from './demo-section.svelte';
+	import DemoCodeSnippet from './demo-code-snippet.svelte';
 	import { untrack } from 'svelte';
 
 	let themeMode: ThemeMode = $state('light');
@@ -25,6 +26,31 @@
 
 	const paletteColors = Object.entries(DEFAULT_THEME.paletteHex) as [string, string][];
 	const surfaceColors = ['background', 'foreground'] as const;
+
+	const usageSnippet = `<script lang="ts">
+  import { Theme } from 'bref/base/theme';
+<\/script>
+
+<!-- Use default theme -->
+<Theme />
+
+<!-- Or customize with your own colors -->
+<Theme
+  paletteHex={{
+    primary: '#6366f1',
+    secondary: '#ec4899',
+    success: '#22c55e',
+    warning: '#f59e0b',
+    danger: '#ef4444',
+    info: '#3b82f6'
+  }}
+  surfaceHex={{
+    background: '#f8fafc',
+    foreground: '#1e293b'
+  }}
+  border={{ widthPx: 1, radiusRem: 0.5, colorHex: '#e2e8f0' }}
+  spacingRem={1}
+/>`;
 </script>
 
 {#snippet colorCard(name: string, isSurface: boolean = false)}
@@ -123,6 +149,15 @@
 			Hover states are delegated to components using <code>color-mix()</code> for context-aware derivation.
 		</li>
 	</ul>
+
+	<!-- Usage -->
+
+	<h3>Usage</h3>
+	<p class="description">
+		Add the Theme component at the root of your app. It generates CSS custom properties and handles
+		light/dark mode switching.
+	</p>
+	<DemoCodeSnippet snippet={usageSnippet} />
 </DemoSection>
 
 <style>
