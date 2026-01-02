@@ -24,9 +24,6 @@ export interface ThemeProps {
 export interface ColorTokenProps {
 	soft: string;
 	base: string;
-	hover: string;
-	active: string;
-	muted: string;
 	contrast: string;
 }
 
