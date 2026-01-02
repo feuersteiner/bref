@@ -4,6 +4,7 @@
 	import DemoHeader from '$lib/internal/demo-header.svelte';
 	import DemoIconButton from '$lib/internal/demo-icon-button.svelte';
 	import DemoIconSection from '$lib/internal/demo-icon-section.svelte';
+	import DemoLoading from '$lib/internal/demo-loading.svelte';
 	import DemoSection from '$lib/internal/demo-section.svelte';
 	import DemoTheming from '$lib/internal/demo-theming.svelte';
 	import DemoTypes from '$lib/internal/demo-types.svelte';
@@ -17,6 +18,7 @@
 			<li><a href="#types">Types</a></li>
 			<li><a href="#buttons">Buttons</a></li>
 			<li><a href="#icons">Icons</a></li>
+			<li><a href="#loading">Loading</a></li>
 		</ul>
 	</DemoSection>
 	<DemoTheming />
@@ -24,6 +26,7 @@
 	<DemoIconSection />
 	<DemoButton />
 	<DemoIconButton />
+	<DemoLoading />
 	<DemoAuthor />
 </main>
 

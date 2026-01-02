@@ -58,7 +58,11 @@ Bref handles:
 - [x] Icon
 - [x] Button
 - [x] Icon Button
-- [ ] Spinner
+- [x] Loading
+  - [x] Circular
+  - [x] Pulsing Dots
+  - [x] Morphing Shapes
+  - [x] Textual
 - [ ] Input
 - [ ] Textarea
 - [ ] Avatar
