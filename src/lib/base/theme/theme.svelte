@@ -1,64 +1,36 @@
 <script lang="ts">
-	import generateColorTokens from './color-tokens.ts';
+	import { setCSSProperty, setThemeMode } from './color-tokens.ts';
 	import { initializeThemeMode } from './mode.ts';
-	import { DEFAULT_THEME, type ThemeMode, type ThemeProps } from './types.js';
-	import { onMount, type Snippet } from 'svelte';
+	import { DEFAULT_THEME, type ThemeProps } from './types.js';
 
 	const userTheme: ThemeProps | undefined | Partial<ThemeProps> = $props();
 
 	const theme: ThemeProps = {
 		...DEFAULT_THEME,
-		...userTheme
+		...userTheme,
+		paletteHex: {
+			...DEFAULT_THEME.paletteHex,
+			...(userTheme?.paletteHex ?? {})
+		},
+		surfaceHex: {
+			...DEFAULT_THEME.surfaceHex,
+			...(userTheme?.surfaceHex ?? {})
+		},
+		border: {
+			...DEFAULT_THEME.border,
+			...(userTheme?.border ?? {})
+		}
 	};
 
-	const setCSSProperty = (key: string, value: string) => {
-		const prefixedKey = key.startsWith('--') ? key : `--${key}`;
-		document.documentElement.style.setProperty(prefixedKey, value);
-	};
+	$effect.pre(() => {
+		setThemeMode(theme, 'light');
+		setThemeMode(theme, 'dark');
 
-	const setColorTokens = (colorKey: string, baseColor: string, mode: ThemeMode) => {
-		const tokens = generateColorTokens(baseColor, mode);
-		Object.entries(tokens).forEach(([variant, value]) => {
-			setCSSProperty(`--color-${mode}-${colorKey}-${variant}`, value);
-		});
-	};
-
-	let ready = $state(false);
-
-	onMount(() => {
-		const lightTheme: ThemeProps = structuredClone(theme);
-		const darkTheme: ThemeProps = structuredClone(theme);
-		const darkBackground = lightTheme.surfaceHex.background;
-		const lightForeground = lightTheme.surfaceHex.foreground;
-
-		darkTheme.surfaceHex.background = lightForeground;
-		darkTheme.surfaceHex.foreground = darkBackground;
-
-		const lightMode: ThemeMode = 'light';
-		Object.entries(lightTheme.paletteHex).forEach(([color, value]) => {
-			setCSSProperty(`--color-${lightMode}-${color}`, value);
-			setColorTokens(color, value, lightMode);
-		});
-		Object.entries(lightTheme.surfaceHex).forEach(([surface, value]) =>
-			setCSSProperty(`--color-${lightMode}-${surface}`, value)
-		);
-		setCSSProperty(`--color-${lightMode}-border`, lightTheme.border.colorHex);
 		setCSSProperty(`--border-width`, `${theme.border.widthPx}px`);
 		setCSSProperty(`--border-radius`, `${theme.border.radiusRem}rem`);
 		setCSSProperty(`--spacing`, `${theme.spacingRem}rem`);
 
-		const darkMode: ThemeMode = 'dark';
-		Object.entries(darkTheme.paletteHex).forEach(([color, value]) => {
-			setCSSProperty(`--color-${darkMode}-${color}`, value);
-			setColorTokens(color, value, darkMode);
-		});
-		Object.entries(darkTheme.surfaceHex).forEach(([surface, value]) =>
-			setCSSProperty(`--color-${darkMode}-${surface}`, value)
-		);
-		setCSSProperty(`--color-${darkMode}-border`, darkTheme.border.colorHex);
-
 		initializeThemeMode();
-		ready = true;
 	});
 </script>
 
@@ -111,9 +83,6 @@
 		--color-border: var(--color-light-border);
 		--color-background: var(--color-light-background);
 		--color-foreground: var(--color-light-foreground);
-		transition:
-			background-color 100ms,
-			color 100ms;
 	}
 
 	:global(*) {
@@ -121,11 +90,11 @@
 	}
 
 	:global(body),
-	:global(div) {
+	:global(main) {
 		background-color: var(--color-background);
 	}
 
-	:global(div) {
+	:global(*) {
 		gap: var(--spacing);
 	}
 

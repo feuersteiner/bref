@@ -1,5 +1,5 @@
 import { colord } from 'colord';
-import type { ColorTokenProps, ThemeMode } from './types.ts';
+import type { ColorTokenProps, ThemeMode, ThemeProps } from './types.ts';
 
 /**
  * Generates a soft background color from the base color.
@@ -38,9 +38,7 @@ const generateBaseColor = (baseColor: string, _mode: ThemeMode): string =>
  * @returns A hex color string for the hover state
  */
 const generateHoverColor = (baseColor: string, mode: ThemeMode): string =>
-	mode === 'light'
-		? colord(baseColor).darken(0.1).toHex()
-		: colord(baseColor).lighten(0.1).toHex();
+	mode === 'light' ? colord(baseColor).darken(0.1).toHex() : colord(baseColor).lighten(0.1).toHex();
 
 /**
  * Generates an active/pressed state color from the base color.
@@ -53,9 +51,7 @@ const generateHoverColor = (baseColor: string, mode: ThemeMode): string =>
  * @returns A hex color string for the active state
  */
 const generateActiveColor = (baseColor: string, mode: ThemeMode): string =>
-	mode === 'light'
-		? colord(baseColor).darken(0.2).toHex()
-		: colord(baseColor).lighten(0.2).toHex();
+	mode === 'light' ? colord(baseColor).darken(0.2).toHex() : colord(baseColor).lighten(0.2).toHex();
 
 /**
  * Generates a muted/desaturated version of the base color.
@@ -101,4 +97,72 @@ const generateColorTokens = (color: string, mode: ThemeMode): ColorTokenProps =>
 	contrast: generateContrastColor(color, mode)
 });
 
-export default generateColorTokens;
+/**
+ * Sets a CSS custom property on the document root element.
+ * Automatically prefixes the key with '--' if not already present.
+ *
+ * @param key - The CSS custom property name (with or without '--' prefix)
+ * @param value - The value to assign to the CSS custom property
+ */
+const setCSSProperty = (key: string, value: string) => {
+	const prefixedKey = key.startsWith('--') ? key : `--${key}`;
+	document.documentElement.style.setProperty(prefixedKey, value);
+};
+
+/**
+ * Generates and applies a complete set of color tokens as CSS custom properties.
+ * Each token is set as `--color-{mode}-{colorKey}-{variant}` on the document root.
+ *
+ * @param colorKey - The semantic name for the color (e.g., 'primary', 'success')
+ * @param baseColor - The base color in any valid CSS color format
+ * @param mode - The current theme mode ('light' or 'dark')
+ */
+const setColorTokens = (colorKey: string, baseColor: string, mode: ThemeMode) => {
+	const tokens = generateColorTokens(baseColor, mode);
+	Object.entries(tokens).forEach(([variant, value]) => {
+		setCSSProperty(`--color-${mode}-${colorKey}-${variant}`, value);
+	});
+};
+
+/**
+ * Flips the background and foreground colors of the theme for dark mode.
+ * In dark mode, the background becomes the foreground and vice versa.
+ * This ensures appropriate contrast and readability in dark themes.
+ *
+ * @param theme - The theme configuration object containing surface colors
+ * @param mode - The current theme mode ('light' or 'dark')
+ * @returns A new ThemeProps object with flipped background and foreground if in dark mode
+ */
+const flipThemeBackgroundAndForeground = (theme: ThemeProps, mode: ThemeMode): ThemeProps => {
+	const flippedTheme = structuredClone(theme);
+	if (mode === 'dark') {
+		const darkBackground = theme.surfaceHex.background;
+		const lightForeground = theme.surfaceHex.foreground;
+		flippedTheme.surfaceHex.background = lightForeground;
+		flippedTheme.surfaceHex.foreground = darkBackground;
+	}
+	return flippedTheme;
+};
+
+/**
+ * Applies all color tokens for a specific theme mode as CSS custom properties.
+ * Sets palette colors, surface colors, and border color for the given mode.
+ *
+ * @param theme - The theme configuration object containing palette and surface colors
+ * @param mode - The theme mode ('light' or 'dark') to apply
+ */
+const setThemeMode = (userTheme: ThemeProps, mode: ThemeMode) => {
+	const theme = flipThemeBackgroundAndForeground(userTheme, mode);
+
+	Object.entries(theme.paletteHex).forEach(([color, value]) => {
+		setCSSProperty(`--color-${mode}-${color}`, value);
+		setColorTokens(color, value, mode);
+	});
+	Object.entries(theme.surfaceHex).forEach(([surface, value]) => {
+		setCSSProperty(`--color-${mode}-${surface}`, value);
+	});
+	setCSSProperty(`--color-${mode}-border`, theme.border.colorHex);
+};
+
+export { generateColorTokens, setCSSProperty, setThemeMode };
+export default setColorTokens;
