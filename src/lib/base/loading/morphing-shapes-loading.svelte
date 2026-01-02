@@ -4,37 +4,74 @@
 	const { size = 'medium', color = 'primary' }: LoadingProps = $props();
 </script>
 
-<div class={`${size} ${color}`} role="status" aria-label="Loading"></div>
+<div class={`${size} ${color}`} role="status" aria-label="Loading">
+	<div class="shape"></div>
+</div>
 
 <style>
 	div {
 		--internal-shape-size: 2rem;
-
 		width: var(--internal-shape-size);
 		height: var(--internal-shape-size);
+	}
+
+	.shape {
+		width: 100%;
+		height: 100%;
 		background-color: var(--internal-current-color);
-		animation: morph 2s ease-in-out infinite;
+		animation:
+			morph 4s ease-in-out infinite,
+			rotate 8s linear infinite;
 	}
 
 	@keyframes morph {
 		0% {
-			border-radius: 0%;
-			transform: rotate(0deg);
-		}
-		25% {
-			border-radius: 50% 0% 50% 0%;
-			transform: rotate(90deg);
-		}
-		50% {
+			/* Circle */
 			border-radius: 50%;
-			transform: rotate(180deg);
+			corner-shape: round;
 		}
-		75% {
-			border-radius: 0% 50% 0% 50%;
-			transform: rotate(270deg);
+		14% {
+			/* Squircle */
+			border-radius: 35%;
+			corner-shape: squircle;
+		}
+		28% {
+			/* Blob with bevel corners */
+			border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+			corner-shape: bevel;
+		}
+		42% {
+			/* Scoop corners */
+			border-radius: 40%;
+			corner-shape: scoop;
+		}
+		57% {
+			/* Organic blob */
+			border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+			corner-shape: round;
+		}
+		71% {
+			/* Notched */
+			border-radius: 30%;
+			corner-shape: notch;
+		}
+		85% {
+			/* Another blob with squircle */
+			border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%;
+			corner-shape: squircle;
 		}
 		100% {
-			border-radius: 0%;
+			/* Back to circle */
+			border-radius: 50%;
+			corner-shape: round;
+		}
+	}
+
+	@keyframes rotate {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
 			transform: rotate(360deg);
 		}
 	}

@@ -37,11 +37,11 @@
 		<MorphingShapesLoading size="x-large" />
 	</div>
 	<h3>Textual Loading</h3>
-	<div>
-		<TextualLoading words="Loading" />
-		<TextualLoading words="Thinking" intervalMs={250} />
-		<TextualLoading words="Processing" intervalMs={750} />
-		<TextualLoading words="Done" dots={false} />
+	<div class="textual">
+		<TextualLoading />
+		<TextualLoading words={['Thinking', 'Processing', 'Generating']} />
+		<TextualLoading words={['Please wait', 'Wait please']} hideDots />
+		<TextualLoading words={['Ready', 'Set', 'Go']} pauseSpeed="slow" typeSpeed="slow" />
 	</div>
 	<h3>Colors</h3>
 	<div>
@@ -68,10 +68,14 @@
 
 <MorphingShapesLoading size="large" color="success" />
 
+<!-- Uses 20 fun default words -->
+<TextualLoading />
+
+<!-- Custom words -->
 <TextualLoading
-  words="Thinking"
-  dots={true}
-  intervalMs={500}
+  words={['Thinking', 'Processing']}
+  typeSpeed="fast"
+  pauseSpeed="slow"
 />`}
 	/>
 </DemoSection>
@@ -83,5 +87,9 @@
 		align-items: center;
 		justify-content: center;
 		flex-wrap: wrap;
+	}
+
+	.textual {
+		flex-direction: column;
 	}
 </style>

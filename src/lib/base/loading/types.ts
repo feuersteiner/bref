@@ -1,4 +1,4 @@
-import type { Color, Size } from '../types.ts';
+import type { Color, Size, Speed } from '../types.ts';
 
 export interface LoadingProps {
 	size?: Size;
@@ -6,7 +6,8 @@ export interface LoadingProps {
 }
 
 export interface TextualLoadingProps extends LoadingProps {
-	words?: string;
-    dots?: boolean;
-    intervalMs?: 250 | 500 | 750 | 1000;
+	words?: string[];
+	hideDots?: boolean;
+	typeSpeed?: Speed;
+	pauseSpeed?: Speed;
 }
