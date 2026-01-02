@@ -23,7 +23,7 @@ export interface ThemeProps {
 
 export interface ColorTokenProps {
 	soft: string;
-	base: string;
+	saturated: string;
 	contrast: string;
 }
 

@@ -67,35 +67,35 @@
 		color: var(--color-foreground-contrast);
 	}
 	.primary {
-		color: var(--color-primary-base);
+		color: var(--color-primary);
 	}
 	.primary.contrastMode {
 		color: var(--color-primary-contrast);
 	}
 
 	.secondary {
-		color: var(--color-secondary-base);
+		color: var(--color-secondary);
 	}
 	.secondary.contrastMode {
 		color: var(--color-secondary-contrast);
 	}
 
 	.success {
-		color: var(--color-success-base);
+		color: var(--color-success);
 	}
 	.success.contrastMode {
 		color: var(--color-success-contrast);
 	}
 
 	.warning {
-		color: var(--color-warning-base);
+		color: var(--color-warning);
 	}
 	.warning.contrastMode {
 		color: var(--color-warning-contrast);
 	}
 
 	.danger {
-		color: var(--color-danger-base);
+		color: var(--color-danger);
 	}
 	.danger.contrastMode {
 		color: var(--color-danger-contrast);
@@ -109,7 +109,7 @@
 	}
 
 	.info {
-		color: var(--color-info-base);
+		color: var(--color-info);
 	}
 	.info.contrastMode {
 		color: var(--color-info-contrast);
