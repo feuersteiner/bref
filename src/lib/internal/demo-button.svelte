@@ -23,6 +23,8 @@
 		<Button label="Warning" color="warning" onClick={() => {}} />
 		<Button label="Danger" color="danger" onClick={() => {}} />
 		<Button label="Info" color="info" onClick={() => {}} />
+		<Button label="Foreground" color="foreground" onClick={() => {}} />
+		<Button label="Background" color="background" onClick={() => {}} />
 	</div>
 	<h3>Sizes</h3>
 	<div>

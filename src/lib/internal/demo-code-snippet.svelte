@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Button from '$lib/base/button/button.svelte';
+
 	const {
 		snippet
 	}: {
@@ -7,7 +9,7 @@
 
 	let hasCopied = $state(false);
 
-	const onCopyClick = () => {
+	const onClick = () => {
 		navigator.clipboard.writeText(snippet).then(() => {
 			hasCopied = true;
 			setTimeout(() => (hasCopied = false), 3000);
@@ -19,7 +21,18 @@
 	<pre>
 		<code>{snippet}</code>
 	</pre>
-	<button onclick={onCopyClick}>copy</button>
+	<Button
+		{onClick}
+		wide
+		size="small"
+		color="foreground"
+		variant="soft"
+		label={hasCopied ? 'Copied!' : 'Copy Code'}
+		icon={{
+			name: hasCopied ? 'check' : 'copy_all'
+		}}
+		disabled={hasCopied}
+	/>
 </div>
 
 <style>
@@ -54,15 +67,5 @@
 		align-items: flex-start;
 		display: flex;
 		justify-content: flex-start;
-	}
-	button {
-		display: flex;
-		padding: 0.5rem 1rem;
-		width: 100%;
-		height: fit-content;
-		text-transform: capitalize;
-		align-items: center;
-		cursor: pointer;
-		justify-content: center;
 	}
 </style>
