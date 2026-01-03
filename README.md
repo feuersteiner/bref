@@ -63,6 +63,7 @@ Bref handles:
   - [x] Pulsing Dots
   - [x] Morphing Shapes
   - [x] Textual
+- [x] Tree View
 - [ ] Input
 - [ ] Textarea
 - [ ] Avatar

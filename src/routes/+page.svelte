@@ -7,6 +7,7 @@
 	import DemoLoading from '$lib/internal/demo-loading.svelte';
 	import DemoSection from '$lib/internal/demo-section.svelte';
 	import DemoTheming from '$lib/internal/demo-theming.svelte';
+	import DemoTreeView from '$lib/internal/demo-tree-view.svelte';
 	import DemoTypes from '$lib/internal/demo-types.svelte';
 </script>
 
@@ -19,6 +20,7 @@
 			<li><a href="#buttons">Buttons</a></li>
 			<li><a href="#icons">Icons</a></li>
 			<li><a href="#loading">Loading</a></li>
+			<li><a href="#tree-view">Tree View</a></li>
 		</ul>
 	</DemoSection>
 	<DemoTheming />
@@ -27,6 +29,7 @@
 	<DemoButton />
 	<DemoIconButton />
 	<DemoLoading />
+	<DemoTreeView />
 	<DemoAuthor />
 </main>
 
