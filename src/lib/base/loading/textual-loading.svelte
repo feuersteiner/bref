@@ -30,7 +30,7 @@
 		words = DEFAULT_WORDS,
 		hideDots = false,
 		typeSpeed = 'normal',
-		pauseSpeed = 'normal'
+		pauseSpeed = 'normal',
 	}: TextualLoadingProps = $props();
 
 	const TYPE_MS = { slow: 100, normal: 50, fast: 25 } as const;
@@ -95,14 +95,17 @@
 <style>
 	span {
 		--internal-font-size: 1rem;
+		--internal-height: 1.5rem;
 
 		font-size: var(--internal-font-size);
+		line-height: var(--internal-height);
+		max-height: var(--internal-height);
 		color: var(--internal-current-color);
 		font-weight: 500;
 	}
 
 	.cursor {
-		animation: blink 0.7s step-end infinite;
+		animation: blink 0.8s step-end infinite;
 	}
 
 	@keyframes blink {
@@ -118,22 +121,27 @@
 	/* Sizes */
 	.x-small {
 		--internal-font-size: 0.75rem;
+		--internal-height: 1.125rem;
 	}
 
 	.small {
 		--internal-font-size: 0.875rem;
+		--internal-height: 1.3125rem;
 	}
 
 	.medium {
 		--internal-font-size: 1rem;
+		--internal-height: 1.5rem;
 	}
 
 	.large {
 		--internal-font-size: 1.125rem;
+		--internal-height: 1.6875rem;
 	}
 
 	.x-large {
 		--internal-font-size: 1.25rem;
+		--internal-height: 1.875rem;
 	}
 
 	/* Color mappings */
