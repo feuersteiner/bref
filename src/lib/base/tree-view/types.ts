@@ -9,19 +9,18 @@ export interface NodeDataProps {
 }
 
 export interface BaseTreeProps {
+	onSelect: (id: string) => void;
+	selectedIds: Set<string>;
 	size?: Size;
-	iconFill?: IconProps['filled'];
-	onSelectionChange?: (selectedIds: Set<string>) => void;
+	filledIcon?: IconProps['filled'];
+	wide?: boolean;
 }
 
 export interface TreeViewProps extends BaseTreeProps {
 	data: NodeDataProps[];
-	multiSelect?: boolean;
 }
 
 export interface TreeNodeProps extends BaseTreeProps {
-	onSelect: (node: NodeDataProps) => void;
 	node: NodeDataProps;
 	level: number;
-	selectedIds?: Set<string>;
 }

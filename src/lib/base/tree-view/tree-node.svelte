@@ -2,7 +2,7 @@
 	import type { TreeNodeProps } from './types.ts';
 	import Icon from '../icon/icon.svelte';
 	import TreeNode from './tree-node.svelte';
-	const { node, level, size, onSelect, selectedIds, iconFill }: TreeNodeProps = $props();
+	const { node, level, size, onSelect, selectedIds, filledIcon, wide }: TreeNodeProps = $props();
 
 	let expanded: boolean = $state(false);
 	let selected: boolean = $derived(selectedIds?.has(node.id) ?? false);
@@ -11,7 +11,7 @@
 
 	const toggleExpand = () => (hasChildren ? (expanded = !expanded) : null);
 
-	const handleSelect = () => onSelect?.(node);
+	const handleSelect = () => onSelect(node.id);
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -21,6 +21,7 @@
 	class:selected
 	style:padding-left="calc({level} * var(--tree-indent))"
 	onclick={handleSelect}
+	class:wide
 >
 	{#if hasChildren}
 		<button class:expanded onclick={toggleExpand}>
@@ -31,7 +32,7 @@
 	{/if}
 
 	{#if node.icon}
-		<Icon name={node.icon} filled={iconFill} {size} color={selected ? 'primary' : undefined} />
+		<Icon name={node.icon} filled={filledIcon} {size} color={selected ? 'primary' : undefined} />
 	{/if}
 
 	<span>{node.label}</span>
@@ -39,7 +40,7 @@
 
 {#if expanded && hasChildren}
 	{#each node.children as child (child.id)}
-		<TreeNode node={child} level={level + 1} {size} {onSelect} {selectedIds} {iconFill} />
+		<TreeNode node={child} level={level + 1} {size} {onSelect} {selectedIds} {filledIcon} {wide} />
 	{/each}
 {/if}
 
@@ -91,5 +92,9 @@
 
 	.spacer {
 		width: 1em;
+	}
+
+	.wide {
+		width: 100%;
 	}
 </style>
