@@ -6,7 +6,6 @@
 	import Header from '$lib/internal/layout/header.svelte';
 
 	const { children } = $props();
-	// page
 </script>
 
 <Theme />
@@ -67,7 +66,6 @@
 		max-height: 100vh;
 		width: 100%;
 		padding: 2rem;
-		/* overflow: hidden; */
 	}
 	main {
 		flex: 1;
