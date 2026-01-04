@@ -35,7 +35,12 @@
 	{/if}
 
 	{#if node.icon}
-		<Icon name={node.icon} filled={filledIcon} {size} color={selected ? 'primary' : undefined} />
+		<Icon
+			name={node.icon}
+			filled={selected || filledIcon}
+			{size}
+			color={selected ? 'primary' : undefined}
+		/>
 	{/if}
 
 	<span>{node.label}</span>
