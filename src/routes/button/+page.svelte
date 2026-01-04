@@ -32,7 +32,9 @@
 		<Button label="Danger" variant="filled" color="danger" onClick={() => {}} />
 		<Button label="Info" variant="filled" color="info" onClick={() => {}} />
 		<Button label="Foreground" variant="filled" color="foreground" onClick={() => {}} />
-		<Button label="Background" variant="filled" color="background" onClick={() => {}} />
+		<span class="background-demo">
+			<Button label="Background" variant="filled" color="background" onClick={() => {}} />
+		</span>
 	</div>
 </Section>
 
@@ -45,7 +47,9 @@
 		<Button label="Danger" variant="soft" color="danger" onClick={() => {}} />
 		<Button label="Info" variant="soft" color="info" onClick={() => {}} />
 		<Button label="Foreground" variant="soft" color="foreground" onClick={() => {}} />
-		<Button label="Background" variant="soft" color="background" onClick={() => {}} />
+		<span class="background-demo">
+			<Button label="Background" variant="soft" color="background" onClick={() => {}} />
+		</span>
 	</div>
 </Section>
 
@@ -58,7 +62,9 @@
 		<Button label="Danger" variant="ghost" color="danger" onClick={() => {}} />
 		<Button label="Info" variant="ghost" color="info" onClick={() => {}} />
 		<Button label="Foreground" variant="ghost" color="foreground" onClick={() => {}} />
-		<Button label="Background" variant="ghost" color="background" onClick={() => {}} />
+		<span class="background-demo">
+			<Button label="Background" variant="ghost" color="background" onClick={() => {}} />
+		</span>
 	</div>
 </Section>
 
@@ -121,5 +127,11 @@
 		flex-direction: column;
 		width: 100%;
 		max-width: 300px;
+	}
+
+	.background-demo {
+		background-color: gray;
+		padding: 0.5rem;
+		border-radius: 0.5rem;
 	}
 </style>

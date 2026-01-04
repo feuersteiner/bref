@@ -40,16 +40,16 @@ export const PAGES: PageProps[] = [
 		icon: 'touch_app',
 		children: [
 			{
-				title: 'Icon Button',
-				description: 'Icon Button for buttons with only an icon',
-				href: '/icon-button',
-				icon: 'adjust'
-			},
-			{
 				title: '(Normal) Button',
 				description: 'A button with label and optional icon',
 				href: '/button',
 				icon: 'buttons_alt'
+			},
+			{
+				title: 'Icon Button',
+				description: 'Icon Button for buttons with only an icon',
+				href: '/icon-button',
+				icon: 'adjust'
 			}
 		]
 	},

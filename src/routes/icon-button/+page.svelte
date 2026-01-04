@@ -33,7 +33,9 @@
 		<IconButton name="favorite" variant="filled" color="danger" onClick={() => {}} />
 		<IconButton name="favorite" variant="filled" color="info" onClick={() => {}} />
 		<IconButton name="favorite" variant="filled" color="foreground" onClick={() => {}} />
-		<IconButton name="favorite" variant="filled" color="background" onClick={() => {}} />
+		<span class="background-demo">
+			<IconButton name="favorite" variant="filled" color="background" onClick={() => {}} />
+		</span>
 	</div>
 </Section>
 
@@ -46,7 +48,9 @@
 		<IconButton name="favorite" variant="soft" color="danger" onClick={() => {}} />
 		<IconButton name="favorite" variant="soft" color="info" onClick={() => {}} />
 		<IconButton name="favorite" variant="soft" color="foreground" onClick={() => {}} />
-		<IconButton name="favorite" variant="soft" color="background" onClick={() => {}} />
+		<span class="background-demo">
+			<IconButton name="favorite" variant="soft" color="background" onClick={() => {}} />
+		</span>
 	</div>
 </Section>
 
@@ -59,7 +63,9 @@
 		<IconButton name="favorite" variant="ghost" color="danger" onClick={() => {}} />
 		<IconButton name="favorite" variant="ghost" color="info" onClick={() => {}} />
 		<IconButton name="favorite" variant="ghost" color="foreground" onClick={() => {}} />
-		<IconButton name="favorite" variant="ghost" color="background" onClick={() => {}} />
+		<span class="background-demo">
+			<IconButton name="favorite" variant="ghost" color="background" onClick={() => {}} />
+		</span>
 	</div>
 </Section>
 
@@ -82,7 +88,9 @@
 		<IconButton name="close" rounded variant="filled" color="danger" onClick={() => {}} />
 		<IconButton name="close" rounded variant="filled" color="info" onClick={() => {}} />
 		<IconButton name="close" rounded variant="filled" color="foreground" onClick={() => {}} />
-		<IconButton name="close" rounded variant="filled" color="background" onClick={() => {}} />
+		<span class="background-demo">
+			<IconButton name="close" rounded variant="filled" color="background" onClick={() => {}} />
+		</span>
 	</div>
 </Section>
 
@@ -95,7 +103,9 @@
 		<IconButton name="close" rounded variant="soft" color="danger" onClick={() => {}} />
 		<IconButton name="close" rounded variant="soft" color="info" onClick={() => {}} />
 		<IconButton name="close" rounded variant="soft" color="foreground" onClick={() => {}} />
-		<IconButton name="close" rounded variant="soft" color="background" onClick={() => {}} />
+		<span class="background-demo">
+			<IconButton name="close" rounded variant="soft" color="background" onClick={() => {}} />
+		</span>
 	</div>
 </Section>
 
@@ -108,7 +118,9 @@
 		<IconButton name="close" rounded variant="ghost" color="danger" onClick={() => {}} />
 		<IconButton name="close" rounded variant="ghost" color="info" onClick={() => {}} />
 		<IconButton name="close" rounded variant="ghost" color="foreground" onClick={() => {}} />
-		<IconButton name="close" rounded variant="ghost" color="background" onClick={() => {}} />
+		<span class="background-demo">
+			<IconButton name="close" rounded variant="ghost" color="background" onClick={() => {}} />
+		</span>
 	</div>
 </Section>
 
@@ -121,7 +133,9 @@
 		<IconButton name="star" filled variant="filled" color="danger" onClick={() => {}} />
 		<IconButton name="star" filled variant="filled" color="info" onClick={() => {}} />
 		<IconButton name="star" filled variant="filled" color="foreground" onClick={() => {}} />
-		<IconButton name="star" filled variant="filled" color="background" onClick={() => {}} />
+		<span class="background-demo">
+			<IconButton name="star" filled variant="filled" color="background" onClick={() => {}} />
+		</span>
 	</div>
 </Section>
 
@@ -134,7 +148,9 @@
 		<IconButton name="star" filled variant="soft" color="danger" onClick={() => {}} />
 		<IconButton name="star" filled variant="soft" color="info" onClick={() => {}} />
 		<IconButton name="star" filled variant="soft" color="foreground" onClick={() => {}} />
-		<IconButton name="star" filled variant="soft" color="background" onClick={() => {}} />
+		<span class="background-demo">
+			<IconButton name="star" filled variant="soft" color="background" onClick={() => {}} />
+		</span>
 	</div>
 </Section>
 
@@ -147,7 +163,9 @@
 		<IconButton name="star" filled variant="ghost" color="danger" onClick={() => {}} />
 		<IconButton name="star" filled variant="ghost" color="info" onClick={() => {}} />
 		<IconButton name="star" filled variant="ghost" color="foreground" onClick={() => {}} />
-		<IconButton name="star" filled variant="ghost" color="background" onClick={() => {}} />
+		<span class="background-demo">
+			<IconButton name="star" filled variant="ghost" color="background" onClick={() => {}} />
+		</span>
 	</div>
 </Section>
 
@@ -160,7 +178,9 @@
 		<IconButton name="edit" disabled variant="filled" color="danger" onClick={() => {}} />
 		<IconButton name="edit" disabled variant="filled" color="info" onClick={() => {}} />
 		<IconButton name="edit" disabled variant="filled" color="foreground" onClick={() => {}} />
-		<IconButton name="edit" disabled variant="filled" color="background" onClick={() => {}} />
+		<span class="background-demo">
+			<IconButton name="edit" disabled variant="filled" color="background" onClick={() => {}} />
+		</span>
 	</div>
 </Section>
 
@@ -173,7 +193,9 @@
 		<IconButton name="edit" disabled variant="soft" color="danger" onClick={() => {}} />
 		<IconButton name="edit" disabled variant="soft" color="info" onClick={() => {}} />
 		<IconButton name="edit" disabled variant="soft" color="foreground" onClick={() => {}} />
-		<IconButton name="edit" disabled variant="soft" color="background" onClick={() => {}} />
+		<span class="background-demo">
+			<IconButton name="edit" disabled variant="soft" color="background" onClick={() => {}} />
+		</span>
 	</div>
 </Section>
 
@@ -186,7 +208,9 @@
 		<IconButton name="edit" disabled variant="ghost" color="danger" onClick={() => {}} />
 		<IconButton name="edit" disabled variant="ghost" color="info" onClick={() => {}} />
 		<IconButton name="edit" disabled variant="ghost" color="foreground" onClick={() => {}} />
-		<IconButton name="edit" disabled variant="ghost" color="background" onClick={() => {}} />
+		<span class="background-demo">
+			<IconButton name="edit" disabled variant="ghost" color="background" onClick={() => {}} />
+		</span>
 	</div>
 </Section>
 
@@ -208,5 +232,11 @@
 		gap: 1rem;
 		align-items: center;
 		justify-content: center;
+	}
+
+	.background-demo {
+		background-color: gray;
+		padding: 0.5rem;
+		border-radius: 0.5rem;
 	}
 </style>
