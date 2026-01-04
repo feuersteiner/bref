@@ -1,10 +1,21 @@
 <script lang="ts">
 	import Icon from '$lib/base/icon/icon.svelte';
-	import { PAGES } from '../layout/types.ts';
+	import { PAGES, type PageProps } from '../layout/types.ts';
 	import { page } from '$app/state';
 
-	const { title, description, icon } =
-		PAGES.find((p) => page.url.pathname.includes(p.href)) ?? PAGES[0];
+	const { title, description, icon } = $derived.by((): PageProps => {
+		if (page.status !== 200) {
+			return {
+				title: 'Error: ' + page.status,
+				description: page.error?.message || 'An unexpected error occurred.',
+				icon: 'error',
+				href: ''
+			};
+		}
+		const firstPage = PAGES[0];
+		const currentPage = PAGES.find((p) => page.url.pathname.includes(p.href));
+		return currentPage || firstPage;
+	});
 </script>
 
 <div class="container">
