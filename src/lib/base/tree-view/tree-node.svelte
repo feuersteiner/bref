@@ -9,7 +9,10 @@
 
 	const hasChildren = $derived(node.children && node.children.length > 0);
 
-	const toggleExpand = () => (hasChildren ? (expanded = !expanded) : null);
+	const toggleExpand = (e: MouseEvent) => {
+		e.stopPropagation();
+		if (hasChildren) expanded = !expanded;
+	};
 
 	const handleSelect = () => onSelect(node.id);
 </script>
