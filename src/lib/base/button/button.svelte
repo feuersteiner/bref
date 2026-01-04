@@ -163,13 +163,13 @@
 
 	.foreground {
 		--internal-current-color: var(--color-foreground);
-		--internal-current-color-soft: var(--color-foreground-soft);
+		--internal-current-color-soft: var(--color-background-saturated);
 		--internal-current-contrast: var(--color-background);
 	}
 
 	.background {
 		--internal-current-color: var(--color-background);
-		--internal-current-color-soft: var(--color-background-soft);
+		--internal-current-color-soft: var(--color-foreground-saturated);
 		--internal-current-contrast: var(--color-foreground);
 	}
 
@@ -227,6 +227,23 @@
 		background-color: color-mix(
 			in srgb,
 			var(--internal-current-color) var(--internal-btn-ghost-active-opacity),
+			var(--color-background)
+		);
+	}
+
+	/* Background color ghost variant needs inverted hover colors */
+	.background.ghost:not(:disabled):hover {
+		background-color: color-mix(
+			in srgb,
+			var(--color-foreground) var(--internal-btn-ghost-hover-opacity),
+			var(--color-background)
+		);
+	}
+
+	.background.ghost:not(:disabled):active {
+		background-color: color-mix(
+			in srgb,
+			var(--color-foreground) var(--internal-btn-ghost-active-opacity),
 			var(--color-background)
 		);
 	}
