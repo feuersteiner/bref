@@ -19,17 +19,7 @@ export const PAGES: PageProps[] = [
 		title: 'Theming',
 		description: 'Customize colors and modes',
 		href: '/theming',
-		icon: 'palette',
-		children: [
-			{
-				title: 'Theme Mode',
-				description: 'Theme Mode',
-				href: '/theming#theme-mode',
-				icon: 'palette'
-			},
-			{ title: 'Colors', description: 'Colors', href: '/theming#colors', icon: 'palette' },
-			{ title: 'Usage', description: 'Usage', href: '/theming#usage', icon: 'palette' }
-		]
+		icon: 'palette'
 	},
 	{
 		title: 'Generic Types',
