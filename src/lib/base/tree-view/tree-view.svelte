@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { TreeViewProps, NodeDataProps } from './types.ts';
+	import type { TreeViewProps } from './types.ts';
 	import TreeNode from './tree-node.svelte';
 
 	let { data, size = 'medium', onSelect, selectedIds, wide, filledIcon }: TreeViewProps = $props();
