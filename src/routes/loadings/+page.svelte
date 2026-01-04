@@ -6,8 +6,9 @@
 	import MorphingShapesLoading from '$lib/base/loading/morphing-shapes-loading.svelte';
 	import TextualLoading from '$lib/base/loading/textual-loading.svelte';
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 
-	const navigate = (href: string) => goto(href);
+	const navigate = (href: string) => goto(resolve(href as any));
 </script>
 
 <Section

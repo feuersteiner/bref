@@ -2,8 +2,9 @@
 	import Section from '$lib/internal/layout/section.svelte';
 	import Button from '$lib/base/button/button.svelte';
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 
-	const navigate = (href: string) => goto(href);
+	const navigate = (href: string) => goto(resolve(href as any));
 </script>
 
 <Section>
