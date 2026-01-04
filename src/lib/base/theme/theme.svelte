@@ -51,8 +51,7 @@
 		color: var(--color-foreground);
 	}
 
-	:global(body),
-	:global(main) {
+	:global(body) {
 		background-color: var(--color-background);
 	}
 
