@@ -32,36 +32,20 @@ export const PAGES: PageProps[] = [
 		]
 	},
 	{
-		title: 'Types',
+		title: 'Generic Types',
 		description: 'Shared types for components',
 		href: '/types',
-		icon: 'data_object',
-		children: [
-			{ title: 'Colors', description: 'Colors', href: '/types#colors', icon: 'data_object' },
-			{ title: 'Variants', description: 'Variants', href: '/types#variants', icon: 'data_object' },
-			{ title: 'Sizes', description: 'Sizes', href: '/types#sizes', icon: 'data_object' }
-		]
+		icon: 'data_object'
 	},
 	{
 		title: 'Icon',
-		description: 'Material Symbols icons',
+		description: 'Material Symbols icons with various sizes, colors, and fill options',
 		href: '/icon',
-		icon: 'emoji_symbols',
-		children: [
-			{ title: 'Sizes', description: 'Sizes', href: '/icon#sizes', icon: 'emoji_symbols' },
-			{ title: 'Colors', description: 'Colors', href: '/icon#colors', icon: 'emoji_symbols' },
-			{
-				title: 'Filled vs Outlined',
-				description: 'Filled vs Outlined',
-				href: '/icon#fill',
-				icon: 'emoji_symbols'
-			},
-			{ title: 'Usage', description: 'Usage', href: '/icon#usage', icon: 'emoji_symbols' }
-		]
+		icon: 'emoji_symbols'
 	},
 	{
 		title: 'Buttons',
-		description: 'Button with label and optional icon',
+		description: '2 types of buttons: Icon Button and a `Normal` Button',
 		href: '/buttons',
 		icon: 'left_click',
 		children: [
@@ -81,39 +65,43 @@ export const PAGES: PageProps[] = [
 	},
 	{
 		title: 'Loading',
-		description: 'Loading indicators',
-		href: '/loading',
+		description: 'Loading indicators to a state that content is being loaded',
+		href: '/loadings',
 		icon: 'progress_activity',
 		children: [
 			{
 				title: 'Circular',
-				description: 'Circular',
-				href: '/loading#circular',
+				description:
+					'A spinning circular indicator for general loading states with customizable size and color',
+				href: '/circular-loading',
 				icon: 'progress_activity'
 			},
 			{
 				title: 'Pulsing Dots',
-				description: 'Pulsing Dots',
-				href: '/loading#pulsing-dots',
+				description: 'Animated dots that pulse in sequence, ideal for chat or messaging interfaces',
+				href: '/pulsing-dots-loading',
 				icon: 'progress_activity'
 			},
 			{
 				title: 'Morphing Shapes',
-				description: 'Morphing Shapes',
-				href: '/loading#morphing-shapes',
+				description:
+					'Smooth shape transitions creating a fluid animation effect for creative loading states',
+				href: '/morphing-shapes-loading',
 				icon: 'progress_activity'
 			},
 			{
 				title: 'Textual',
-				description: 'Textual',
-				href: '/loading#textual',
+				description:
+					'Text-based loading indicator with customizable messages and animated ellipsis',
+				href: '/textual-loading',
 				icon: 'progress_activity'
 			}
 		]
 	},
 	{
 		title: 'TreeView',
-		description: 'Hierarchical tree component',
+		description:
+			'Hierarchical tree component for displaying nested data structures with expandable nodes',
 		href: '/tree-view',
 		icon: 'account_tree'
 	}
