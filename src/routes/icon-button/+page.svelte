@@ -24,24 +24,42 @@
 	</p>
 </Section>
 
-<Section title="Variants" description="Choose between filled, soft, or ghost styles.">
+<Section title="Filled Variant" description="Solid background icon buttons for primary actions.">
 	<div class="demo">
-		<IconButton name="add" variant="filled" onClick={() => {}} />
-		<IconButton name="add" variant="soft" onClick={() => {}} />
-		<IconButton name="add" variant="ghost" onClick={() => {}} />
+		<IconButton name="favorite" variant="filled" color="primary" onClick={() => {}} />
+		<IconButton name="favorite" variant="filled" color="secondary" onClick={() => {}} />
+		<IconButton name="favorite" variant="filled" color="success" onClick={() => {}} />
+		<IconButton name="favorite" variant="filled" color="warning" onClick={() => {}} />
+		<IconButton name="favorite" variant="filled" color="danger" onClick={() => {}} />
+		<IconButton name="favorite" variant="filled" color="info" onClick={() => {}} />
+		<IconButton name="favorite" variant="filled" color="foreground" onClick={() => {}} />
+		<IconButton name="favorite" variant="filled" color="background" onClick={() => {}} />
 	</div>
 </Section>
 
-<Section title="Colors" description="Semantic colors for different actions and states.">
+<Section title="Soft Variant" description="Subtle background icon buttons for secondary actions.">
 	<div class="demo">
-		<IconButton name="favorite" color="primary" onClick={() => {}} />
-		<IconButton name="favorite" color="secondary" onClick={() => {}} />
-		<IconButton name="favorite" color="success" onClick={() => {}} />
-		<IconButton name="favorite" color="warning" onClick={() => {}} />
-		<IconButton name="favorite" color="danger" onClick={() => {}} />
-		<IconButton name="favorite" color="info" onClick={() => {}} />
-		<IconButton name="favorite" color="foreground" onClick={() => {}} />
-		<IconButton name="favorite" color="background" onClick={() => {}} />
+		<IconButton name="favorite" variant="soft" color="primary" onClick={() => {}} />
+		<IconButton name="favorite" variant="soft" color="secondary" onClick={() => {}} />
+		<IconButton name="favorite" variant="soft" color="success" onClick={() => {}} />
+		<IconButton name="favorite" variant="soft" color="warning" onClick={() => {}} />
+		<IconButton name="favorite" variant="soft" color="danger" onClick={() => {}} />
+		<IconButton name="favorite" variant="soft" color="info" onClick={() => {}} />
+		<IconButton name="favorite" variant="soft" color="foreground" onClick={() => {}} />
+		<IconButton name="favorite" variant="soft" color="background" onClick={() => {}} />
+	</div>
+</Section>
+
+<Section title="Ghost Variant" description="Transparent icon buttons for minimal UI impact.">
+	<div class="demo">
+		<IconButton name="favorite" variant="ghost" color="primary" onClick={() => {}} />
+		<IconButton name="favorite" variant="ghost" color="secondary" onClick={() => {}} />
+		<IconButton name="favorite" variant="ghost" color="success" onClick={() => {}} />
+		<IconButton name="favorite" variant="ghost" color="warning" onClick={() => {}} />
+		<IconButton name="favorite" variant="ghost" color="danger" onClick={() => {}} />
+		<IconButton name="favorite" variant="ghost" color="info" onClick={() => {}} />
+		<IconButton name="favorite" variant="ghost" color="foreground" onClick={() => {}} />
+		<IconButton name="favorite" variant="ghost" color="background" onClick={() => {}} />
 	</div>
 </Section>
 
@@ -55,27 +73,120 @@
 	</div>
 </Section>
 
-<Section title="Rounded" description="Circular buttons for a softer appearance.">
+<Section title="Rounded - Filled Variant" description="Circular filled icon buttons.">
 	<div class="demo">
-		<IconButton name="close" rounded onClick={() => {}} />
-		<IconButton name="close" rounded variant="soft" onClick={() => {}} />
-		<IconButton name="close" rounded variant="ghost" onClick={() => {}} />
+		<IconButton name="close" rounded variant="filled" color="primary" onClick={() => {}} />
+		<IconButton name="close" rounded variant="filled" color="secondary" onClick={() => {}} />
+		<IconButton name="close" rounded variant="filled" color="success" onClick={() => {}} />
+		<IconButton name="close" rounded variant="filled" color="warning" onClick={() => {}} />
+		<IconButton name="close" rounded variant="filled" color="danger" onClick={() => {}} />
+		<IconButton name="close" rounded variant="filled" color="info" onClick={() => {}} />
+		<IconButton name="close" rounded variant="filled" color="foreground" onClick={() => {}} />
+		<IconButton name="close" rounded variant="filled" color="background" onClick={() => {}} />
 	</div>
 </Section>
 
-<Section title="Filled Icons" description="Use filled icon variants for emphasis.">
+<Section title="Rounded - Soft Variant" description="Circular soft icon buttons.">
 	<div class="demo">
-		<IconButton name="star" filled onClick={() => {}} />
+		<IconButton name="close" rounded variant="soft" color="primary" onClick={() => {}} />
+		<IconButton name="close" rounded variant="soft" color="secondary" onClick={() => {}} />
+		<IconButton name="close" rounded variant="soft" color="success" onClick={() => {}} />
+		<IconButton name="close" rounded variant="soft" color="warning" onClick={() => {}} />
+		<IconButton name="close" rounded variant="soft" color="danger" onClick={() => {}} />
+		<IconButton name="close" rounded variant="soft" color="info" onClick={() => {}} />
+		<IconButton name="close" rounded variant="soft" color="foreground" onClick={() => {}} />
+		<IconButton name="close" rounded variant="soft" color="background" onClick={() => {}} />
+	</div>
+</Section>
+
+<Section title="Rounded - Ghost Variant" description="Circular ghost icon buttons.">
+	<div class="demo">
+		<IconButton name="close" rounded variant="ghost" color="primary" onClick={() => {}} />
+		<IconButton name="close" rounded variant="ghost" color="secondary" onClick={() => {}} />
+		<IconButton name="close" rounded variant="ghost" color="success" onClick={() => {}} />
+		<IconButton name="close" rounded variant="ghost" color="warning" onClick={() => {}} />
+		<IconButton name="close" rounded variant="ghost" color="danger" onClick={() => {}} />
+		<IconButton name="close" rounded variant="ghost" color="info" onClick={() => {}} />
+		<IconButton name="close" rounded variant="ghost" color="foreground" onClick={() => {}} />
+		<IconButton name="close" rounded variant="ghost" color="background" onClick={() => {}} />
+	</div>
+</Section>
+
+<Section title="Filled Icons - Filled Variant" description="Use filled icon variants with solid backgrounds.">
+	<div class="demo">
+		<IconButton name="star" filled variant="filled" color="primary" onClick={() => {}} />
+		<IconButton name="star" filled variant="filled" color="secondary" onClick={() => {}} />
+		<IconButton name="star" filled variant="filled" color="success" onClick={() => {}} />
+		<IconButton name="star" filled variant="filled" color="warning" onClick={() => {}} />
+		<IconButton name="star" filled variant="filled" color="danger" onClick={() => {}} />
+		<IconButton name="star" filled variant="filled" color="info" onClick={() => {}} />
+		<IconButton name="star" filled variant="filled" color="foreground" onClick={() => {}} />
+		<IconButton name="star" filled variant="filled" color="background" onClick={() => {}} />
+	</div>
+</Section>
+
+<Section title="Filled Icons - Soft Variant" description="Use filled icon variants with subtle backgrounds.">
+	<div class="demo">
+		<IconButton name="star" filled variant="soft" color="primary" onClick={() => {}} />
+		<IconButton name="star" filled variant="soft" color="secondary" onClick={() => {}} />
+		<IconButton name="star" filled variant="soft" color="success" onClick={() => {}} />
 		<IconButton name="star" filled variant="soft" color="warning" onClick={() => {}} />
-		<IconButton name="star" filled variant="ghost" color="warning" onClick={() => {}} />
+		<IconButton name="star" filled variant="soft" color="danger" onClick={() => {}} />
+		<IconButton name="star" filled variant="soft" color="info" onClick={() => {}} />
+		<IconButton name="star" filled variant="soft" color="foreground" onClick={() => {}} />
+		<IconButton name="star" filled variant="soft" color="background" onClick={() => {}} />
 	</div>
 </Section>
 
-<Section title="Disabled" description="Disabled state for unavailable actions.">
+<Section title="Filled Icons - Ghost Variant" description="Use filled icon variants with transparent backgrounds.">
 	<div class="demo">
-		<IconButton name="edit" disabled onClick={() => {}} />
-		<IconButton name="edit" disabled variant="soft" onClick={() => {}} />
-		<IconButton name="edit" disabled variant="ghost" onClick={() => {}} />
+		<IconButton name="star" filled variant="ghost" color="primary" onClick={() => {}} />
+		<IconButton name="star" filled variant="ghost" color="secondary" onClick={() => {}} />
+		<IconButton name="star" filled variant="ghost" color="success" onClick={() => {}} />
+		<IconButton name="star" filled variant="ghost" color="warning" onClick={() => {}} />
+		<IconButton name="star" filled variant="ghost" color="danger" onClick={() => {}} />
+		<IconButton name="star" filled variant="ghost" color="info" onClick={() => {}} />
+		<IconButton name="star" filled variant="ghost" color="foreground" onClick={() => {}} />
+		<IconButton name="star" filled variant="ghost" color="background" onClick={() => {}} />
+	</div>
+</Section>
+
+<Section title="Disabled - Filled Variant" description="Disabled filled icon buttons.">
+	<div class="demo">
+		<IconButton name="edit" disabled variant="filled" color="primary" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="filled" color="secondary" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="filled" color="success" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="filled" color="warning" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="filled" color="danger" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="filled" color="info" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="filled" color="foreground" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="filled" color="background" onClick={() => {}} />
+	</div>
+</Section>
+
+<Section title="Disabled - Soft Variant" description="Disabled soft icon buttons.">
+	<div class="demo">
+		<IconButton name="edit" disabled variant="soft" color="primary" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="soft" color="secondary" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="soft" color="success" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="soft" color="warning" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="soft" color="danger" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="soft" color="info" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="soft" color="foreground" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="soft" color="background" onClick={() => {}} />
+	</div>
+</Section>
+
+<Section title="Disabled - Ghost Variant" description="Disabled ghost icon buttons.">
+	<div class="demo">
+		<IconButton name="edit" disabled variant="ghost" color="primary" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="ghost" color="secondary" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="ghost" color="success" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="ghost" color="warning" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="ghost" color="danger" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="ghost" color="info" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="ghost" color="foreground" onClick={() => {}} />
+		<IconButton name="edit" disabled variant="ghost" color="background" onClick={() => {}} />
 	</div>
 </Section>
 

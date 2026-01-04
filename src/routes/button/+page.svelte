@@ -23,24 +23,42 @@
 	</p>
 </Section>
 
-<Section title="Variants" description="Choose between filled, soft, or ghost styles.">
+<Section title="Filled Variant" description="Solid background buttons for primary actions.">
 	<div class="demo">
-		<Button label="Filled" variant="filled" onClick={() => {}} />
-		<Button label="Soft" variant="soft" onClick={() => {}} />
-		<Button label="Ghost" variant="ghost" onClick={() => {}} />
+		<Button label="Primary" variant="filled" color="primary" onClick={() => {}} />
+		<Button label="Secondary" variant="filled" color="secondary" onClick={() => {}} />
+		<Button label="Success" variant="filled" color="success" onClick={() => {}} />
+		<Button label="Warning" variant="filled" color="warning" onClick={() => {}} />
+		<Button label="Danger" variant="filled" color="danger" onClick={() => {}} />
+		<Button label="Info" variant="filled" color="info" onClick={() => {}} />
+		<Button label="Foreground" variant="filled" color="foreground" onClick={() => {}} />
+		<Button label="Background" variant="filled" color="background" onClick={() => {}} />
 	</div>
 </Section>
 
-<Section title="Colors" description="Semantic colors for different actions and states.">
+<Section title="Soft Variant" description="Subtle background buttons for secondary actions.">
 	<div class="demo">
-		<Button label="Primary" color="primary" onClick={() => {}} />
-		<Button label="Secondary" color="secondary" onClick={() => {}} />
-		<Button label="Success" color="success" onClick={() => {}} />
-		<Button label="Warning" color="warning" onClick={() => {}} />
-		<Button label="Danger" color="danger" onClick={() => {}} />
-		<Button label="Info" color="info" onClick={() => {}} />
-		<Button label="Foreground" color="foreground" onClick={() => {}} />
-		<Button label="Background" color="background" onClick={() => {}} />
+		<Button label="Primary" variant="soft" color="primary" onClick={() => {}} />
+		<Button label="Secondary" variant="soft" color="secondary" onClick={() => {}} />
+		<Button label="Success" variant="soft" color="success" onClick={() => {}} />
+		<Button label="Warning" variant="soft" color="warning" onClick={() => {}} />
+		<Button label="Danger" variant="soft" color="danger" onClick={() => {}} />
+		<Button label="Info" variant="soft" color="info" onClick={() => {}} />
+		<Button label="Foreground" variant="soft" color="foreground" onClick={() => {}} />
+		<Button label="Background" variant="soft" color="background" onClick={() => {}} />
+	</div>
+</Section>
+
+<Section title="Ghost Variant" description="Transparent buttons for minimal UI impact.">
+	<div class="demo">
+		<Button label="Primary" variant="ghost" color="primary" onClick={() => {}} />
+		<Button label="Secondary" variant="ghost" color="secondary" onClick={() => {}} />
+		<Button label="Success" variant="ghost" color="success" onClick={() => {}} />
+		<Button label="Warning" variant="ghost" color="warning" onClick={() => {}} />
+		<Button label="Danger" variant="ghost" color="danger" onClick={() => {}} />
+		<Button label="Info" variant="ghost" color="info" onClick={() => {}} />
+		<Button label="Foreground" variant="ghost" color="foreground" onClick={() => {}} />
+		<Button label="Background" variant="ghost" color="background" onClick={() => {}} />
 	</div>
 </Section>
 
