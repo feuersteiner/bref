@@ -13,7 +13,10 @@
 		icon: page.icon,
 		children: page.children?.map(pageToNode)
 	});
-	const selectedPage = $derived(PAGES.find((p) => page.url.pathname.endsWith(p.href)) ?? PAGES[0]);
+	const selectedPage = $derived.by(() => {
+		const allPages = PAGES.flatMap((p) => [p, ...(p.children || [])]);
+		return allPages.find((p) => page.url.pathname.endsWith(p.href)) ?? PAGES[0];
+	});
 	const selectedIds = $derived(new Set([selectedPage.href]));
 	const onSelect = (href: string) => goto(href);
 </script>

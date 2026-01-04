@@ -13,7 +13,8 @@
 			};
 		}
 		const firstPage = PAGES[0];
-		const currentPage = PAGES.find((p) => page.url.pathname.includes(p.href));
+		const allPages = PAGES.flatMap((p) => [p, ...(p.children || [])]);
+		const currentPage = allPages.find((p) => page.url.pathname.endsWith(p.href));
 		return currentPage || firstPage;
 	});
 </script>
