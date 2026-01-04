@@ -47,6 +47,7 @@
 		display: flex;
 		gap: 1rem;
 		overflow: hidden;
+		scroll-snap-align: start;
 		flex-direction: column;
 		background-color: color-mix(in srgb, var(--color-background) 90%, transparent);
 		backdrop-filter: blur(2rem);
@@ -55,8 +56,8 @@
 		border: 1px solid color-mix(in srgb, var(--color-foreground) 10%, transparent);
 	}
 	:global(.container:hover) {
-		border: 1px solid color-mix(in srgb, var(--color-foreground) 20%, transparent);
-		box-shadow: 0 0 3rem color-mix(in srgb, var(--color-background) 50%, transparent);
+		background-color: color-mix(in srgb, var(--color-background) 95%, transparent);
+		border: 1px solid color-mix(in srgb, var(--color-foreground) 30%, transparent);
 	}
 	div {
 		display: flex;
@@ -73,6 +74,8 @@
 		display: flex;
 		width: 100%;
 		overflow: auto;
+		scroll-behavior: smooth;
+		scroll-snap-type: y mandatory;
 		flex-direction: column;
 		gap: 1rem;
 		background-color: transparent;
