@@ -71,12 +71,6 @@ export const PAGES: PageProps[] = [
 				description: 'Multi-line text area input fields with labels and placeholders',
 				href: '/text-inputs/area-text-input',
 				icon: 'notes'
-			},
-			{
-				title: 'Multi Author',
-				description: 'Input field for adding multiple authors for highlighting and collaboration',
-				href: '/text-inputs/multi-author',
-				icon: 'group'
 			}
 		]
 	},
