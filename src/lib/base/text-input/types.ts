@@ -1,5 +1,6 @@
+import type { IconButtonProps } from '../button/types.ts';
 import type { IconName } from '../icon/types.ts';
-import type { Color } from '../types.ts';
+import type { Color, Variant } from '../types.ts';
 
 interface BaseTextInputProps {
 	value: string;
@@ -10,9 +11,16 @@ interface BaseTextInputProps {
 }
 
 export interface TextInputProps extends BaseTextInputProps {
-	type?: 'email' | 'password' | 'search' | 'tel' | 'text';
 	startIcon?: IconName;
-	endIcon?: IconName;
+	ctaIconButton?: IconButtonProps & {
+		triggerOnEnter?: boolean;
+		clearOnTrigger?: boolean;
+	};
+	variant?: Extract<Variant, 'soft' | 'ghost'>;
+	validation?: {
+		regex: RegExp;
+		message: string;
+	};
 }
 
 export interface AreaTextInputProps extends BaseTextInputProps {
