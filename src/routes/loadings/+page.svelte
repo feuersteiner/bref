@@ -4,6 +4,7 @@
 	import PulsingDotsLoading from '$lib/base/loading/pulsing-dots-loading.svelte';
 	import MorphingShapesLoading from '$lib/base/loading/morphing-shapes-loading.svelte';
 	import TextualLoading from '$lib/base/loading/textual-loading.svelte';
+	import navigateTo from '../../lib/internal/navigate.ts';
 </script>
 
 <Section>
@@ -15,22 +16,49 @@
 
 <Section title="Circular Loading" description="A classic spinning circle indicator.">
 	<CircularLoading size="medium" />
-	<a href="/loadings/circular">View full demo →</a>
+	<a
+		href="/loadings/circular"
+		onclick={(e) => {
+			e.preventDefault();
+			navigateTo('/loadings/circular');
+		}}>View full demo →</a
+	>
 </Section>
 
 <Section title="Pulsing Dots Loading" description="Three dots that pulse in sequence.">
 	<PulsingDotsLoading size="medium" />
-	<a href="/loadings/pulsing-dots">View full demo →</a>
+	<a
+		href="/loadings/pulsing-dots"
+		onclick={(e) => {
+			e.preventDefault();
+			navigateTo('/loadings/pulsing-dots');
+		}}>View full demo →</a
+	>
 </Section>
 
-<Section title="Morphing Shapes Loading" description="A shape that transforms through organic forms.">
+<Section
+	title="Morphing Shapes Loading"
+	description="A shape that transforms through organic forms."
+>
 	<MorphingShapesLoading size="medium" />
-	<a href="/loadings/morphing-shapes">View full demo →</a>
+	<a
+		href="/loadings/morphing-shapes"
+		onclick={(e) => {
+			e.preventDefault();
+			navigateTo('/loadings/morphing-shapes');
+		}}>View full demo →</a
+	>
 </Section>
 
 <Section title="Textual Loading" description="Animated text with a typewriter effect.">
 	<TextualLoading />
-	<a href="/loadings/textual">View full demo →</a>
+	<a
+		href="/loadings/textual"
+		onclick={(e) => {
+			e.preventDefault();
+			navigateTo('/loadings/textual');
+		}}>View full demo →</a
+	>
 </Section>
 
 <style>
