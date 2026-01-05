@@ -68,7 +68,6 @@ Bref handles:
 - [-] Inputs
   - [x] Text Input (single line)
   - [x] Area Text Input
-  - [x] Multi Author Input
   - [ ] File Input
   - [ ] Image Input
 - [ ] Avatar
