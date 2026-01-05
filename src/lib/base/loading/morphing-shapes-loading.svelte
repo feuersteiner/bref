@@ -5,12 +5,13 @@
 		size = 'medium',
 		color = 'primary',
 		speed = 'normal',
-		isGradient = false
+		isGradient = false,
+		pulseShadow = false
 	}: MorphingShapesLoadingProps = $props();
 </script>
 
 <div
-	class={`holder ${size} ${speed} ${isGradient ? 'gradient' : color}`}
+	class={`holder ${size} ${speed} ${isGradient ? 'gradient' : color} ${pulseShadow ? 'pulse-shadow' : ''}`}
 	role="status"
 	aria-label="Loading"
 >
@@ -206,5 +207,32 @@
 	.fast {
 		--internal-morph-duration: 2.4s;
 		--internal-rotate-duration: 3s;
+	}
+
+	/* Pulse shadow */
+	.pulse-shadow .shape {
+		--internal-shadow-size: calc(var(--internal-shape-size) * 0.5);
+		animation:
+			morph var(--internal-morph-duration) cubic-bezier(0.4, 0, 0.2, 1) infinite,
+			rotate var(--internal-rotate-duration) cubic-bezier(0.22, 0.61, 0.36, 1) infinite,
+			pulse-shadow 2s ease-in-out infinite;
+	}
+
+	.pulse-shadow.gradient .shape {
+		animation:
+			morph var(--internal-morph-duration) cubic-bezier(0.4, 0, 0.2, 1) infinite,
+			rotate var(--internal-rotate-duration) cubic-bezier(0.22, 0.61, 0.36, 1) infinite,
+			gradient-flow 12s ease-in-out infinite,
+			pulse-shadow 2s ease-in-out infinite;
+	}
+
+	@keyframes pulse-shadow {
+		0%,
+		100% {
+			box-shadow: 0 0 var(--internal-shadow-size) color-mix(in srgb, var(--color-foreground) 15%, transparent);
+		}
+		50% {
+			box-shadow: 0 0 var(--internal-shadow-size) color-mix(in srgb, var(--color-foreground) 35%, transparent);
+		}
 	}
 </style>

@@ -9,18 +9,14 @@
   speed="normal"
 />
 
-<!-- Different sizes -->
-<MorphingShapesLoading size="x-small" />
-<MorphingShapesLoading size="medium" />
-<MorphingShapesLoading size="x-large" />
-
-<!-- Different speeds -->
-<MorphingShapesLoading speed="slow" />
-<MorphingShapesLoading speed="normal" />
-<MorphingShapesLoading speed="fast" />
-
 <!-- Gradient mode -->
-<MorphingShapesLoading isGradient />`;
+<MorphingShapesLoading isGradient />
+
+<!-- With pulsing shadow -->
+<MorphingShapesLoading pulseShadow />
+
+<!-- Combined -->
+<MorphingShapesLoading isGradient pulseShadow />`;
 </script>
 
 <Section>
@@ -84,6 +80,15 @@
 		<MorphingShapesLoading isGradient size="medium" />
 		<MorphingShapesLoading isGradient size="large" />
 		<MorphingShapesLoading isGradient size="x-large" />
+	</div>
+</Section>
+
+<Section title="Pulse Shadow" description="Subtle pulsing glow effect.">
+	<div class="demo">
+		<MorphingShapesLoading pulseShadow size="small" />
+		<MorphingShapesLoading pulseShadow size="medium" />
+		<MorphingShapesLoading pulseShadow size="large" />
+		<MorphingShapesLoading pulseShadow isGradient size="large" />
 	</div>
 </Section>
 
