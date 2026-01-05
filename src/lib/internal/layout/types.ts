@@ -23,7 +23,8 @@ export const PAGES: PageProps[] = [
 	},
 	{
 		title: 'Generic Types',
-		description: 'Shared TypeScript types used across components for consistent styling and behavior',
+		description:
+			'Shared TypeScript types used across components for consistent styling and behavior',
 		href: '/types',
 		icon: 'data_object'
 	},
@@ -50,6 +51,32 @@ export const PAGES: PageProps[] = [
 				description: 'Icon buttons with customizable size, color, variant, and shape',
 				href: '/buttons/icon-button',
 				icon: 'adjust'
+			}
+		]
+	},
+	{
+		title: 'Text Inputs',
+		description: 'Text input fields with customizable size, color, and validation states',
+		href: '/text-inputs',
+		icon: 'input',
+		children: [
+			{
+				title: 'Text Input',
+				description: 'Single-line text input fields with labels, placeholders, and icons',
+				href: '/text-inputs/text-input',
+				icon: 'short_text'
+			},
+			{
+				title: 'Area Text Input',
+				description: 'Multi-line text area input fields with labels and placeholders',
+				href: '/text-inputs/area-text-input',
+				icon: 'notes'
+			},
+			{
+				title: 'Multi Author',
+				description: 'Input field for adding multiple authors for highlighting and collaboration',
+				href: '/text-inputs/multi-author',
+				icon: 'group'
 			}
 		]
 	},
