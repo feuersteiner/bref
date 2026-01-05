@@ -20,10 +20,7 @@
 <CircularLoading color="danger" />`;
 </script>
 
-<Section
-	title="Circular Loading"
-	description="A classic spinning circle indicator for loading states."
->
+<Section>
 	<p class="intro">
 		The circular loading component provides a familiar, clean spinning animation that works well for
 		general-purpose loading indicators across your application.

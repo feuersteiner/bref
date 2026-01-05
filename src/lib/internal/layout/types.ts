@@ -17,81 +17,77 @@ export const PAGES: PageProps[] = [
 	},
 	{
 		title: 'Theming',
-		description: 'Customize colors and modes',
+		description: "Bref's theming system uses CSS custom properties for complete flexibility",
 		href: '/theming',
 		icon: 'palette'
 	},
 	{
 		title: 'Generic Types',
-		description: 'Shared types for components',
+		description: 'Shared TypeScript types used across components for consistent styling and behavior',
 		href: '/types',
 		icon: 'data_object'
 	},
 	{
 		title: 'Icon',
-		description: 'Material Symbols icons with various sizes, colors, and fill options',
+		description: 'Icons with customizable size, color, and fill. Based on Google Material Symbols',
 		href: '/icon',
 		icon: 'emoji_symbols'
 	},
 	{
 		title: 'Buttons',
-		description: '2 types of buttons: Icon Button and a `Normal` Button',
+		description: 'Full-featured buttons with labels and icons, or compact icon-only buttons',
 		href: '/buttons',
 		icon: 'touch_app',
 		children: [
 			{
-				title: '(Normal) Button',
-				description: 'A button with label and optional icon',
-				href: '/button',
+				title: 'Button',
+				description: 'Buttons with customizable size, color, variant, and optional icons',
+				href: '/buttons/button',
 				icon: 'buttons_alt'
 			},
 			{
 				title: 'Icon Button',
-				description: 'Icon Button for buttons with only an icon',
-				href: '/icon-button',
+				description: 'Icon buttons with customizable size, color, variant, and shape',
+				href: '/buttons/icon-button',
 				icon: 'adjust'
 			}
 		]
 	},
 	{
 		title: 'Loading',
-		description: 'Loading indicators to a state that content is being loaded',
+		description: 'Multiple loading indicator styles for different visual contexts',
 		href: '/loadings',
 		icon: 'hourglass_empty',
 		children: [
 			{
 				title: 'Circular',
-				description:
-					'A spinning circular indicator for general loading states with customizable size and color',
-				href: '/circular-loading',
+				description: 'A classic spinning circle indicator for loading states',
+				href: '/loadings/circular',
 				icon: 'autorenew'
 			},
 			{
 				title: 'Pulsing Dots',
-				description: 'Animated dots that pulse in sequence, ideal for chat or messaging interfaces',
-				href: '/pulsing-dots-loading',
+				description: 'Three dots that pulse in sequence to indicate loading',
+				href: '/loadings/pulsing-dots',
 				icon: 'more_horiz'
 			},
 			{
 				title: 'Morphing Shapes',
-				description:
-					'Smooth shape transitions creating a fluid animation effect for creative loading states',
-				href: '/morphing-shapes-loading',
+				description: 'A shape that transforms through organic forms while rotating',
+				href: '/loadings/morphing-shapes',
 				icon: 'animation'
 			},
 			{
 				title: 'Textual',
-				description:
-					'Text-based loading indicator with customizable messages and animated ellipsis',
-				href: '/textual-loading',
+				description: 'Animated text with a typewriter effect that cycles through words',
+				href: '/loadings/textual',
 				icon: 'text_fields'
 			}
 		]
 	},
 	{
-		title: 'TreeView',
-		description:
-			'Hierarchical tree component for displaying nested data structures with expandable nodes',
+		title: 'Tree View',
+		description: 'A hierarchical tree component for displaying nested data structures',
 		href: '/tree-view',
 		icon: 'account_tree'
 	}

@@ -5,16 +5,12 @@
 	import PulsingDotsLoading from '$lib/base/loading/pulsing-dots-loading.svelte';
 	import MorphingShapesLoading from '$lib/base/loading/morphing-shapes-loading.svelte';
 	import TextualLoading from '$lib/base/loading/textual-loading.svelte';
-	import { goto } from '$app/navigation';
-	import { resolve } from '$app/paths';
+	import navigateTo from '../../lib/internal/navigate.ts';
 
-	const navigate = (href: string) => goto(resolve(href as any));
+	const navigate = (href: string) => navigateTo(href);
 </script>
 
-<Section
-	title="Loadings"
-	description="Bref provides multiple loading indicator styles for different visual contexts."
->
+<Section>
 	<p class="intro">
 		Choose from circular spinners, pulsing dots, morphing shapes, or textual indicators to match
 		your application's style and communicate loading states effectively.
@@ -32,7 +28,7 @@
 	<Button
 		label="View Circular Loading"
 		icon={{ name: 'progress_activity' }}
-		onClick={() => navigate('/circular-loading')}
+		onClick={() => navigate('/loadings/circular')}
 	/>
 </Section>
 
@@ -47,7 +43,7 @@
 	<Button
 		label="View Pulsing Dots Loading"
 		icon={{ name: 'more_horiz' }}
-		onClick={() => navigate('/pulsing-dots-loading')}
+		onClick={() => navigate('/loadings/pulsing-dots')}
 	/>
 </Section>
 
@@ -65,7 +61,7 @@
 	<Button
 		label="View Morphing Shapes Loading"
 		icon={{ name: 'shapes' }}
-		onClick={() => navigate('/morphing-shapes-loading')}
+		onClick={() => navigate('/loadings/morphing-shapes')}
 	/>
 </Section>
 
@@ -80,7 +76,7 @@
 	<Button
 		label="View Textual Loading"
 		icon={{ name: 'text_fields' }}
-		onClick={() => navigate('/textual-loading')}
+		onClick={() => navigate('/loadings/textual')}
 	/>
 </Section>
 

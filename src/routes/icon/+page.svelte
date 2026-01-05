@@ -11,10 +11,7 @@
 />`;
 </script>
 
-<Section
-	title="Icon"
-	description="Icons with customizable size, color, and fill. Based on Google Material Symbols."
->
+<Section>
 	<p class="intro">
 		A flexible icon component using Google Material Symbols Rounded, supporting multiple sizes,
 		semantic colors, and filled or outlined styles.
@@ -123,16 +120,16 @@
 
 <Section title="Browse All Icons" description="Explore the full Material Symbols library from Google.">
 	<p class="browse-text">
-		This component uses <a href="https://fonts.google.com/icons" target="_blank" rel="noopener noreferrer">Google Material Symbols</a>.
-		Browse the full icon library below or visit the site directly.
+		This component uses Google Material Symbols Rounded. Browse the full icon library at
+		<a
+			href="https://fonts.google.com/icons?icon.set=Material+Symbols&icon.style=Rounded"
+			target="_blank"
+			rel="noopener noreferrer"
+		>
+			fonts.google.com/icons
+		</a>
+		to find the perfect icon for your needs.
 	</p>
-	<div class="iframe-container">
-		<iframe
-			src="https://fonts.google.com/icons?icon.set=Material+Symbols&icon.style=Rounded"
-			title="Google Material Symbols"
-			loading="lazy"
-		></iframe>
-	</div>
 </Section>
 
 <style>
@@ -186,26 +183,9 @@
 
 	.browse-text {
 		text-align: center;
-		margin-bottom: 1.5rem;
 	}
 
 	.browse-text a {
 		color: var(--color-primary);
-		text-decoration: underline;
-	}
-
-	.iframe-container {
-		width: 100%;
-		max-width: 900px;
-		height: 500px;
-		border-radius: 8px;
-		overflow: hidden;
-		border: 1px solid var(--color-surface-2);
-	}
-
-	.iframe-container iframe {
-		width: 100%;
-		height: 100%;
-		border: none;
 	}
 </style>

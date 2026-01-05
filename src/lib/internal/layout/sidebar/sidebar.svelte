@@ -5,8 +5,7 @@
 	import { page } from '$app/state';
 	import TreeView from '$lib/base/tree-view/tree-view.svelte';
 	import type { NodeDataProps } from '../../../index.ts';
-	import { goto } from '$app/navigation';
-	import { resolve } from '$app/paths';
+	import navigateTo from '../../../internal/navigate.ts';
 
 	const pageToNode = (page: PageProps): NodeDataProps => ({
 		id: page.href,
@@ -19,7 +18,7 @@
 		return allPages.find((p) => page.url.pathname.endsWith(p.href)) ?? PAGES[0];
 	});
 	const selectedIds = $derived(new Set([selectedPage.href]));
-	const onSelect = (href: string) => goto(resolve(href as any));
+	const onSelect = (href: string) => navigateTo(href);
 </script>
 
 <div class="container">

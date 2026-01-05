@@ -1,9 +1,13 @@
+<script lang="ts">
+	import { asset } from '$app/paths';
+</script>
+
 <div class="logo">
 	<div class="icon">
-		<img src={'favicon.svg'} alt="Logo" />
+		<img src={asset('/favicon.svg')} alt="Logo" />
 		<span>Bref</span>
 	</div>
-	
+
 	<p>A truly Svelte-esque UI Component Library.</p>
 </div>
 

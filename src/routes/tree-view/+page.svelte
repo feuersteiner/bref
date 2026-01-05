@@ -119,10 +119,7 @@ interface TreeViewProps {
 }`;
 </script>
 
-<Section
-	title="Tree View"
-	description="A hierarchical tree component for displaying nested data structures."
->
+<Section>
 	<p class="intro">
 		The TreeView component renders collapsible, nested tree structures perfect for file explorers,
 		navigation menus, or any hierarchical data.

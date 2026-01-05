@@ -25,9 +25,9 @@
 	<IconButton
 		{onClick}
 		size="x-small"
-		color={hasCopied ? 'success' : 'primary'}
-		variant={hasCopied ? 'filled' : 'soft'}
-        filled
+		color={hasCopied ? 'success' : 'foreground'}
+		variant={hasCopied ? 'filled' : 'ghost'}
+		rounded
 		name={hasCopied ? 'check' : 'copy_all'}
 		disabled={hasCopied}
 	/>
@@ -59,7 +59,8 @@
 	code,
 	pre {
 		width: 100%;
-		flex: 1; align-self: center;
+		flex: 1;
+		align-self: center;
 		height: fit-content;
 	}
 	pre {

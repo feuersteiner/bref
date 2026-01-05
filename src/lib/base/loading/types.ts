@@ -11,3 +11,8 @@ export interface TextualLoadingProps extends LoadingProps {
 	typeSpeed?: Speed;
 	pauseSpeed?: Speed;
 }
+
+export interface MorphingShapesLoadingProps extends LoadingProps {
+	speed?: Speed;
+	isGradient?: boolean;
+}

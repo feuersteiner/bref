@@ -1,10 +1,11 @@
 <script lang="ts">
 	import CodeSnippet from '$lib/internal/layout/code-snippet.svelte';
 	import Section from '$lib/internal/layout/section.svelte';
+	import { asset } from '$app/paths';
 </script>
 
 <Section>
-	<img src={'favicon.svg'} alt="Logo" />
+	<img src={asset('/favicon.svg')} alt="Logo" />
 	<h1>Bref</h1>
 	<p>A truly Svelte-esque UI Component Library.</p>
 
@@ -38,35 +39,36 @@
 	<p>Bref takes a different approach to Svelte component libraries:</p>
 	<ul>
 		<li>
-			<strong>Pure CSS</strong>: Uses Svelte's built-in scoped styling instead of Tailwind. If you chose
-			Svelte for its elegant styling solution, Bref keeps that promise.
+			<strong>Pure CSS</strong>: Uses Svelte's built-in scoped styling instead of Tailwind. If you
+			chose Svelte for its elegant styling solution, Bref keeps that promise.
 		</li>
 		<li>
-			<strong>Minimal</strong>: Only essential components, nothing extra. No bloat, no unnecessary dependencies.
+			<strong>Minimal</strong>: Only essential components, nothing extra. No bloat, no unnecessary
+			dependencies.
 		</li>
 		<li>
 			<strong>Flexible</strong>: Use as an npm package or copy components directly into your project
 			with our CLI tool.
 		</li>
 		<li>
-			<strong>Batteries Included Theming</strong>: Just provide your base colors and Bref handles shade
-			generation, contrast calculation, and dark mode automatically.
+			<strong>Batteries Included Theming</strong>: Just provide your base colors and Bref handles
+			shade generation, contrast calculation, and dark mode automatically.
 		</li>
 	</ul>
 </Section>
 <Section title="Roadmap" description="We're building Bref in phases:">
 	<ul>
 		<li>
-			<strong>Base Components</strong>: Button, Icon, Input, Select, Checkbox, and other foundational
-			UI elements.
+			<strong>Base Components</strong>: Button, Icon, Input, Select, Checkbox, and other
+			foundational UI elements.
 		</li>
 		<li>
-			<strong>Section Components</strong>: Nav, Card, Accordion, Tabs, Table, Form, and Toast for complex
-			layouts.
+			<strong>Section Components</strong>: Nav, Card, Accordion, Tabs, Table, Form, and Toast for
+			complex layouts.
 		</li>
 		<li>
-			<strong>Marketing Components</strong>: Hero, Features, Pricing, FAQ, and CTA sections for landing
-			pages.
+			<strong>Marketing Components</strong>: Hero, Features, Pricing, FAQ, and CTA sections for
+			landing pages.
 		</li>
 		<li>
 			<strong>CLI Tool</strong>: Import components directly into your codebase and customize them at

@@ -69,10 +69,7 @@
 --spacing`;
 </script>
 
-<Section
-	title="Theming"
-	description="Bref's theming system uses CSS custom properties for complete flexibility."
->
+<Section>
 	<p class="intro">
 		The Theme component generates semantic color tokens from your base colors, handling shade
 		generation, contrast calculation, and dark mode automatically.

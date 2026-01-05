@@ -6,24 +6,24 @@
 	const usageSnippet = `<MorphingShapesLoading
   size="medium"
   color="primary"
+  speed="normal"
 />
 
 <!-- Different sizes -->
 <MorphingShapesLoading size="x-small" />
-<MorphingShapesLoading size="small" />
 <MorphingShapesLoading size="medium" />
-<MorphingShapesLoading size="large" />
 <MorphingShapesLoading size="x-large" />
 
-<!-- Different colors -->
-<MorphingShapesLoading color="success" />
-<MorphingShapesLoading color="warning" />`;
+<!-- Different speeds -->
+<MorphingShapesLoading speed="slow" />
+<MorphingShapesLoading speed="normal" />
+<MorphingShapesLoading speed="fast" />
+
+<!-- Gradient mode -->
+<MorphingShapesLoading isGradient />`;
 </script>
 
-<Section
-	title="Morphing Shapes Loading"
-	description="A shape that transforms through organic forms while rotating."
->
+<Section>
 	<p class="intro">
 		The morphing shapes loading component creates an engaging, modern animation where a shape
 		continuously transforms through circles, squircles, blobs, and other organic forms while
@@ -61,6 +61,32 @@
 	</div>
 </Section>
 
+<Section title="Speeds" description="Control animation speed for different contexts.">
+	<div class="demo">
+		<div class="speed-item">
+			<MorphingShapesLoading speed="slow" />
+			<span class="speed-label">Slow</span>
+		</div>
+		<div class="speed-item">
+			<MorphingShapesLoading speed="normal" />
+			<span class="speed-label">Normal</span>
+		</div>
+		<div class="speed-item">
+			<MorphingShapesLoading speed="fast" />
+			<span class="speed-label">Fast</span>
+		</div>
+	</div>
+</Section>
+
+<Section title="Gradient" description="Animated gradient cycling through theme colors.">
+	<div class="demo">
+		<MorphingShapesLoading isGradient size="small" />
+		<MorphingShapesLoading isGradient size="medium" />
+		<MorphingShapesLoading isGradient size="large" />
+		<MorphingShapesLoading isGradient size="x-large" />
+	</div>
+</Section>
+
 <Section title="Usage" description="Example code for implementing morphing shapes loading.">
 	<CodeSnippet snippet={usageSnippet} />
 </Section>
@@ -89,5 +115,17 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+
+	.speed-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.speed-label {
+		font-size: 0.875rem;
+		opacity: 0.7;
 	}
 </style>

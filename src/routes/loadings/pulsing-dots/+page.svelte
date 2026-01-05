@@ -20,10 +20,7 @@
 <PulsingDotsLoading color="success" />`;
 </script>
 
-<Section
-	title="Pulsing Dots Loading"
-	description="Three dots that pulse in sequence to indicate loading."
->
+<Section>
 	<p class="intro">
 		The pulsing dots loading component offers a subtle, rhythmic animation with three dots that
 		pulse in sequence. Ideal for inline contexts, chat interfaces, and subtle loading states.

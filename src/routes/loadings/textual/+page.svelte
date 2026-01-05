@@ -28,10 +28,7 @@
 <TextualLoading size="large" color="success" />`;
 </script>
 
-<Section
-	title="Textual Loading"
-	description="Animated text with a typewriter effect that cycles through words."
->
+<Section>
 	<p class="intro">
 		The textual loading component displays rotating words with a typing animation, adding
 		personality and context to loading states. Comes with 20 fun default words or use your own

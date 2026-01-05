@@ -13,10 +13,7 @@
 />`;
 </script>
 
-<Section
-	title="Button"
-	description="Buttons with customizable size, color, variant, and optional icons."
->
+<Section>
 	<p class="intro">
 		A versatile button component supporting multiple variants, colors, sizes, and optional icons
 		for a wide range of use cases.

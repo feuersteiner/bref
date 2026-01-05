@@ -14,10 +14,7 @@
 />`;
 </script>
 
-<Section
-	title="Icon Button"
-	description="Icon buttons with customizable size, color, variant, and shape."
->
+<Section>
 	<p class="intro">
 		A compact button component displaying only an icon, perfect for toolbars, close buttons, and
 		actions where space is limited.

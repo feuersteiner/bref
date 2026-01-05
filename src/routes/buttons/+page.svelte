@@ -1,10 +1,9 @@
 <script lang="ts">
 	import Section from '$lib/internal/layout/section.svelte';
 	import Button from '$lib/base/button/button.svelte';
-	import { goto } from '$app/navigation';
-	import { resolve } from '$app/paths';
+	import navigateTo from '../../lib/internal/navigate.ts';
 
-	const navigate = (href: string) => goto(resolve(href as any));
+	const navigate = (href: string) => navigateTo(href);
 </script>
 
 <Section>
@@ -19,7 +18,7 @@
 		Use the standard Button component when you need text labels, icons, or both. Supports multiple
 		variants, colors, and sizes.
 	</p>
-	<Button label="View Button" icon={{ name: 'buttons_alt' }} onClick={() => navigate('/button')} />
+	<Button label="View Button" icon={{ name: 'buttons_alt' }} onClick={() => navigate('/buttons/button')} />
 </Section>
 
 <Section title="Icon Button" description="A compact button displaying only an icon.">
@@ -30,6 +29,6 @@
 	<Button
 		label="View Icon Button"
 		icon={{ name: 'adjust' }}
-		onClick={() => navigate('/icon-button')}
+		onClick={() => navigate('/buttons/icon-button')}
 	/>
 </Section>

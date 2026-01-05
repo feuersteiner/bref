@@ -45,10 +45,7 @@
 <Button label="Click me" {color} {size} {variant} />`;
 </script>
 
-<Section
-	title="Generic Types"
-	description="Shared TypeScript types used across components for consistent styling and behavior."
->
+<Section>
 	<p class="intro">
 		Bref UI uses a set of shared types to ensure consistency across all components. These types
 		define common properties like colors, sizes, variants, and animation speeds.
