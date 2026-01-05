@@ -48,6 +48,7 @@ Bref is a **batteries included** theming solution. You don't need to be a color 
 Simply provide your base theme colors, and Bref automatically generates all the necessary CSS variables with proper contrast ratios, hover states, and luminance variations. No more manually calculating shades, tints, or ensuring accessibility compliance.
 
 Bref handles:
+
 - **Shade generation**: Automatically creates lighter and darker variants
 - **Contrast calculation**: Ensures text remains readable on all backgrounds
 - **State variations**: Hover, active, and disabled states just work
@@ -64,8 +65,12 @@ Bref handles:
   - [x] Morphing Shapes
   - [x] Textual
 - [x] Tree View
-- [ ] Input
-- [ ] Textarea
+- [-] Inputs
+  - [x] Text Input (single line)
+  - [x] Area Text Input
+  - [x] Multi Author Input
+  - [ ] File Input
+  - [ ] Image Input
 - [ ] Avatar
 - [ ] Progress
 - [ ] Select
@@ -76,10 +81,10 @@ Bref handles:
 - [ ] Popover
 - [ ] Radio
 - [ ] Switch
-- [ ] Img
-- [ ] Meter
 - [ ] Tooltip
 - [ ] Dialog
+- [ ] Toast
+- [ ] Accordion
 
 ## Section Components
 
@@ -89,11 +94,9 @@ Bref handles:
 - [ ] Footer
 - [ ] Article
 - [ ] Card
-- [ ] Accordion
 - [ ] Tabs
 - [ ] Table
 - [ ] Form
-- [ ] Toast
 
 ## Marketing Components
 
