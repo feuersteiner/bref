@@ -7,7 +7,7 @@
 <Section>
 	<img src={asset('/favicon.svg')} alt="Logo" />
 	<h1>Bref</h1>
-	<p>A truly Svelte-esque UI Component Library.</p>
+	<p>A Svelte UI Component Library using scoped CSS.</p>
 
 	<div>
 		<span class="word">bref</span>
@@ -34,13 +34,12 @@
 </Section>
 <Section
 	title="Philosophy"
-	description="Why Bref? What makes it different from other Svelte component libraries?"
+	description="Why Bref?"
 >
-	<p>Bref takes a different approach to Svelte component libraries:</p>
 	<ul>
 		<li>
-			<strong>Pure CSS</strong>: Uses Svelte's built-in scoped styling instead of Tailwind. If you
-			chose Svelte for its elegant styling solution, Bref keeps that promise.
+			<strong>Scoped CSS</strong>: Uses Svelte's built-in scoped styling, each component's styles are
+			encapsulated and won't leak or conflict.
 		</li>
 		<li>
 			<strong>Minimal</strong>: Only essential components, nothing extra. No bloat, no unnecessary

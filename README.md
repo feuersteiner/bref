@@ -1,12 +1,12 @@
-# Bref: a truly Svelte-esque UI Component Library
+# Bref: a Svelte UI Component Library
 
 **[Live Demo](https://feuersteiner.github.io/bref/)**
 
-Bref is a Svelte UI component library designed to be minimal, flexible, and easy to use.
-Think of it as, what if `Shadcn/ui` was built specifically for Svelte, used only CSS styling and no Tailwind CSS, fully embracing Svelte's unique capabilities and idioms.
+Bref is a Svelte UI component library designed to be minimal, flexible, and easy to use. It uses Svelte's built-in scoped CSS for styling, no external CSS frameworks required.
 
 ## What We Promise
 
+- **Pure CSS with scoped styles**: Uses Svelte's native styling system for clean, maintainable components
 - **Base UI components with escape hatches**: Access raw CSS properties when you need full control
 - **Clear naming conventions**: Component names resemble HTML as much as possible to avoid confusion
 - **Section-based components**: For more complex UI needs like navbars, modals, and cards
@@ -32,11 +32,7 @@ npm install bref-ui
 
 ## Why Bref?
 
-There are excellent Svelte component libraries out there. [Flowbite Svelte](https://github.com/themesberg/flowbite-svelte) and [shadcn-svelte](https://github.com/huntabyte/shadcn-svelte) are doing great work, and you should check them out.
-
-Bref takes a different approach:
-
-- **Pure CSS**: Uses Svelte's built-in scoped styling instead of Tailwind CSS. If you chose Svelte for its elegant styling solution, Bref keeps that promise.
+- **Scoped CSS**: Uses Svelte's built-in scoped styling, each component's styles are encapsulated and won't leak or conflict.
 - **Minimal**: Only essential components, nothing extra.
 - **Flexible**: Use as an npm package or copy components directly into your project with our CLI tool (WIP).
 - **Batteries included theming**: Just provide your base colors and we handle the rest (see below).
