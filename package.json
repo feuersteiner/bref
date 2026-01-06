@@ -1,6 +1,6 @@
 {
 	"name": "bref-ui",
-	"version": "0.1.8",
+	"version": "0.1.9",
 	"description": "A Svelte UI component library using scoped CSS - minimal and flexible",
 	"license": "MIT",
 	"author": "feuerstein",

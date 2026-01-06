@@ -14,6 +14,7 @@ export interface BaseTreeProps {
 	size?: Size;
 	filledIcon?: IconProps['filled'];
 	wide?: boolean;
+	expandOnSelect?: boolean;
 }
 
 export interface TreeViewProps extends BaseTreeProps {

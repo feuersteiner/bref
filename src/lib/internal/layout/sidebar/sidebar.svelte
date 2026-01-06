@@ -24,7 +24,14 @@
 <div class="container">
 	<Logo />
 	<div class="content">
-		<TreeView wide size="small" {selectedIds} {onSelect} data={PAGES.map(pageToNode)} />
+		<TreeView
+			wide
+			size="small"
+			{selectedIds}
+			{onSelect}
+			data={PAGES.map(pageToNode)}
+			expandOnSelect
+		/>
 	</div>
 	<Footer />
 </div>

@@ -2,12 +2,29 @@
 	import type { TreeViewProps } from './types.ts';
 	import TreeNode from './tree-node.svelte';
 
-	let { data, size = 'medium', onSelect, selectedIds, wide, filledIcon }: TreeViewProps = $props();
+	let {
+		data,
+		size = 'medium',
+		onSelect,
+		selectedIds,
+		wide,
+		filledIcon,
+		expandOnSelect
+	}: TreeViewProps = $props();
 </script>
 
 <div role="tree" class={size} class:wide>
 	{#each data as node (node.id)}
-		<TreeNode {node} level={0} {size} {onSelect} {selectedIds} {wide} {filledIcon} />
+		<TreeNode
+			{node}
+			level={0}
+			{size}
+			{onSelect}
+			{selectedIds}
+			{wide}
+			{filledIcon}
+			{expandOnSelect}
+		/>
 	{/each}
 </div>
 

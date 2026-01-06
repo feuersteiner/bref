@@ -2,7 +2,16 @@
 	import type { TreeNodeProps } from './types.ts';
 	import Icon from '../icon/icon.svelte';
 	import TreeNode from './tree-node.svelte';
-	const { node, level, size, onSelect, selectedIds, filledIcon, wide }: TreeNodeProps = $props();
+	const {
+		node,
+		level,
+		size,
+		onSelect,
+		selectedIds,
+		filledIcon,
+		wide,
+		expandOnSelect
+	}: TreeNodeProps = $props();
 
 	let expanded: boolean = $state(false);
 	let selected: boolean = $derived(selectedIds?.has(node.id) ?? false);
@@ -14,7 +23,12 @@
 		if (hasChildren) expanded = !expanded;
 	};
 
-	const handleSelect = () => onSelect(node.id);
+	const handleSelect = () => {
+		onSelect(node.id);
+		if (expandOnSelect && hasChildren) expanded = true;
+	};
+
+	const nextLevel = $derived(level + 1);
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -48,7 +62,16 @@
 
 {#if expanded && hasChildren}
 	{#each node.children as child (child.id)}
-		<TreeNode node={child} level={level + 1} {size} {onSelect} {selectedIds} {filledIcon} {wide} />
+		<TreeNode
+			node={child}
+			level={nextLevel}
+			{size}
+			{onSelect}
+			{selectedIds}
+			{filledIcon}
+			{wide}
+			{expandOnSelect}
+		/>
 	{/each}
 {/if}
 
