@@ -1,3 +1,5 @@
+export const prerender = true;
+
 export function GET() {
 	const content = `# Bref-UI
 
