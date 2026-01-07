@@ -37,6 +37,7 @@
 		word-wrap: normal;
 		white-space: nowrap;
 		direction: ltr;
+		flex-shrink: 0;
 		user-select: none;
 	}
 

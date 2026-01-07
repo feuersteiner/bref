@@ -43,6 +43,7 @@
 		align-items: center;
 		justify-content: center;
 		border: none;
+		flex-shrink: 0;
 		cursor: pointer;
 		width: var(--internal-btn-size);
 		height: var(--internal-btn-size);

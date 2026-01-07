@@ -99,7 +99,8 @@
 		display: inline-flex;
 		flex-direction: column;
 		gap: 0.25rem;
-		margin: 2px;
+		margin: 3px;
+		flex-shrink: 0;
 	}
 
 	.input-container.wide {

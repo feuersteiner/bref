@@ -17,6 +17,7 @@
 		border: var(--internal-loader-border-width) solid transparent;
 		border-top-color: var(--internal-current-color);
 		animation: spin 0.9s linear infinite;
+		flex-shrink: 0;
 	}
 
 	@keyframes spin {

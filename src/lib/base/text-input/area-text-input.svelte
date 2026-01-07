@@ -20,14 +20,7 @@
 </script>
 
 <div class:wide class:disabled class:resizable>
-	<textarea
-		{...rest}
-		{placeholder}
-		{disabled}
-		{rows}
-		{value}
-		oninput={handleInput}
-	></textarea>
+	<textarea {...rest} {placeholder} {disabled} {rows} {value} oninput={handleInput}></textarea>
 </div>
 
 <style>
@@ -42,7 +35,8 @@
 		display: inline-flex;
 		padding: var(--internal-textarea-padding-y) var(--internal-textarea-padding-x);
 		border-radius: var(--internal-textarea-radius);
-		margin: 2px;
+		margin: 3px;
+		flex-shrink: 0;
 		background-color: color-mix(
 			in srgb,
 			var(--color-foreground) var(--internal-textarea-bg-opacity),

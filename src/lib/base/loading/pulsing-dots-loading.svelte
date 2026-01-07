@@ -18,6 +18,7 @@
 		display: flex;
 		align-items: center;
 		gap: var(--internal-gap);
+		flex-shrink: 0;
 	}
 
 	span {

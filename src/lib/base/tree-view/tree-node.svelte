@@ -85,6 +85,7 @@
 	div {
 		--tree-indent: 1em;
 		display: flex;
+		flex-shrink: 0;
 		align-items: center;
 		padding: 0.25em 0.5em;
 		gap: 0.25em;

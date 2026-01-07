@@ -23,6 +23,7 @@
 		--internal-shape-size: 2rem;
 		--internal-morph-duration: 4s;
 		--internal-rotate-duration: 5s;
+		flex-shrink: 0;
 		width: var(--internal-shape-size);
 		height: var(--internal-shape-size);
 	}

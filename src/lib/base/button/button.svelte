@@ -57,6 +57,7 @@
 		border: none;
 		cursor: pointer;
 		font-weight: 500;
+		flex-shrink: 0;
 		width: fit-content;
 		min-width: fit-content;
 		height: fit-content;
