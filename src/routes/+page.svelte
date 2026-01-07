@@ -55,6 +55,12 @@
 		</li>
 	</ul>
 </Section>
+<Section title="For LLMs" description="AI-friendly documentation for code assistants.">
+	<p>
+		Use <a href="./llms.txt">/llms.txt</a> for a token-optimized reference when working with AI coding
+		assistants. It provides concise props and examples for all components.
+	</p>
+</Section>
 <Section title="Roadmap" description="We're building Bref in phases:">
 	<ul>
 		<li>
