@@ -105,6 +105,7 @@
 
 	.input-container.wide {
 		width: 100%;
+		flex-shrink: 1;
 	}
 
 	.input-wrapper {

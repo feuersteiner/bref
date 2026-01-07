@@ -87,6 +87,7 @@
 
 	.wide {
 		width: 100%;
+		flex-shrink: 1;
 	}
 
 	/* Sizes */
@@ -181,11 +182,19 @@
 	}
 
 	.filled:not(:disabled):hover {
-		background-color: color-mix(in oklch, var(--internal-current-color) var(--internal-btn-hover-mix), black);
+		background-color: color-mix(
+			in oklch,
+			var(--internal-current-color) var(--internal-btn-hover-mix),
+			black
+		);
 	}
 
 	.filled:not(:disabled):active {
-		background-color: color-mix(in oklch, var(--internal-current-color) var(--internal-btn-active-mix), black);
+		background-color: color-mix(
+			in oklch,
+			var(--internal-current-color) var(--internal-btn-active-mix),
+			black
+		);
 	}
 
 	/* Soft variant */
