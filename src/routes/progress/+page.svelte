@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Section from '$lib/internal/layout/section.svelte';
+	import ProgressBar from '$lib/base/progress-bar/progress-bar.svelte';
 	import CircularLoading from '$lib/base/loading/circular-loading.svelte';
 	import PulsingDotsLoading from '$lib/base/loading/pulsing-dots-loading.svelte';
 	import MorphingShapesLoading from '$lib/base/loading/morphing-shapes-loading.svelte';
@@ -9,18 +10,30 @@
 
 <Section>
 	<p class="intro">
-		Choose from circular spinners, pulsing dots, morphing shapes, or textual indicators to match
-		your application's style and communicate loading states effectively.
+		Progress indicators and loading animations to communicate state changes effectively. Choose
+		from progress bars for determinate progress, or various loading animations for indeterminate
+		states.
 	</p>
+</Section>
+
+<Section title="Progress Bar" description="A versatile progress bar with click interaction.">
+	<ProgressBar value={65} size="medium" />
+	<a
+		href="/progress/progress-bar"
+		onclick={(e) => {
+			e.preventDefault();
+			navigateTo('/progress/progress-bar');
+		}}>View full demo →</a
+	>
 </Section>
 
 <Section title="Circular Loading" description="A classic spinning circle indicator.">
 	<CircularLoading size="medium" />
 	<a
-		href="/loadings/circular"
+		href="/progress/circular"
 		onclick={(e) => {
 			e.preventDefault();
-			navigateTo('/loadings/circular');
+			navigateTo('/progress/circular');
 		}}>View full demo →</a
 	>
 </Section>
@@ -28,10 +41,10 @@
 <Section title="Pulsing Dots Loading" description="Three dots that pulse in sequence.">
 	<PulsingDotsLoading size="medium" />
 	<a
-		href="/loadings/pulsing-dots"
+		href="/progress/pulsing-dots"
 		onclick={(e) => {
 			e.preventDefault();
-			navigateTo('/loadings/pulsing-dots');
+			navigateTo('/progress/pulsing-dots');
 		}}>View full demo →</a
 	>
 </Section>
@@ -42,10 +55,10 @@
 >
 	<MorphingShapesLoading size="medium" />
 	<a
-		href="/loadings/morphing-shapes"
+		href="/progress/morphing-shapes"
 		onclick={(e) => {
 			e.preventDefault();
-			navigateTo('/loadings/morphing-shapes');
+			navigateTo('/progress/morphing-shapes');
 		}}>View full demo →</a
 	>
 </Section>
@@ -53,10 +66,10 @@
 <Section title="Textual Loading" description="Animated text with a typewriter effect.">
 	<TextualLoading />
 	<a
-		href="/loadings/textual"
+		href="/progress/textual"
 		onclick={(e) => {
 			e.preventDefault();
-			navigateTo('/loadings/textual');
+			navigateTo('/progress/textual');
 		}}>View full demo →</a
 	>
 </Section>

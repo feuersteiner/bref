@@ -81,33 +81,39 @@ export const PAGES: PageProps[] = [
 		]
 	},
 	{
-		title: 'Loading',
-		description: 'Multiple loading indicator styles for different visual contexts',
-		href: '/loadings',
+		title: 'Progress / Loading',
+		description: 'Progress indicators and loading animations',
+		href: '/progress',
 		icon: 'hourglass_empty',
 		children: [
 			{
+				title: 'Progress Bar',
+				description: 'A progress bar with determinate and indeterminate states',
+				href: '/progress/progress-bar',
+				icon: 'linear_scale'
+			},
+			{
 				title: 'Circular',
 				description: 'A classic spinning circle indicator for loading states',
-				href: '/loadings/circular',
+				href: '/progress/circular',
 				icon: 'autorenew'
 			},
 			{
 				title: 'Pulsing Dots',
 				description: 'Three dots that pulse in sequence to indicate loading',
-				href: '/loadings/pulsing-dots',
+				href: '/progress/pulsing-dots',
 				icon: 'more_horiz'
 			},
 			{
 				title: 'Morphing Shapes',
 				description: 'A shape that transforms through organic forms while rotating',
-				href: '/loadings/morphing-shapes',
+				href: '/progress/morphing-shapes',
 				icon: 'animation'
 			},
 			{
 				title: 'Textual',
 				description: 'Animated text with a typewriter effect that cycles through words',
-				href: '/loadings/textual',
+				href: '/progress/textual',
 				icon: 'text_fields'
 			}
 		]
