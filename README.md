@@ -55,7 +55,8 @@ Bref handles:
 - [x] Icon
 - [x] Button
 - [x] Icon Button
-- [x] Loading
+- [x] Progress / Loading
+  - [x] Progress Bar
   - [x] Circular
   - [x] Pulsing Dots
   - [x] Morphing Shapes
@@ -64,12 +65,11 @@ Bref handles:
 - [-] Inputs
   - [x] Text Input (single line)
   - [x] Area Text Input
+  - [x] Slider (range)
   - [ ] File Input
   - [ ] Image Input
 - [ ] Avatar
-- [ ] Progress
 - [ ] Select
-- [ ] Slider
 - [ ] Skeleton
 - [ ] Checkbox
 - [ ] Badge
