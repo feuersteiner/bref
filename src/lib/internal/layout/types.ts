@@ -55,22 +55,28 @@ export const PAGES: PageProps[] = [
 		]
 	},
 	{
-		title: 'Text Inputs',
-		description: 'Text input fields with customizable size, color, and validation states',
-		href: '/text-inputs',
+		title: 'Inputs',
+		description: 'Input fields for text, numbers, and selections',
+		href: '/inputs',
 		icon: 'input',
 		children: [
 			{
 				title: 'Text Input',
 				description: 'Single-line text input fields with labels, placeholders, and icons',
-				href: '/text-inputs/text-input',
+				href: '/inputs/text-input',
 				icon: 'short_text'
 			},
 			{
 				title: 'Area Text Input',
 				description: 'Multi-line text area input fields with labels and placeholders',
-				href: '/text-inputs/area-text-input',
+				href: '/inputs/area-text-input',
 				icon: 'notes'
+			},
+			{
+				title: 'Slider',
+				description: 'Range slider for selecting numeric values within a range',
+				href: '/inputs/slider',
+				icon: 'tune'
 			}
 		]
 	},

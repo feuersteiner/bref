@@ -2,10 +2,12 @@
 	import Section from '$lib/internal/layout/section.svelte';
 	import TextInput from '$lib/base/text-input/text-input.svelte';
 	import AreaTextInput from '$lib/base/text-input/area-text-input.svelte';
+	import Slider from '$lib/base/slider/slider.svelte';
 	import navigateTo from '../../lib/internal/navigate.ts';
 
 	let textValue = $state('');
 	let areaValue = $state('');
+	let sliderValue = $state(50);
 </script>
 
 <Section
@@ -19,10 +21,10 @@
 		onChange={(v) => (textValue = v)}
 	/>
 	<a
-		href="/text-inputs/text-input"
+		href="/inputs/text-input"
 		onclick={(e) => {
 			e.preventDefault();
-			navigateTo('/text-inputs/text-input');
+			navigateTo('/inputs/text-input');
 		}}>View full demo →</a
 	>
 </Section>
@@ -35,10 +37,21 @@
 		onChange={(v) => (areaValue = v)}
 	/>
 	<a
-		href="/text-inputs/area-text-input"
+		href="/inputs/area-text-input"
 		onclick={(e) => {
 			e.preventDefault();
-			navigateTo('/text-inputs/area-text-input');
+			navigateTo('/inputs/area-text-input');
+		}}>View full demo →</a
+	>
+</Section>
+
+<Section title="Slider" description="Range slider for selecting numeric values.">
+	<Slider value={sliderValue} onChange={(v) => (sliderValue = v)} />
+	<a
+		href="/inputs/slider"
+		onclick={(e) => {
+			e.preventDefault();
+			navigateTo('/inputs/slider');
 		}}>View full demo →</a
 	>
 </Section>
