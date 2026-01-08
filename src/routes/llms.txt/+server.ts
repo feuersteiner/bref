@@ -321,6 +321,83 @@ Rotating words with typing animation.
 
 ---
 
+## ProgressBar
+
+Horizontal progress bar with determinate and indeterminate modes.
+
+**Props:**
+- \`value?\`: number (0-100, omit for indeterminate mode)
+- \`size?\`: Size
+- \`color?\`: Color
+- \`wide?\`: boolean
+- \`animateValue?\`: boolean (smooth value transitions)
+- \`onValueClick?\`: (clickedValue: number) => void (makes bar clickable)
+
+\`\`\`svelte
+<ProgressBar value={75} color="success" size="medium" />
+\`\`\`
+
+Indeterminate mode (loading):
+
+\`\`\`svelte
+<ProgressBar color="primary" />
+\`\`\`
+
+Clickable with animation:
+
+\`\`\`svelte
+<ProgressBar
+  value={progress}
+  animateValue
+  onValueClick={(v) => progress = v}
+/>
+\`\`\`
+
+---
+
+## Slider
+
+Range input slider for selecting numeric values.
+
+**Props:**
+- \`value\`: number (required)
+- \`onChange\`: (value: number) => void (required)
+- \`min?\`: number (default: 0)
+- \`max?\`: number (default: 100)
+- \`step?\`: number (default: 1)
+- \`disabled?\`: boolean
+- \`wide?\`: boolean
+- \`size?\`: Size
+- \`color?\`: 'primary' | 'foreground'
+
+\`\`\`svelte
+<script lang="ts">
+  let volume = $state(50);
+</script>
+
+<Slider
+  value={volume}
+  min={0}
+  max={100}
+  onChange={(v) => volume = v}
+/>
+\`\`\`
+
+With step and custom range:
+
+\`\`\`svelte
+<Slider
+  value={temperature}
+  min={-10}
+  max={40}
+  step={0.5}
+  wide
+  onChange={(v) => temperature = v}
+/>
+\`\`\`
+
+---
+
 ## Common Icon Names
 
 home, settings, search, menu, close, check, add, delete, edit, refresh, download, upload, favorite, star, person, send, mail, folder, description, article, image, warning, error, check_circle, arrow_back, arrow_forward, chevron_right, chevron_left
