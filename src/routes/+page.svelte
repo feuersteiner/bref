@@ -2,6 +2,7 @@
 	import CodeSnippet from '$lib/internal/layout/code-snippet.svelte';
 	import Section from '$lib/internal/layout/section.svelte';
 	import { asset } from '$app/paths';
+	import { NPM_INSTALL_CODE_SNIPPET } from './snippets';
 </script>
 
 <Section>
@@ -30,7 +31,7 @@
 	title="Installation"
 	description="Install Bref via npm or bun or your favorite package manager."
 >
-	<CodeSnippet snippet="npm install bref-ui" />
+	<CodeSnippet snippet={NPM_INSTALL_CODE_SNIPPET} />
 </Section>
 <Section
 	title="Philosophy"

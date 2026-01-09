@@ -1,6 +1,13 @@
 <script lang="ts">
 	import Section from '$lib/internal/layout/section.svelte';
 	import CodeSnippet from '$lib/internal/layout/code-snippet.svelte';
+	import {
+		COLOR_TYPE_CODE_SNIPPET,
+		VARIANT_TYPE_CODE_SNIPPET,
+		SIZE_TYPE_CODE_SNIPPET,
+		SPEED_TYPE_CODE_SNIPPET,
+		TYPES_USAGE_CODE_SNIPPET
+	} from './snippets';
 
 	const colors = [
 		'primary',
@@ -16,33 +23,6 @@
 	const variants = ['filled', 'soft', 'ghost'] as const;
 	const sizes = ['x-small', 'small', 'medium', 'large', 'x-large'] as const;
 	const speeds = ['slow', 'normal', 'fast'] as const;
-
-	const colorSnippet = `export type Color =
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'warning'
-  | 'danger'
-  | 'info'
-  | 'foreground'
-  | 'background';`;
-
-	const variantSnippet = `export type Variant = 'filled' | 'soft' | 'ghost';`;
-
-	const sizeSnippet = `export type Size = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';`;
-
-	const speedSnippet = `export type Speed = 'slow' | 'normal' | 'fast';`;
-
-	const usageSnippet = `<script lang="ts">
-  import { Button } from 'bref-ui';
-  import type { Color, Size, Variant } from 'bref-ui';
-
-  let color: Color = 'primary';
-  let size: Size = 'medium';
-  let variant: Variant = 'filled';
-<\/script>
-
-<Button label="Click me" {color} {size} {variant} />`;
 </script>
 
 <Section>
@@ -65,7 +45,7 @@
 			</div>
 		{/each}
 	</div>
-	<CodeSnippet snippet={colorSnippet} />
+	<CodeSnippet snippet={COLOR_TYPE_CODE_SNIPPET} />
 </Section>
 
 <Section title="Variant" description="Visual style variations for interactive components.">
@@ -88,7 +68,7 @@
 			</div>
 		{/each}
 	</div>
-	<CodeSnippet snippet={variantSnippet} />
+	<CodeSnippet snippet={VARIANT_TYPE_CODE_SNIPPET} />
 </Section>
 
 <Section title="Size" description="Consistent sizing scale for components.">
@@ -103,7 +83,7 @@
 			</div>
 		{/each}
 	</div>
-	<CodeSnippet snippet={sizeSnippet} />
+	<CodeSnippet snippet={SIZE_TYPE_CODE_SNIPPET} />
 </Section>
 
 <Section title="Speed" description="Animation speed presets for loading indicators.">
@@ -118,7 +98,7 @@
 			</div>
 		{/each}
 	</div>
-	<CodeSnippet snippet={speedSnippet} />
+	<CodeSnippet snippet={SPEED_TYPE_CODE_SNIPPET} />
 </Section>
 
 <Section title="Usage Example" description="How to use these types in your components.">
@@ -126,7 +106,7 @@
 		Import types directly from <code>bref-ui</code> to get full TypeScript support in your
 		components.
 	</p>
-	<CodeSnippet snippet={usageSnippet} />
+	<CodeSnippet snippet={TYPES_USAGE_CODE_SNIPPET} />
 </Section>
 
 <style>

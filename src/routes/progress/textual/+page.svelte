@@ -2,30 +2,7 @@
 	import TextualLoading from '$lib/base/loading/textual-loading.svelte';
 	import Section from '$lib/internal/layout/section.svelte';
 	import CodeSnippet from '$lib/internal/layout/code-snippet.svelte';
-
-	const usageSnippet = `<!-- Uses 20 fun default words -->
-<TextualLoading />
-
-<!-- Custom words -->
-<TextualLoading
-  words={['Thinking', 'Processing', 'Generating']}
-/>
-
-<!-- Hide dots -->
-<TextualLoading
-  words={['Please wait', 'Almost there']}
-  hideDots
-/>
-
-<!-- Custom speeds -->
-<TextualLoading
-  words={['Ready', 'Set', 'Go']}
-  typeSpeed="slow"
-  pauseSpeed="slow"
-/>
-
-<!-- Different colors and sizes -->
-<TextualLoading size="large" color="success" />`;
+	import { TEXTUAL_LOADING_USAGE_CODE_SNIPPET } from './snippets';
 </script>
 
 <Section>
@@ -96,7 +73,7 @@
 </Section>
 
 <Section title="Usage" description="Example code for implementing textual loading.">
-	<CodeSnippet snippet={usageSnippet} />
+	<CodeSnippet snippet={TEXTUAL_LOADING_USAGE_CODE_SNIPPET} />
 </Section>
 
 <style>

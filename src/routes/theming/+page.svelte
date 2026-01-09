@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Section from '$lib/internal/layout/section.svelte';
 	import CodeSnippet from '$lib/internal/layout/code-snippet.svelte';
+	import { THEME_USAGE_CODE_SNIPPET, CSS_VARIABLES_CODE_SNIPPET } from './snippets';
 
 	const DEFAULT_THEME = {
 		paletteHex: {
@@ -26,47 +27,6 @@
 	const paletteColors = Object.entries(DEFAULT_THEME.paletteHex) as [string, string][];
 	const surfaceColors = ['background', 'foreground'] as const;
 	const variants = ['base', 'soft', 'saturated', 'contrast'] as const;
-
-	const usageSnippet = `<script lang="ts">
-  import { Theme } from 'bref-ui/base/theme';
-<\/script>
-
-<!-- Use default theme -->
-<Theme />
-
-<!-- Or customize with your own colors -->
-<Theme
-  paletteHex={{
-    primary: '#6366f1',
-    secondary: '#ec4899',
-    success: '#22c55e',
-    warning: '#f59e0b',
-    danger: '#ef4444',
-    info: '#3b82f6'
-  }}
-  surfaceHex={{
-    background: '#f8fafc',
-    foreground: '#1e293b'
-  }}
-  border={{ widthPx: 1, radiusRem: 0.5, colorHex: '#e2e8f0' }}
-  spacingRem={1}
-/>`;
-
-	const cssVariablesSnippet = `/* Palette colors - each generates 4 variants */
---color-primary          /* Base color */
---color-primary-soft     /* Lighter, subtle version */
---color-primary-saturated /* More vibrant version */
---color-primary-contrast /* Text color for use on base */
-
-/* Surface colors */
---color-background
---color-foreground
-
-/* Layout tokens */
---border-width
---border-radius
---border-color
---spacing`;
 </script>
 
 <Section>
@@ -132,14 +92,14 @@
 	<p class="description">
 		Use these variables anywhere in your CSS to maintain consistency with your theme.
 	</p>
-	<CodeSnippet snippet={cssVariablesSnippet} />
+	<CodeSnippet snippet={CSS_VARIABLES_CODE_SNIPPET} />
 </Section>
 
 <Section title="Usage" description="Add the Theme component at the root of your app.">
 	<p class="description">
 		It generates CSS custom properties and handles light/dark mode switching automatically.
 	</p>
-	<CodeSnippet snippet={usageSnippet} />
+	<CodeSnippet snippet={THEME_USAGE_CODE_SNIPPET} />
 </Section>
 
 <style>

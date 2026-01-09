@@ -2,22 +2,7 @@
 	import CircularLoading from '$lib/base/loading/circular-loading.svelte';
 	import Section from '$lib/internal/layout/section.svelte';
 	import CodeSnippet from '$lib/internal/layout/code-snippet.svelte';
-
-	const usageSnippet = `<CircularLoading
-  size="medium"
-  color="primary"
-/>
-
-<!-- Different sizes -->
-<CircularLoading size="x-small" />
-<CircularLoading size="small" />
-<CircularLoading size="medium" />
-<CircularLoading size="large" />
-<CircularLoading size="x-large" />
-
-<!-- Different colors -->
-<CircularLoading color="success" />
-<CircularLoading color="danger" />`;
+	import { CIRCULAR_LOADING_USAGE_CODE_SNIPPET } from './snippets';
 </script>
 
 <Section>
@@ -58,7 +43,7 @@
 </Section>
 
 <Section title="Usage" description="Example code for implementing circular loading.">
-	<CodeSnippet snippet={usageSnippet} />
+	<CodeSnippet snippet={CIRCULAR_LOADING_USAGE_CODE_SNIPPET} />
 </Section>
 
 <style>

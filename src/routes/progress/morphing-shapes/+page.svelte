@@ -2,21 +2,7 @@
 	import MorphingShapesLoading from '$lib/base/loading/morphing-shapes-loading.svelte';
 	import Section from '$lib/internal/layout/section.svelte';
 	import CodeSnippet from '$lib/internal/layout/code-snippet.svelte';
-
-	const usageSnippet = `<MorphingShapesLoading
-  size="medium"
-  color="primary"
-  speed="normal"
-/>
-
-<!-- Gradient mode -->
-<MorphingShapesLoading isGradient />
-
-<!-- With pulsing shadow -->
-<MorphingShapesLoading pulseShadow />
-
-<!-- Combined -->
-<MorphingShapesLoading isGradient pulseShadow />`;
+	import { MORPHING_SHAPES_LOADING_USAGE_CODE_SNIPPET } from './snippets';
 </script>
 
 <Section>
@@ -93,7 +79,7 @@
 </Section>
 
 <Section title="Usage" description="Example code for implementing morphing shapes loading.">
-	<CodeSnippet snippet={usageSnippet} />
+	<CodeSnippet snippet={MORPHING_SHAPES_LOADING_USAGE_CODE_SNIPPET} />
 </Section>
 
 <style>

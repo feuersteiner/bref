@@ -2,13 +2,7 @@
 	import Icon from '$lib/base/icon/icon.svelte';
 	import Section from '$lib/internal/layout/section.svelte';
 	import CodeSnippet from '$lib/internal/layout/code-snippet.svelte';
-
-	const usageSnippet = `<Icon
-  name="favorite"
-  filled={true}
-  color="danger"
-  size="large"
-/>`;
+	import { ICON_USAGE_CODE_SNIPPET } from './snippets';
 </script>
 
 <Section>
@@ -115,7 +109,7 @@
 </Section>
 
 <Section title="Usage" description="Example code for implementing an icon.">
-	<CodeSnippet snippet={usageSnippet} />
+	<CodeSnippet snippet={ICON_USAGE_CODE_SNIPPET} />
 </Section>
 
 <Section title="Browse All Icons" description="Explore the full Material Symbols library from Google.">

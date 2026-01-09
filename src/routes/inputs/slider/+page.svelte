@@ -2,17 +2,11 @@
 	import Slider from '$lib/base/slider/slider.svelte';
 	import Section from '$lib/internal/layout/section.svelte';
 	import CodeSnippet from '$lib/internal/layout/code-snippet.svelte';
+	import { SLIDER_USAGE_CODE_SNIPPET } from './snippets';
 
 	let value = $state(50);
 	let stepValue = $state(3);
 	let percentValue = $state(25);
-
-	const usageSnippet = `<Slider
-  value={volume}
-  min={0}
-  max={100}
-  onChange={(v) => volume = v}
-/>`;
 </script>
 
 <Section>
@@ -94,7 +88,7 @@
 </Section>
 
 <Section title="Usage" description="Example code for implementing a slider.">
-	<CodeSnippet snippet={usageSnippet} />
+	<CodeSnippet snippet={SLIDER_USAGE_CODE_SNIPPET} />
 </Section>
 
 <style>

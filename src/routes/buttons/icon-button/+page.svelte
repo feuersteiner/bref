@@ -2,16 +2,7 @@
 	import IconButton from '$lib/base/button/icon-button.svelte';
 	import Section from '$lib/internal/layout/section.svelte';
 	import CodeSnippet from '$lib/internal/layout/code-snippet.svelte';
-
-	const usageSnippet = `<IconButton
-  name="favorite"
-  filled={true}
-  color="danger"
-  variant="soft"
-  size="large"
-  rounded
-  onClick={() => handleClick()}
-/>`;
+	import { ICON_BUTTON_USAGE_CODE_SNIPPET } from './snippets';
 </script>
 
 <Section>
@@ -212,7 +203,7 @@
 </Section>
 
 <Section title="Usage" description="Example code for implementing an icon button.">
-	<CodeSnippet snippet={usageSnippet} />
+	<CodeSnippet snippet={ICON_BUTTON_USAGE_CODE_SNIPPET} />
 </Section>
 
 <style>

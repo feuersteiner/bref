@@ -2,33 +2,14 @@
 	import AreaTextInput from '$lib/base/text-input/area-text-input.svelte';
 	import Section from '$lib/internal/layout/section.svelte';
 	import CodeSnippet from '$lib/internal/layout/code-snippet.svelte';
+	import {
+		AREA_TEXT_INPUT_USAGE_CODE_SNIPPET,
+		AREA_TEXT_INPUT_RESIZABLE_CODE_SNIPPET
+	} from './snippets';
 
 	let textValue = $state('');
 	let bioValue = $state('');
 	let notesValue = $state('');
-
-	const usageSnippet = `<AreaTextInput
-  value={description}
-  placeholder="Enter a description..."
-  rows={4}
-  onChange={(v) => description = v}
-/>`;
-
-	const resizableSnippet = `// Resizable (default)
-<AreaTextInput
-  value={notes}
-  placeholder="Write your notes..."
-  resizable={true}
-  onChange={(v) => notes = v}
-/>
-
-// Fixed size
-<AreaTextInput
-  value={comment}
-  placeholder="Leave a comment..."
-  resizable={false}
-  onChange={(v) => comment = v}
-/>`;
 </script>
 
 <Section>
@@ -112,11 +93,11 @@
 </Section>
 
 <Section title="Usage" description="Example code for implementing an area text input.">
-	<CodeSnippet snippet={usageSnippet} />
+	<CodeSnippet snippet={AREA_TEXT_INPUT_USAGE_CODE_SNIPPET} />
 </Section>
 
 <Section title="Resizable Options" description="Control resize behavior.">
-	<CodeSnippet snippet={resizableSnippet} />
+	<CodeSnippet snippet={AREA_TEXT_INPUT_RESIZABLE_CODE_SNIPPET} />
 </Section>
 
 <style>

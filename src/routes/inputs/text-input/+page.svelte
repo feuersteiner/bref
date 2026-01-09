@@ -2,49 +2,16 @@
 	import TextInput from '$lib/base/text-input/text-input.svelte';
 	import Section from '$lib/internal/layout/section.svelte';
 	import CodeSnippet from '$lib/internal/layout/code-snippet.svelte';
+	import {
+		TEXT_INPUT_USAGE_CODE_SNIPPET,
+		TEXT_INPUT_CTA_USAGE_CODE_SNIPPET,
+		TEXT_INPUT_VALIDATION_CODE_SNIPPET
+	} from './snippets';
 
 	let textValue = $state('');
 	let searchValue = $state('');
 	let emailValue = $state('');
 	let messageValue = $state('');
-
-	const usageSnippet = `<TextInput
-  value={name}
-  placeholder="Enter your name"
-  startIcon="person"
-  variant="soft"
-  onChange={(v) => name = v}
-/>`;
-
-	const ctaUsageSnippet = `<TextInput
-  value={message}
-  placeholder="Type a message..."
-  ctaIconButton={{
-    name: 'send',
-    variant: 'ghost',
-    triggerOnEnter: true,
-    clearOnTrigger: true,
-    onClick: () => sendMessage()
-  }}
-  onChange={(v) => message = v}
-/>`;
-
-	const validationSnippet = `// Validation uses regex matching with 1s debounce
-// CTA button is automatically blocked when validation fails
-<TextInput
-  value={email}
-  placeholder="Enter email"
-  validation={{
-    regex: /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/,
-    message: 'Please enter a valid email'
-  }}
-  ctaIconButton={{
-    name: 'check',
-    variant: 'ghost',
-    onClick: () => submit() // Only fires when valid
-  }}
-  onChange={(v) => email = v}
-/>`;
 </script>
 
 <Section>
@@ -226,15 +193,15 @@
 </Section>
 
 <Section title="Usage" description="Example code for implementing a text input.">
-	<CodeSnippet snippet={usageSnippet} />
+	<CodeSnippet snippet={TEXT_INPUT_USAGE_CODE_SNIPPET} />
 </Section>
 
 <Section title="With CTA Button" description="Example with an action button.">
-	<CodeSnippet snippet={ctaUsageSnippet} />
+	<CodeSnippet snippet={TEXT_INPUT_CTA_USAGE_CODE_SNIPPET} />
 </Section>
 
 <Section title="With Validation" description="Example with input validation.">
-	<CodeSnippet snippet={validationSnippet} />
+	<CodeSnippet snippet={TEXT_INPUT_VALIDATION_CODE_SNIPPET} />
 </Section>
 
 <style>

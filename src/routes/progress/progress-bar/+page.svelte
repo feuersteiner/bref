@@ -3,6 +3,7 @@
 	import Section from '$lib/internal/layout/section.svelte';
 	import CodeSnippet from '$lib/internal/layout/code-snippet.svelte';
 	import Button from '$lib/base/button/button.svelte';
+	import { PROGRESS_BAR_USAGE_CODE_SNIPPET } from './snippets';
 
 	let interactiveValue = $state(50);
 	let animatedValue = $state(25);
@@ -18,27 +19,6 @@
 	const decrementAnimated = () => {
 		animatedValue = Math.max(0, animatedValue - 10);
 	};
-
-	const usageSnippet = `<ProgressBar
-  value={50}
-  size="medium"
-  color="primary"
-/>
-
-<!-- Indeterminate (loading) state -->
-<ProgressBar color="primary" />
-
-<!-- With click handler -->
-<ProgressBar
-  value={progress}
-  onValueClick={(v) => progress = v}
-/>
-
-<!-- Animated value changes -->
-<ProgressBar
-  value={progress}
-  animateValue
-/>`;
 </script>
 
 <Section>
@@ -102,7 +82,7 @@
 </Section>
 
 <Section title="Usage" description="Example code for implementing the progress bar.">
-	<CodeSnippet snippet={usageSnippet} />
+	<CodeSnippet snippet={PROGRESS_BAR_USAGE_CODE_SNIPPET} />
 </Section>
 
 <style>
@@ -138,19 +118,5 @@
 		display: flex;
 		gap: 1rem;
 		align-items: center;
-	}
-
-	.button-row button {
-		padding: 0.5rem 1rem;
-		border: 1px solid var(--color-foreground);
-		background: transparent;
-		border-radius: var(--border-radius);
-		cursor: pointer;
-		font-size: 0.875rem;
-	}
-
-	.button-row button:hover {
-		background: var(--color-foreground);
-		color: var(--color-background);
 	}
 </style>

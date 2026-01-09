@@ -2,15 +2,7 @@
 	import Button from '$lib/base/button/button.svelte';
 	import Section from '$lib/internal/layout/section.svelte';
 	import CodeSnippet from '$lib/internal/layout/code-snippet.svelte';
-
-	const usageSnippet = `<Button
-  label="Submit"
-  icon={{ name: 'check', filled: true }}
-  color="success"
-  variant="filled"
-  size="large"
-  onClick={() => handleSubmit()}
-/>`;
+	import { BUTTON_USAGE_CODE_SNIPPET } from './snippets';
 </script>
 
 <Section>
@@ -100,7 +92,7 @@
 </Section>
 
 <Section title="Usage" description="Example code for implementing a button.">
-	<CodeSnippet snippet={usageSnippet} />
+	<CodeSnippet snippet={BUTTON_USAGE_CODE_SNIPPET} />
 </Section>
 
 <style>
