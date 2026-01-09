@@ -28,7 +28,6 @@
 
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <!-- svelte-ignore a11y_click_events_have_key_events -->
-<!-- aria-valuenow={isIndeterminate ? undefined : clampedValue} -->
 <div
 	class={`${size} ${color}`}
 	class:wide
@@ -38,6 +37,7 @@
 	role="progressbar"
 	aria-valuemin={0}
 	aria-valuemax={100}
+	aria-valuetext={isIndeterminate ? 'Loading' : `${value}%`}
 	onclick={isClickable ? handleClick : undefined}
 >
 	<span class:indeterminate={isIndeterminate} style:width={progressWidth}></span>
@@ -50,7 +50,9 @@
 
 		position: relative;
 		display: flex;
-		width: 12rem;
+		min-width: 4rem;
+		width: 8rem;
+		max-width: 100%;
 		height: var(--internal-progress-height);
 		background-color: var(--internal-current-color-soft);
 		border-radius: var(--internal-progress-radius);
