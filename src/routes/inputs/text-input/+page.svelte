@@ -1,7 +1,7 @@
 <script lang="ts">
 	import TextInput from '$lib/base/text-input/text-input.svelte';
-	import Section from '$lib/internal/layout/section.svelte';
-	import CodeSnippet from '$lib/internal/layout/code-snippet.svelte';
+	import Section from '../../../internal/layout/section.svelte';
+	import CodeSnippet from '../../../internal/layout/code-snippet.svelte';
 	import {
 		TEXT_INPUT_USAGE_CODE_SNIPPET,
 		TEXT_INPUT_CTA_USAGE_CODE_SNIPPET,

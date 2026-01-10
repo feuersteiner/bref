@@ -2,8 +2,8 @@
 	import '@fontsource/spectral';
 	import '@fontsource/meow-script';
 	import Theme from '$lib/base/theme/theme.svelte';
-	import Sidebar from '$lib/internal/layout/sidebar/sidebar.svelte';
-	import Header from '$lib/internal/layout/header.svelte';
+	import Sidebar from '../internal/layout/sidebar/sidebar.svelte';
+	import Header from '../internal/layout/header.svelte';
 
 	const { children } = $props();
 </script>

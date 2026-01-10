@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Section from '$lib/internal/layout/section.svelte';
-	import CodeSnippet from '$lib/internal/layout/code-snippet.svelte';
+	import Section from '../../internal/layout/section.svelte';
+	import CodeSnippet from '../../internal/layout/code-snippet.svelte';
 	import {
 		COLOR_TYPE_CODE_SNIPPET,
 		VARIANT_TYPE_CODE_SNIPPET,

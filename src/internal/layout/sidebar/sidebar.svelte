@@ -4,8 +4,8 @@
 	import { PAGES, type PageProps } from '../types.ts';
 	import { page } from '$app/state';
 	import TreeView from '$lib/base/tree-view/tree-view.svelte';
-	import type { NodeDataProps } from '../../../index.ts';
-	import navigateTo from '../../../internal/navigate.ts';
+	import type { NodeDataProps } from '../../../lib/index.ts';
+	import navigateTo from '../../navigate.ts';
 
 	const pageToNode = (page: PageProps): NodeDataProps => ({
 		id: page.href,

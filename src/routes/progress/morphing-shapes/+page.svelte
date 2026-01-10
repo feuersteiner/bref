@@ -1,7 +1,7 @@
 <script lang="ts">
 	import MorphingShapesLoading from '$lib/base/loading/morphing-shapes-loading.svelte';
-	import Section from '$lib/internal/layout/section.svelte';
-	import CodeSnippet from '$lib/internal/layout/code-snippet.svelte';
+	import Section from '../../../internal/layout/section.svelte';
+	import CodeSnippet from '../../../internal/layout/code-snippet.svelte';
 	import { MORPHING_SHAPES_LOADING_USAGE_CODE_SNIPPET } from './snippets';
 </script>
 

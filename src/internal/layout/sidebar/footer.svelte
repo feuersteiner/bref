@@ -4,7 +4,7 @@
 		type ThemeMode,
 		initializeThemeMode,
 		toggleThemeMode
-	} from '../../../base/theme/index.ts';
+	} from '../../../lib/base/theme/index.ts';
 	import { untrack } from 'svelte';
 	import Icon from '$lib/base/icon/icon.svelte';
 

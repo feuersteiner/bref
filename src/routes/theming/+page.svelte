@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Section from '$lib/internal/layout/section.svelte';
-	import CodeSnippet from '$lib/internal/layout/code-snippet.svelte';
+	import Section from '../../internal/layout/section.svelte';
+	import CodeSnippet from '../../internal/layout/code-snippet.svelte';
 	import { THEME_USAGE_CODE_SNIPPET, CSS_VARIABLES_CODE_SNIPPET } from './snippets';
 
 	const DEFAULT_THEME = {

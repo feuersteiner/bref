@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Section from '$lib/internal/layout/section.svelte';
+	import Section from '../../internal/layout/section.svelte';
 	import Button from '$lib/base/button/button.svelte';
 	import IconButton from '$lib/base/button/icon-button.svelte';
-	import navigateTo from '../../lib/internal/navigate.ts';
+	import navigateTo from '../../internal/navigate.ts';
 </script>
 
 <Section>

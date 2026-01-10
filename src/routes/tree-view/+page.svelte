@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Section from '$lib/internal/layout/section.svelte';
-	import CodeSnippet from '$lib/internal/layout/code-snippet.svelte';
+	import Section from '../../internal/layout/section.svelte';
+	import CodeSnippet from '../../internal/layout/code-snippet.svelte';
 	import TreeView from '$lib/base/tree-view/tree-view.svelte';
 	import type { NodeDataProps } from '../../lib/index.ts';
 	import {
