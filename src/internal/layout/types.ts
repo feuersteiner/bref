@@ -1,4 +1,4 @@
-import type { IconName } from '../../base/icon/types.ts';
+import type { IconName } from '../../lib/base/icon/types.ts';
 
 export interface PageProps {
 	title: string;
@@ -77,6 +77,12 @@ export const PAGES: PageProps[] = [
 				description: 'Range slider for selecting numeric values within a range',
 				href: '/inputs/slider',
 				icon: 'tune'
+			},
+			{
+				title: 'Select',
+				description: 'Dropdown select with customizable styling using CSS base-select',
+				href: '/inputs/select',
+				icon: 'arrow_drop_down_circle'
 			}
 		]
 	},
@@ -117,6 +123,12 @@ export const PAGES: PageProps[] = [
 				icon: 'text_fields'
 			}
 		]
+	},
+	{
+		title: 'Pill',
+		description: 'Compact labels for tags, statuses, and single-choice selection',
+		href: '/pill',
+		icon: 'pill'
 	},
 	{
 		title: 'Tree View',

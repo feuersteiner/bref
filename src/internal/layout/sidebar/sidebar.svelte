@@ -55,5 +55,6 @@
 		justify-content: flex-start;
 		align-items: flex-start;
 		padding: 1rem;
+		overflow-y: auto;
 	}
 </style>

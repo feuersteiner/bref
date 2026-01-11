@@ -62,6 +62,7 @@ Bref handles:
   - [x] Morphing Shapes
   - [x] Textual
 - [x] Tree View
+- [x] Pill
 - [-] Inputs
   - [x] Text Input (single line)
   - [x] Area Text Input

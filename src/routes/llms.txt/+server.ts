@@ -7,7 +7,7 @@ Minimal Svelte 5 UI component library. Scoped CSS, no dependencies, batteries-in
 
 Install: \`npm|bun|pnpm install bref-ui\`
 
-Import: \`import { Button, Icon, TextInput, TreeView, Theme } from 'bref-ui';\`
+Import: \`import { Button, Icon, TextInput, TreeView, Pill, Theme } from 'bref-ui';\`
 
 ## Types
 
@@ -394,6 +394,29 @@ With step and custom range:
   wide
   onChange={(v) => temperature = v}
 />
+\`\`\`
+
+---
+
+## Pill
+
+Compact label for tags and statuses.
+
+**Props:**
+- \`label\`: string (required)
+- \`size?\`: Size
+- \`color?\`: Color
+- \`variant?\`: Variant
+- \`icon?\`: { name: IconName, filled?: boolean }
+
+\`\`\`svelte
+<Pill label="New" color="success" />
+\`\`\`
+
+With icon:
+
+\`\`\`svelte
+<Pill label="Featured" icon={{ name: 'star', filled: true }} color="warning" />
 \`\`\`
 
 ---
