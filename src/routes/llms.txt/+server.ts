@@ -400,7 +400,7 @@ With step and custom range:
 
 ## Select
 
-Dropdown select with customizable styling using CSS \`appearance: base-select\`.
+Dropdown select with customizable styling. Features focus outline and hover states.
 
 **Props:**
 - \`value\`: string (required)

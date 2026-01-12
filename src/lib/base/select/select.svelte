@@ -59,6 +59,7 @@
 		--internal-select-radius: calc(var(--border-radius) * 1);
 
 		display: flex;
+		margin: 2px;
 		cursor: pointer;
 		align-items: center;
 		gap: 0.25rem;
@@ -79,6 +80,11 @@
 			var(--color-foreground) var(--internal-select-hover-opacity),
 			transparent
 		);
+	}
+
+	div:focus-within {
+		outline: 2px solid var(--color-primary);
+		outline-offset: 1px;
 	}
 
 	div.wide {
