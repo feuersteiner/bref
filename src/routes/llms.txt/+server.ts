@@ -398,6 +398,59 @@ With step and custom range:
 
 ---
 
+## Select
+
+Dropdown select with customizable styling using CSS \`appearance: base-select\`.
+
+**Props:**
+- \`value\`: string (required)
+- \`options\`: SelectOptionProps[] (required)
+- \`onChange\`: (value: string) => void (required)
+- \`placeholder?\`: string
+- \`disabled?\`: boolean
+- \`wide?\`: boolean
+- \`size?\`: Size
+- \`startIcon?\`: { name: IconName, color?: Color, filled?: boolean }
+
+**SelectOptionProps:**
+- \`value\`: string (required)
+- \`label\`: string (required)
+
+\`\`\`svelte
+<script lang="ts">
+  import { Select } from 'bref-ui';
+
+  let selected = $state('');
+
+  const options = [
+    { value: 'apple', label: 'Apple' },
+    { value: 'banana', label: 'Banana' },
+    { value: 'cherry', label: 'Cherry' }
+  ];
+</script>
+
+<Select
+  value={selected}
+  options={options}
+  placeholder="Choose a fruit"
+  onChange={(v) => selected = v}
+/>
+\`\`\`
+
+With start icon:
+
+\`\`\`svelte
+<Select
+  value={selected}
+  options={options}
+  placeholder="Select fruit"
+  startIcon={{ name: 'nutrition', color: 'primary' }}
+  onChange={(v) => selected = v}
+/>
+\`\`\`
+
+---
+
 ## Pill
 
 Compact label for tags and statuses.
