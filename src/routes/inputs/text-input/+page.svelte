@@ -6,7 +6,7 @@
 		TEXT_INPUT_USAGE_CODE_SNIPPET,
 		TEXT_INPUT_CTA_USAGE_CODE_SNIPPET,
 		TEXT_INPUT_VALIDATION_CODE_SNIPPET
-	} from './snippets';
+	} from './snippets.ts';
 
 	let textValue = $state('');
 	let searchValue = $state('');

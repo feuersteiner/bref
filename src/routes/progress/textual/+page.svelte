@@ -2,7 +2,7 @@
 	import TextualLoading from '$lib/base/loading/textual-loading.svelte';
 	import Section from '../../../internal/layout/section.svelte';
 	import CodeSnippet from '../../../internal/layout/code-snippet.svelte';
-	import { TEXTUAL_LOADING_USAGE_CODE_SNIPPET } from './snippets';
+	import { TEXTUAL_LOADING_USAGE_CODE_SNIPPET } from './snippets.ts';
 </script>
 
 <Section>

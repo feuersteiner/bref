@@ -7,7 +7,7 @@
 		SIZE_TYPE_CODE_SNIPPET,
 		SPEED_TYPE_CODE_SNIPPET,
 		TYPES_USAGE_CODE_SNIPPET
-	} from './snippets';
+	} from './snippets.ts';
 
 	const colors = [
 		'primary',
@@ -103,8 +103,7 @@
 
 <Section title="Usage Example" description="How to use these types in your components.">
 	<p class="description">
-		Import types directly from <code>bref-ui</code> to get full TypeScript support in your
-		components.
+		Import types directly from <code>bref-ui</code> to get full TypeScript support in your components.
 	</p>
 	<CodeSnippet snippet={TYPES_USAGE_CODE_SNIPPET} />
 </Section>

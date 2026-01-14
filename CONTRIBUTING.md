@@ -2,6 +2,14 @@
 
 Guidelines for adding new components to the library.
 
+## Checklist
+
+- [ ] Component folder with `.svelte`, `types.ts`, `index.ts`
+- [ ] Export added to `src/lib/base/index.ts`
+- [ ] Demo page at `src/routes/<name>/+page.svelte`
+- [ ] Entry in `PAGES` array in `src/lib/internal/layout/types.ts`
+- [ ] Entry in `src/routes/llms.txt/+server.ts`
+
 ---
 
 ## 1. Component Structure
@@ -252,13 +260,3 @@ Brief action-oriented description.
 
 ---
 ```
-
----
-
-## Checklist
-
-- [ ] Component folder with `.svelte`, `types.ts`, `index.ts`
-- [ ] Export added to `src/lib/base/index.ts`
-- [ ] Demo page at `src/routes/<name>/+page.svelte`
-- [ ] Entry in `PAGES` array in `src/lib/internal/layout/types.ts`
-- [ ] Entry in `src/routes/llms.txt/+server.ts`

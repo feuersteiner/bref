@@ -2,7 +2,7 @@
 	import Icon from '$lib/base/icon/icon.svelte';
 	import Section from '../../internal/layout/section.svelte';
 	import CodeSnippet from '../../internal/layout/code-snippet.svelte';
-	import { ICON_USAGE_CODE_SNIPPET } from './snippets';
+	import { ICON_USAGE_CODE_SNIPPET } from './snippets.ts';
 </script>
 
 <Section>
@@ -112,7 +112,10 @@
 	<CodeSnippet snippet={ICON_USAGE_CODE_SNIPPET} />
 </Section>
 
-<Section title="Browse All Icons" description="Explore the full Material Symbols library from Google.">
+<Section
+	title="Browse All Icons"
+	description="Explore the full Material Symbols library from Google."
+>
 	<p class="browse-text">
 		This component uses Google Material Symbols Rounded. Browse the full icon library at
 		<a

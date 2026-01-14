@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Section from '../../internal/layout/section.svelte';
 	import CodeSnippet from '../../internal/layout/code-snippet.svelte';
-	import { THEME_USAGE_CODE_SNIPPET, CSS_VARIABLES_CODE_SNIPPET } from './snippets';
+	import { THEME_USAGE_CODE_SNIPPET, CSS_VARIABLES_CODE_SNIPPET } from './snippets.ts';
 
 	const DEFAULT_THEME = {
 		paletteHex: {

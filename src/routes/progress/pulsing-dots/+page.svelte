@@ -2,7 +2,7 @@
 	import PulsingDotsLoading from '$lib/base/loading/pulsing-dots-loading.svelte';
 	import Section from '../../../internal/layout/section.svelte';
 	import CodeSnippet from '../../../internal/layout/code-snippet.svelte';
-	import { PULSING_DOTS_LOADING_USAGE_CODE_SNIPPET } from './snippets';
+	import { PULSING_DOTS_LOADING_USAGE_CODE_SNIPPET } from './snippets.ts';
 </script>
 
 <Section>

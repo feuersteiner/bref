@@ -7,7 +7,7 @@
 		TREE_VIEW_BASIC_CODE_SNIPPET,
 		TREE_VIEW_SELECTION_CODE_SNIPPET,
 		TREE_VIEW_PROPS_CODE_SNIPPET
-	} from './snippets';
+	} from './snippets.ts';
 
 	const data: NodeDataProps[] = [
 		{

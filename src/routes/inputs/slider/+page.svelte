@@ -2,7 +2,7 @@
 	import Slider from '$lib/base/slider/slider.svelte';
 	import Section from '../../../internal/layout/section.svelte';
 	import CodeSnippet from '../../../internal/layout/code-snippet.svelte';
-	import { SLIDER_USAGE_CODE_SNIPPET } from './snippets';
+	import { SLIDER_USAGE_CODE_SNIPPET } from './snippets.ts';
 
 	let value = $state(50);
 	let stepValue = $state(3);
@@ -10,14 +10,12 @@
 </script>
 
 <Section>
-	<p class="intro">
-		A minimalist slider component for selecting numeric values within a range.
-	</p>
+	<p class="intro">A minimalist slider component for selecting numeric values within a range.</p>
 </Section>
 
 <Section title="Basic" description="Default slider with standard styling.">
 	<div class="demo">
-		<Slider value={value} onChange={(v) => (value = v)} />
+		<Slider {value} onChange={(v) => (value = v)} />
 		<span class="value-display">{value}</span>
 	</div>
 </Section>
@@ -26,23 +24,23 @@
 	<div class="demo vertical">
 		<div class="size-row">
 			<span class="size-label">x-small</span>
-			<Slider value={value} size="x-small" onChange={(v) => (value = v)} />
+			<Slider {value} size="x-small" onChange={(v) => (value = v)} />
 		</div>
 		<div class="size-row">
 			<span class="size-label">small</span>
-			<Slider value={value} size="small" onChange={(v) => (value = v)} />
+			<Slider {value} size="small" onChange={(v) => (value = v)} />
 		</div>
 		<div class="size-row">
 			<span class="size-label">medium</span>
-			<Slider value={value} size="medium" onChange={(v) => (value = v)} />
+			<Slider {value} size="medium" onChange={(v) => (value = v)} />
 		</div>
 		<div class="size-row">
 			<span class="size-label">large</span>
-			<Slider value={value} size="large" onChange={(v) => (value = v)} />
+			<Slider {value} size="large" onChange={(v) => (value = v)} />
 		</div>
 		<div class="size-row">
 			<span class="size-label">x-large</span>
-			<Slider value={value} size="x-large" onChange={(v) => (value = v)} />
+			<Slider {value} size="x-large" onChange={(v) => (value = v)} />
 		</div>
 	</div>
 </Section>
@@ -51,11 +49,11 @@
 	<div class="demo vertical">
 		<div class="size-row">
 			<span class="size-label">primary</span>
-			<Slider value={value} color="primary" onChange={(v) => (value = v)} />
+			<Slider {value} color="primary" onChange={(v) => (value = v)} />
 		</div>
 		<div class="size-row">
 			<span class="size-label">foreground</span>
-			<Slider value={value} color="foreground" onChange={(v) => (value = v)} />
+			<Slider {value} color="foreground" onChange={(v) => (value = v)} />
 		</div>
 	</div>
 </Section>
@@ -69,7 +67,13 @@
 		</div>
 		<div class="size-row">
 			<span class="size-label">0-100 by 25</span>
-			<Slider value={percentValue} min={0} max={100} step={25} onChange={(v) => (percentValue = v)} />
+			<Slider
+				value={percentValue}
+				min={0}
+				max={100}
+				step={25}
+				onChange={(v) => (percentValue = v)}
+			/>
 			<span class="value-display">{percentValue}%</span>
 		</div>
 	</div>
@@ -77,7 +81,7 @@
 
 <Section title="Wide" description="Full-width slider for forms and layouts.">
 	<div class="demo wide-container">
-		<Slider value={value} wide onChange={(v) => (value = v)} />
+		<Slider {value} wide onChange={(v) => (value = v)} />
 	</div>
 </Section>
 

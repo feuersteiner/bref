@@ -10,9 +10,8 @@
 
 <Section>
 	<p class="intro">
-		Progress indicators and loading animations to communicate state changes effectively. Choose
-		from progress bars for determinate progress, or various loading animations for indeterminate
-		states.
+		Progress indicators and loading animations to communicate state changes effectively. Choose from
+		progress bars for determinate progress, or various loading animations for indeterminate states.
 	</p>
 </Section>
 

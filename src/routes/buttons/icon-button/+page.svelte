@@ -2,7 +2,7 @@
 	import IconButton from '$lib/base/button/icon-button.svelte';
 	import Section from '../../../internal/layout/section.svelte';
 	import CodeSnippet from '../../../internal/layout/code-snippet.svelte';
-	import { ICON_BUTTON_USAGE_CODE_SNIPPET } from './snippets';
+	import { ICON_BUTTON_USAGE_CODE_SNIPPET } from './snippets.ts';
 </script>
 
 <Section>
@@ -112,7 +112,10 @@
 	</div>
 </Section>
 
-<Section title="Filled Icons - Filled Variant" description="Use filled icon variants with solid backgrounds.">
+<Section
+	title="Filled Icons - Filled Variant"
+	description="Use filled icon variants with solid backgrounds."
+>
 	<div class="demo">
 		<IconButton name="star" filled variant="filled" color="primary" onClick={() => {}} />
 		<IconButton name="star" filled variant="filled" color="secondary" onClick={() => {}} />
@@ -127,7 +130,10 @@
 	</div>
 </Section>
 
-<Section title="Filled Icons - Soft Variant" description="Use filled icon variants with subtle backgrounds.">
+<Section
+	title="Filled Icons - Soft Variant"
+	description="Use filled icon variants with subtle backgrounds."
+>
 	<div class="demo">
 		<IconButton name="star" filled variant="soft" color="primary" onClick={() => {}} />
 		<IconButton name="star" filled variant="soft" color="secondary" onClick={() => {}} />
@@ -142,7 +148,10 @@
 	</div>
 </Section>
 
-<Section title="Filled Icons - Ghost Variant" description="Use filled icon variants with transparent backgrounds.">
+<Section
+	title="Filled Icons - Ghost Variant"
+	description="Use filled icon variants with transparent backgrounds."
+>
 	<div class="demo">
 		<IconButton name="star" filled variant="ghost" color="primary" onClick={() => {}} />
 		<IconButton name="star" filled variant="ghost" color="secondary" onClick={() => {}} />

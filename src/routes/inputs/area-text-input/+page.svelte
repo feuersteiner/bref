@@ -5,7 +5,7 @@
 	import {
 		AREA_TEXT_INPUT_USAGE_CODE_SNIPPET,
 		AREA_TEXT_INPUT_RESIZABLE_CODE_SNIPPET
-	} from './snippets';
+	} from './snippets.ts';
 
 	let textValue = $state('');
 	let bioValue = $state('');

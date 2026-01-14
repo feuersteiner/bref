@@ -230,10 +230,12 @@
 	@keyframes pulse-shadow {
 		0%,
 		100% {
-			box-shadow: 0 0 var(--internal-shadow-size) color-mix(in srgb, var(--color-foreground) 15%, transparent);
+			box-shadow: 0 0 var(--internal-shadow-size)
+				color-mix(in srgb, var(--color-foreground) 15%, transparent);
 		}
 		50% {
-			box-shadow: 0 0 var(--internal-shadow-size) color-mix(in srgb, var(--color-foreground) 35%, transparent);
+			box-shadow: 0 0 var(--internal-shadow-size)
+				color-mix(in srgb, var(--color-foreground) 35%, transparent);
 		}
 	}
 </style>

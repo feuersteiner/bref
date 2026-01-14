@@ -2,13 +2,13 @@
 	import Button from '$lib/base/button/button.svelte';
 	import Section from '../../../internal/layout/section.svelte';
 	import CodeSnippet from '../../../internal/layout/code-snippet.svelte';
-	import { BUTTON_USAGE_CODE_SNIPPET } from './snippets';
+	import { BUTTON_USAGE_CODE_SNIPPET } from './snippets.ts';
 </script>
 
 <Section>
 	<p class="intro">
-		A versatile button component supporting multiple variants, colors, sizes, and optional icons
-		for a wide range of use cases.
+		A versatile button component supporting multiple variants, colors, sizes, and optional icons for
+		a wide range of use cases.
 	</p>
 </Section>
 
@@ -70,9 +70,20 @@
 <Section title="With Icons" description="Add leading icons to enhance visual context.">
 	<div class="demo">
 		<Button label="Add" icon={{ name: 'add' }} onClick={() => {}} />
-		<Button label="Favorite" icon={{ name: 'favorite', filled: true }} color="danger" onClick={() => {}} />
+		<Button
+			label="Favorite"
+			icon={{ name: 'favorite', filled: true }}
+			color="danger"
+			onClick={() => {}}
+		/>
 		<Button label="Settings" icon={{ name: 'settings' }} variant="soft" onClick={() => {}} />
-		<Button label="Delete" icon={{ name: 'delete' }} variant="ghost" color="danger" onClick={() => {}} />
+		<Button
+			label="Delete"
+			icon={{ name: 'delete' }}
+			variant="ghost"
+			color="danger"
+			onClick={() => {}}
+		/>
 	</div>
 </Section>
 

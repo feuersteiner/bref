@@ -2,7 +2,7 @@
 	import CodeSnippet from '../internal/layout/code-snippet.svelte';
 	import Section from '../internal/layout/section.svelte';
 	import { asset } from '$app/paths';
-	import { NPM_INSTALL_CODE_SNIPPET } from './snippets';
+	import { NPM_INSTALL_CODE_SNIPPET } from './snippets.ts';
 </script>
 
 <Section>
@@ -33,14 +33,11 @@
 >
 	<CodeSnippet snippet={NPM_INSTALL_CODE_SNIPPET} />
 </Section>
-<Section
-	title="Philosophy"
-	description="Why Bref?"
->
+<Section title="Philosophy" description="Why Bref?">
 	<ul>
 		<li>
-			<strong>Scoped CSS</strong>: Uses Svelte's built-in scoped styling, each component's styles are
-			encapsulated and won't leak or conflict.
+			<strong>Scoped CSS</strong>: Uses Svelte's built-in scoped styling, each component's styles
+			are encapsulated and won't leak or conflict.
 		</li>
 		<li>
 			<strong>Minimal</strong>: Only essential components, nothing extra. No bloat, no unnecessary
