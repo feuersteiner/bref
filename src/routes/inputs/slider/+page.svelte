@@ -85,6 +85,59 @@
 	</div>
 </Section>
 
+<Section title="Responsive" description="Slider adapts to container width constraints.">
+	<div class="demo vertical responsive-demo">
+		<div class="responsive-row">
+			<span class="size-label">200px</span>
+			<div class="constrained-container">
+				<div style:width="200px;">
+					<Slider {value} wide onChange={(v) => (value = v)} />
+				</div>
+			</div>
+		</div>
+		<div class="responsive-row">
+			<span class="size-label">150px</span>
+			<div class="constrained-container">
+				<div style:width="150px;">
+					<Slider {value} wide onChange={(v) => (value = v)} />
+				</div>
+			</div>
+		</div>
+		<div class="responsive-row">
+			<span class="size-label">120px</span>
+			<div class="constrained-container">
+				<div style:width="120px;">
+					<Slider {value} wide onChange={(v) => (value = v)} />
+				</div>
+			</div>
+		</div>
+		<div class="responsive-row">
+			<span class="size-label">90px</span>
+			<div class="constrained-container">
+				<div style:width="90px;">
+					<Slider {value} wide onChange={(v) => (value = v)} />
+				</div>
+			</div>
+		</div>
+		<div class="responsive-row">
+			<span class="size-label">60px</span>
+			<div class="constrained-container">
+				<div style:width="60px;">
+					<Slider {value} wide onChange={(v) => (value = v)} />
+				</div>
+			</div>
+		</div>
+		<div class="responsive-row">
+			<span class="size-label">30px</span>
+			<div class="constrained-container">
+				<div style:width="30px;">
+					<Slider {value} wide onChange={(v) => (value = v)} />
+				</div>
+			</div>
+		</div>
+	</div>
+</Section>
+
 <Section title="Disabled" description="Disabled state for unavailable inputs.">
 	<div class="demo">
 		<Slider value={50} disabled onChange={() => {}} />
@@ -140,5 +193,23 @@
 		flex-direction: column;
 		width: 100%;
 		max-width: 400px;
+	}
+
+	.responsive-demo {
+		max-width: 500px;
+	}
+
+	.responsive-row {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.constrained-container {
+		border: 1px dashed var(--color-border);
+		border-radius: 1rem;
+		padding: 0.5rem;
+		width: fit-content;
+		min-width: fit-content;
 	}
 </style>

@@ -44,7 +44,9 @@
 		--internal-thumb-color: var(--color-primary-saturated);
 
 		position: relative;
-		min-width: 7.5rem;
+		width: 7.5rem;
+		max-width: 100%;
+		min-width: 1.5rem;
 		height: var(--internal-track-height);
 		background: var(--internal-color-soft);
 		border-radius: calc(var(--internal-track-height) / 2);
