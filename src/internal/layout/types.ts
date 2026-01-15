@@ -83,6 +83,12 @@ export const PAGES: PageProps[] = [
 				description: 'Dropdown select with customizable styling using CSS base-select',
 				href: '/inputs/select',
 				icon: 'arrow_drop_down_circle'
+			},
+			{
+				title: 'Toggle',
+				description: 'Minimal toggle switch for binary on/off states',
+				href: '/inputs/toggle',
+				icon: 'toggle_on'
 			}
 		]
 	},

@@ -3,11 +3,13 @@
 	import TextInput from '$lib/base/text-input/text-input.svelte';
 	import AreaTextInput from '$lib/base/text-input/area-text-input.svelte';
 	import Slider from '$lib/base/slider/slider.svelte';
+	import Toggle from '$lib/base/toggle/toggle.svelte';
 	import navigateTo from '../../internal/navigate.ts';
 
 	let textValue = $state('');
 	let areaValue = $state('');
 	let sliderValue = $state(50);
+	let toggleValue = $state(false);
 </script>
 
 <Section
@@ -52,6 +54,17 @@
 		onclick={(e) => {
 			e.preventDefault();
 			navigateTo('/inputs/slider');
+		}}>View full demo →</a
+	>
+</Section>
+
+<Section title="Toggle" description="Minimal toggle switch for binary on/off states.">
+	<Toggle checked={toggleValue} onChange={(v) => (toggleValue = v)} />
+	<a
+		href="/inputs/toggle"
+		onclick={(e) => {
+			e.preventDefault();
+			navigateTo('/inputs/toggle');
 		}}>View full demo →</a
 	>
 </Section>

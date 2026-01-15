@@ -7,7 +7,7 @@ Minimal Svelte 5 UI component library. Scoped CSS, no dependencies, batteries-in
 
 Install: \`npm|bun|pnpm install bref-ui\`
 
-Import: \`import { Button, Icon, TextInput, TreeView, Pill, Theme } from 'bref-ui';\`
+Import: \`import { Button, Icon, TextInput, TreeView, Pill, Toggle, Theme } from 'bref-ui';\`
 
 ## Types
 
@@ -446,6 +446,29 @@ With start icon:
   placeholder="Select fruit"
   startIcon={{ name: 'nutrition', color: 'primary' }}
   onChange={(v) => selected = v}
+/>
+\`\`\`
+
+---
+
+## Toggle
+
+Minimal toggle switch for binary on/off states.
+
+**Props:**
+- \`onChange\`: (checked: boolean) => void (required)
+- \`checked?\`: boolean
+- \`disabled?\`: boolean
+- \`size?\`: Size
+
+\`\`\`svelte
+<script lang="ts">
+  let checked = $state(false);
+</script>
+
+<Toggle
+  checked={checked}
+  onChange={(v) => checked = v}
 />
 \`\`\`
 
