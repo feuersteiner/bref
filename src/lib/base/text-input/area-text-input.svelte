@@ -89,7 +89,8 @@
 
 	/* Wide */
 	div.wide {
-		width: calc(100% - 4px);
+		width: 100%;
+		flex-shrink: 1;
 	}
 
 	/* Disabled */
