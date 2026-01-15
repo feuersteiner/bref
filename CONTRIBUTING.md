@@ -134,6 +134,11 @@ Map theme colors to generic `--internal-current-*` variables:
 }
 ```
 
+### Svelte Styling Best Practices
+
+- Use scoped styles for component-specific rules
+- Must always prefer selectors over classes when possible
+
 ---
 
 ## 3. Demo Site
