@@ -7,4 +7,6 @@ export interface PillProps {
 	color?: Color;
 	variant?: Variant;
 	icon?: Pick<IconProps, 'name' | 'filled' | 'ariaLabel'>;
+	onClick?: () => void;
+	disabled?: boolean;
 }

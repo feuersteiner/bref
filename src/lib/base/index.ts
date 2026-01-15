@@ -8,5 +8,6 @@ export * from './text-input/index.ts';
 export * from './slider/index.ts';
 export * from './progress-bar/index.ts';
 export * from './pill/index.ts';
+export * from './pill-selection/index.ts';
 export * from './select/index.ts';
 export * from './toggle/index.ts';

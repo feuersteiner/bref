@@ -137,6 +137,12 @@ export const PAGES: PageProps[] = [
 		icon: 'pill'
 	},
 	{
+		title: 'Pill Selection',
+		description: 'Multi-select pill component for choosing from a set of options',
+		href: '/pill-selection',
+		icon: 'check_circle'
+	},
+	{
 		title: 'Tree View',
 		description: 'A hierarchical tree component for displaying nested data structures',
 		href: '/tree-view',

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { SvelteHTMLElements } from 'svelte/elements';
 	import type { PillProps } from './types.ts';
 	import Icon from '../icon/icon.svelte';
 
@@ -8,11 +7,24 @@
 		size = 'medium',
 		color = 'primary',
 		variant = 'filled',
-		icon
+		icon,
+		onClick,
+		disabled = false
 	}: PillProps = $props();
+
+	const handleClick = () => {
+		if (!disabled && onClick) onClick();
+	};
 </script>
 
-<div class={`${size} ${color} ${variant}`}>
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<div
+	class={`${size} ${color} ${variant}`}
+	class:clickable={!!onClick}
+	class:disabled
+	onclick={handleClick}
+>
 	{#if icon}
 		<Icon contrastMode={variant === 'filled'} {color} {...icon} {size} />
 	{/if}
@@ -20,6 +32,10 @@
 </div>
 
 <style>
+	div,
+	span {
+		transition: all 0.2s ease-in-out;
+	}
 	div {
 		/* Size defaults (medium) */
 		--internal-pill-padding-y: calc(var(--spacing) * 0.375);
@@ -39,6 +55,15 @@
 		padding: var(--internal-pill-padding-y) var(--internal-pill-padding-x);
 		font-size: var(--internal-pill-font-size);
 		border-radius: 4rem;
+	}
+
+	div.clickable {
+		cursor: pointer;
+	}
+
+	div.disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
 	}
 
 	span {

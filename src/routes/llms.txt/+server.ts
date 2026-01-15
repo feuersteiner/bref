@@ -7,7 +7,7 @@ Minimal Svelte 5 UI component library. Scoped CSS, no dependencies, batteries-in
 
 Install: \`npm|bun|pnpm install bref-ui\`
 
-Import: \`import { Button, Icon, TextInput, TreeView, Pill, Toggle, Theme } from 'bref-ui';\`
+Import: \`import { Button, Icon, TextInput, TreeView, Pill, PillSelection, Toggle, Theme } from 'bref-ui';\`
 
 ## Types
 
@@ -484,6 +484,8 @@ Compact label for tags and statuses.
 - \`color?\`: Color
 - \`variant?\`: Variant
 - \`icon?\`: { name: IconName, filled?: boolean }
+- \`onClick?\`: () => void
+- \`disabled?\`: boolean
 
 \`\`\`svelte
 <Pill label="New" color="success" />
@@ -493,6 +495,69 @@ With icon:
 
 \`\`\`svelte
 <Pill label="Featured" icon={{ name: 'star', filled: true }} color="warning" />
+\`\`\`
+
+---
+
+## PillSelection
+
+Multi-select pill component for choosing from a set of options.
+
+**Props:**
+- \`items\`: PillSelectionItem[] (required)
+- \`selection\`: string[] (required)
+- \`onSelect\`: (selection: string[]) => void (required)
+- \`maxSelectionLength?\`: number
+- \`disableOthersOnFull?\`: boolean (default: false, dequeues oldest when full)
+- \`size?\`: Size
+- \`color?\`: Color
+
+**PillSelectionItem:**
+- \`id\`: string (required)
+- \`label\`: string (required)
+- \`icon?\`: { name: IconName, filled?: boolean }
+
+\`\`\`svelte
+<script lang="ts">
+  import { PillSelection } from 'bref-ui';
+
+  let selection = $state<string[]>([]);
+
+  const items = [
+    { id: 'svelte', label: 'Svelte' },
+    { id: 'react', label: 'React' },
+    { id: 'vue', label: 'Vue' }
+  ];
+</script>
+
+<PillSelection
+  {items}
+  {selection}
+  onSelect={(s) => selection = s}
+/>
+\`\`\`
+
+With max selection (dequeue oldest):
+
+\`\`\`svelte
+<PillSelection
+  {items}
+  {selection}
+  maxSelectionLength={2}
+  onSelect={(s) => selection = s}
+/>
+\`\`\`
+
+With max selection (disable others):
+
+\`\`\`svelte
+<PillSelection
+  {items}
+  {selection}
+  maxSelectionLength={2}
+  disableOthersOnFull
+  onSelect={(s) => selection = s}
+/>
 \`\`\`
 
 ---
