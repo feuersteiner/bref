@@ -80,3 +80,8 @@ export const svelteKitRouteSegment = (segment, isRoot) => {
 		);
 	});
 };
+
+// This is SvelteKit 2.49.2's manifest-level constraint. It applies to the ordered route ID,
+// rather than an individual folder, so it must remain separate from the segment grammar above.
+export const hasValidSvelteKitRoutePath = (segments) =>
+	!/\[\.\.\.\w+\]\/\[\[/.test(segments.join('/'));

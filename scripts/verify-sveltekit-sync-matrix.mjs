@@ -30,7 +30,8 @@ const syncMatrixTokens = [
 export const verifySvelteKitSyncMatrix = async ({
 	fixtureName,
 	lintRouteFixture,
-	projectDirectory
+	projectDirectory,
+	matcherName
 }) => {
 	const syncMatrixDirectory = `route-sync-matrix-${fixtureName}`;
 	const syncAccepts = () => {
@@ -41,17 +42,19 @@ export const verifySvelteKitSyncMatrix = async ({
 			return false;
 		}
 	};
-	const verifyRoute = async (name, segment, expectedSync) => {
-		const route = `${syncMatrixDirectory}/${name}/${segment}/+page.svelte`;
+	const verifyRoute = async (name, segments, expectedSync) => {
+		const route = `${syncMatrixDirectory}/${name}/${segments.join('/')}/+page.svelte`;
 		const messages = await lintRouteFixture(route, '<p>sync oracle</p>\n');
 		const syncPassed = syncAccepts();
 		if (expectedSync !== undefined && syncPassed !== expectedSync) {
 			throw new Error(
-				`${segment} unexpectedly ${syncPassed ? 'passed' : 'failed'} svelte-kit sync`
+				`${segments.join('/')} unexpectedly ${syncPassed ? 'passed' : 'failed'} svelte-kit sync`
 			);
 		}
 		if ((messages.length === 0) !== syncPassed) {
-			throw new Error(`${segment} disagrees with svelte-kit sync: ${JSON.stringify(messages)}`);
+			throw new Error(
+				`${segments.join('/')} disagrees with svelte-kit sync: ${JSON.stringify(messages)}`
+			);
 		}
 		await rm(join(projectDirectory, 'src', 'routes', fixtureName, syncMatrixDirectory, name), {
 			recursive: true,
@@ -67,12 +70,12 @@ export const verifySvelteKitSyncMatrix = async ({
 		['manifest-whole-unicode-accepts', '[u+61-5d][slug]'],
 		['manifest-whole-unicode-rejects', '[u+5d-61][slug]']
 	]) {
-		await verifyRoute(name, segment, name === 'manifest-whole-unicode-accepts');
+		await verifyRoute(name, [segment], name === 'manifest-whole-unicode-accepts');
 	}
 	if (syncMatrixTokens.length !== 22) throw new Error('Expected a complete 22-token sync matrix');
 	for (const [leftIndex, left] of syncMatrixTokens.entries()) {
 		for (const [rightIndex, right] of syncMatrixTokens.entries()) {
-			await verifyRoute(`${leftIndex}-${rightIndex}`, `${left}${right}`);
+			await verifyRoute(`${leftIndex}-${rightIndex}`, [`${left}${right}`]);
 		}
 	}
 	for (const [name, segment, expectedSync] of [
@@ -82,7 +85,15 @@ export const verifySvelteKitSyncMatrix = async ({
 		['group-uppercase-escape', '([X+61])', false],
 		['group-invalid-unicode', '([u+zzzz])', false]
 	]) {
-		await verifyRoute(name, segment, expectedSync);
+		await verifyRoute(name, [segment], expectedSync);
+	}
+	for (const [name, segments, expectedSync] of [
+		['rest-then-required', ['[...rest]', '[slug]'], true],
+		['optional-then-rest', ['[[optional]]', '[...rest]'], true],
+		['rest-then-optional', ['[...rest]', '[[optional]]'], false],
+		['rest-then-matched-optional', ['[...rest]', `[[optional=${matcherName}]]`], false]
+	]) {
+		await verifyRoute(name, segments, expectedSync);
 	}
 	execFileSync('node_modules/.bin/svelte-kit', ['sync']);
 };

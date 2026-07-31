@@ -8,7 +8,10 @@ import svelte from 'eslint-plugin-svelte';
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import ts from 'typescript-eslint';
-import { svelteKitRouteSegment } from './scripts/sveltekit-route-segment.mjs';
+import {
+	hasValidSvelteKitRoutePath,
+	svelteKitRouteSegment
+} from './scripts/sveltekit-route-segment.mjs';
 import svelteConfig from './svelte.config.js';
 
 const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
@@ -59,6 +62,12 @@ const svelteKitRouteFolders = {
 						if (!svelteKitRouteSegment(folder, index === 0))
 							context.report({ node, messageId: 'invalid', data: { folder } });
 					}
+					if (!hasValidSvelteKitRoutePath(folders))
+						context.report({
+							node,
+							messageId: 'invalid',
+							data: { folder: folders.join('/') }
+						});
 				}
 			})
 		}

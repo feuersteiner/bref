@@ -120,7 +120,7 @@ try {
 		'export const match = (value: string) => !!value;\n'
 	);
 	execFileSync('node_modules/.bin/svelte-kit', ['sync']);
-	await verifySvelteKitSyncMatrix({ fixtureName, lintRouteFixture, projectDirectory });
+	await verifySvelteKitSyncMatrix({ fixtureName, lintRouteFixture, projectDirectory, matcherName });
 	const badModules = [
 		['+page@segment.ts', 'export const load = () => ({});\n'],
 		['+layout@segment.js', 'export const load = () => ({});\n'],
