@@ -1,7 +1,7 @@
 import type { ComponentWorkbench } from '../../../../../../src/lib/docs/types.ts';
 
 export const workbench = {
-	component: 'Fixture',
+	component: 'Second fixture',
 	description: 'A structural verifier fixture.',
 	api: [],
 	types: [],

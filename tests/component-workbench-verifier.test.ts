@@ -6,7 +6,7 @@ const fixture = (name: string) =>
 	resolve('tests/fixtures/component-workbenches', name, 'components');
 
 describe('component workbench verifier', () => {
-	it('accepts a structural route, export, and registry contract', () => {
+	it('accepts a structural route, workbench value, registry, and navigation contract', () => {
 		expect(verifyComponentWorkbenches(fixture('valid'))).toEqual([]);
 	});
 
@@ -34,6 +34,15 @@ describe('component workbench verifier', () => {
 		);
 		expect(verifyComponentWorkbenches(fixture('numeric-registry'))).toContain(
 			'registry must export a componentWorkbenches array.'
+		);
+	});
+
+	it('rejects numeric workbench exports and registry entries omitted from navigation', () => {
+		expect(verifyComponentWorkbenches(fixture('numeric-workbench'))).toContain(
+			'workbench/snippets.ts must export workbench.'
+		);
+		expect(verifyComponentWorkbenches(fixture('navigation-drift'))).toContain(
+			'second is registered but missing navigation metadata.'
 		);
 	});
 });

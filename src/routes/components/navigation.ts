@@ -10,7 +10,7 @@ interface ComponentWorkbenchNavigation {
 
 // Navigation intentionally contains no workbench imports. Root layout consumers
 // can use this metadata without downloading route-local live demos.
-const componentWorkbenchNavigation: readonly ComponentWorkbenchNavigation[] = [
+export const componentWorkbenchNavigation: readonly ComponentWorkbenchNavigation[] = [
 	{
 		slug: 'workbench',
 		title: 'Component Workbench',

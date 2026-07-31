@@ -1,1 +1,3 @@
-const componentWorkbenches = [];
+const componentWorkbenches: unknown[] = [];
+
+void componentWorkbenches;

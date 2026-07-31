@@ -15,13 +15,14 @@ describe('component workbench contract', () => {
 	});
 
 	it('exposes each workbench through the runtime navigation source', () => {
-		const workbench = componentWorkbenches[0];
-		const route = `/components/${workbench.slug}`;
-
-		expect(PAGES.flatMap((entry) => [entry, ...(entry.children || [])])).toContainEqual(
-			expect.objectContaining({ href: route, title: workbench.title })
-		);
-		expect(pageForPath(route)).toMatchObject({ href: route, title: workbench.title });
+		const pages = PAGES.flatMap((entry) => [entry, ...(entry.children || [])]);
+		for (const workbench of componentWorkbenches) {
+			const route = `/components/${workbench.slug}`;
+			expect(pages).toContainEqual(
+				expect.objectContaining({ href: route, title: workbench.title })
+			);
+			expect(pageForPath(route)).toMatchObject({ href: route, title: workbench.title });
+		}
 	});
 
 	it('renders the workbench route with live component and state demos', () => {
@@ -34,7 +35,9 @@ describe('component workbench contract', () => {
 		expect(body).toContain('Working…');
 		expect(body).toContain('role="alert"');
 		expect(body).toContain('This deliberately long status message remains readable');
-		expect(body).toContain('disabled aria-busy="true"');
+		const loadingButton = body.match(/<button\b[^>]*\baria-busy=(?:"true"|'true')[^>]*>/)?.[0];
+		expect(loadingButton).toBeDefined();
+		expect(loadingButton).toMatch(/\bdisabled(?:\s|=|>)/);
 	});
 
 	it('keeps root navigation free of route-local demo manifests', async () => {
