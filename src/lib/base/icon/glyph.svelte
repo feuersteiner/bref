@@ -30,7 +30,7 @@
 		...rest
 	}: GlyphProps & SvelteHTMLElements['span'] = $props();
 
-	const variationSettings = $derived(`\"FILL\" ${filled ? 1 : 0}, \"GRAD\" ${grade ?? 0}`);
+	const variationSettings = $derived(`"FILL" ${filled ? 1 : 0}, "GRAD" ${grade ?? 0}`);
 </script>
 
 <span
