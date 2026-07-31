@@ -101,6 +101,29 @@ async function assertMutationProof(browser) {
 				fixtureFilter(component, 'primary', 'filled')
 			)
 		);
+		await expectRejected(`${component} filled icon contrast-mode regression`, () =>
+			validate(
+				browser,
+				{
+					[source]: (code) =>
+						code.replace("contrastMode={variant === 'filled'}", 'contrastMode={false}')
+				},
+				fixtureFilter(component, 'primary', 'filled')
+			)
+		);
+		await expectRejected(`${component} !important danger alias remapping regression`, () =>
+			validate(
+				browser,
+				{
+					[source]: (code) =>
+						code.replace(
+							'\n</style>',
+							`\n\t.danger {\n\t\t--internal-current-color: var(--color-primary) !important;\n\t\t--internal-current-color-soft: var(--color-primary-soft) !important;\n\t\t--internal-current-contrast: var(--color-primary-contrast) !important;\n\t}\n</style>`
+						)
+				},
+				fixtureFilter(component, 'danger', 'filled')
+			)
+		);
 	}
 
 	const variablesPath = '/src/lib/base/button/color-variables.ts';
@@ -185,21 +208,30 @@ async function renderedMatrix(page, fixtureFilter) {
 					if (!fixtureFilter({ component, color, variant, disabled })) continue;
 					const id = fixtureId(component, color, variant, disabled);
 					const locator = page.locator(`#${id}`);
-					const rest = await renderedState(page, locator, 'rest');
+					const expectedAliasTokens = expectedSemanticTokenNames(color);
+					const rest = await renderedState(page, locator, 'rest', expectedAliasTokens);
 					for (const state of states) {
-						const current = state === 'rest' ? rest : await renderedState(page, locator, state);
+						const current =
+							state === 'rest'
+								? rest
+								: await renderedState(page, locator, state, expectedAliasTokens);
 						matrix.push({
 							component,
 							color,
 							variant,
 							state,
 							disabled,
-							contrast: contrastRatio(current.foreground, current.background),
+							contrast: Math.min(
+								...current.foregrounds.map((foreground) =>
+									contrastRatio(foreground, current.background)
+								)
+							),
 							interactionDelta:
 								state === 'rest' ? 0 : oklabDistance(rest.background, current.background),
 							restingState: rest,
 							currentState: current,
-							aliases: current.aliases
+							aliases: current.aliases,
+							expectedAliases: current.expectedAliases
 						});
 					}
 				}
@@ -210,46 +242,34 @@ async function renderedMatrix(page, fixtureFilter) {
 }
 
 function assertSemanticAliasIdentity(matrix) {
-	for (const component of components) {
-		for (const color of colors) {
-			const fixture = matrix.find(
-				(entry) =>
-					entry.component === component &&
-					entry.color === color &&
-					entry.variant === 'filled' &&
-					entry.state === 'rest' &&
-					!entry.disabled
-			);
-			if (!fixture) continue;
-			assert.deepEqual(
-				fixture.aliases,
-				expectedSemanticTokenReferences(color),
-				`${component} ${color} must retain its effective public semantic token identity.`
-			);
-		}
+	for (const entry of matrix) {
+		assert.deepEqual(
+			entry.aliases,
+			entry.expectedAliases,
+			`${entry.component} ${entry.color} ${entry.variant} ${entry.state} must retain its effective public semantic token identity.`
+		);
 	}
 }
 
-function expectedSemanticTokenReferences(color) {
-	const variable = (token) => `var(${token})`;
+function expectedSemanticTokenNames(color) {
 	if (color === 'foreground') {
 		return {
-			'--internal-current-color': variable('--color-foreground'),
-			'--internal-current-color-soft': variable('--color-background-saturated'),
-			'--internal-current-contrast': variable('--color-background')
+			'--internal-current-color': '--color-foreground',
+			'--internal-current-color-soft': '--color-background-saturated',
+			'--internal-current-contrast': '--color-background'
 		};
 	}
 	if (color === 'background') {
 		return {
-			'--internal-current-color': variable('--color-background'),
-			'--internal-current-color-soft': variable('--color-foreground-saturated'),
-			'--internal-current-contrast': variable('--color-foreground')
+			'--internal-current-color': '--color-background',
+			'--internal-current-color-soft': '--color-foreground-saturated',
+			'--internal-current-contrast': '--color-foreground'
 		};
 	}
 	return {
-		'--internal-current-color': variable(`--color-${color}`),
-		'--internal-current-color-soft': variable(`--color-${color}-soft`),
-		'--internal-current-contrast': variable(`--color-${color}-contrast`)
+		'--internal-current-color': `--color-${color}`,
+		'--internal-current-color-soft': `--color-${color}-soft`,
+		'--internal-current-contrast': `--color-${color}-contrast`
 	};
 }
 
@@ -265,52 +285,65 @@ function fixtureFilter(component, color, variant) {
 		!fixture.disabled;
 }
 
-async function renderedState(page, locator, state) {
+async function renderedState(page, locator, state, expectedAliasTokens) {
 	await page.mouse.move(0, 0);
 	if (state !== 'rest') await locator.hover();
 	if (state === 'active') await page.mouse.down();
 	try {
 		const screenshot = await locator.screenshot();
-		return await locator.evaluate(async (element, screenshotBase64) => {
-			const style = getComputedStyle(element);
-			const toRgb = (value) => {
-				const canvas = document.createElement('canvas');
-				const context = canvas.getContext('2d');
-				if (!context) throw new Error('Canvas 2D context is unavailable.');
-				context.fillStyle = value;
-				context.fillRect(0, 0, 1, 1);
-				return [...context.getImageData(0, 0, 1, 1).data.slice(0, 3)].map(
-					(channel) => channel / 255
+		return await locator.evaluate(
+			async (element, { screenshotBase64, expectedAliasTokens }) => {
+				const style = getComputedStyle(element);
+				const icon = element.querySelector(':scope > [aria-hidden], :scope > [aria-label]');
+				if (!icon) throw new Error('Rendered button is missing its nested Icon.');
+				const iconStyle = getComputedStyle(icon);
+				const toRgb = (value) => {
+					const canvas = document.createElement('canvas');
+					const context = canvas.getContext('2d');
+					if (!context) throw new Error('Canvas 2D context is unavailable.');
+					context.fillStyle = value;
+					context.fillRect(0, 0, 1, 1);
+					return [...context.getImageData(0, 0, 1, 1).data.slice(0, 3)].map(
+						(channel) => channel / 255
+					);
+				};
+				const aliases = Object.fromEntries(
+					[
+						'--internal-current-color',
+						'--internal-current-color-soft',
+						'--internal-current-contrast'
+					].map((property) => [property, style.getPropertyValue(property).trim()])
 				);
-			};
-			const aliases = Object.fromEntries(
-				[
-					'--internal-current-color',
-					'--internal-current-color-soft',
-					'--internal-current-contrast'
-				].map((property) => [property, element.style.getPropertyValue(property).trim()])
-			);
-			const image = new Image();
-			image.src = `data:image/png;base64,${screenshotBase64}`;
-			await image.decode();
-			const canvas = document.createElement('canvas');
-			const context = canvas.getContext('2d', { willReadFrequently: true });
-			if (!context) throw new Error('Canvas 2D context is unavailable.');
-			canvas.width = image.naturalWidth;
-			canvas.height = image.naturalHeight;
-			context.drawImage(image, 0, 0);
-			const background = context.getImageData(
-				Math.min(3, image.naturalWidth - 1),
-				Math.floor(image.naturalHeight * 0.5),
-				1,
-				1
-			).data;
-			return {
-				foreground: toRgb(style.color),
-				background: [...background.slice(0, 3)].map((channel) => channel / 255),
-				aliases
-			};
-		}, screenshot.toString('base64'));
+				const expectedAliases = Object.fromEntries(
+					Object.entries(expectedAliasTokens).map(([property, token]) => [
+						property,
+						style.getPropertyValue(token).trim()
+					])
+				);
+				const image = new Image();
+				image.src = `data:image/png;base64,${screenshotBase64}`;
+				await image.decode();
+				const canvas = document.createElement('canvas');
+				const context = canvas.getContext('2d', { willReadFrequently: true });
+				if (!context) throw new Error('Canvas 2D context is unavailable.');
+				canvas.width = image.naturalWidth;
+				canvas.height = image.naturalHeight;
+				context.drawImage(image, 0, 0);
+				const background = context.getImageData(
+					Math.min(3, image.naturalWidth - 1),
+					Math.floor(image.naturalHeight * 0.5),
+					1,
+					1
+				).data;
+				return {
+					foregrounds: [toRgb(style.color), toRgb(iconStyle.color)],
+					background: [...background.slice(0, 3)].map((channel) => channel / 255),
+					aliases,
+					expectedAliases
+				};
+			},
+			{ screenshotBase64: screenshot.toString('base64'), expectedAliasTokens }
+		);
 	} finally {
 		if (state === 'active') await page.mouse.up();
 	}
@@ -343,8 +376,8 @@ function relativePath(id) {
 }
 
 function sameState(first, second) {
-	return [...first.foreground, ...first.background].every(
-		(value, index) => value === [...second.foreground, ...second.background][index]
+	return [...first.foregrounds.flat(), ...first.background].every(
+		(value, index) => value === [...second.foregrounds.flat(), ...second.background][index]
 	);
 }
 
