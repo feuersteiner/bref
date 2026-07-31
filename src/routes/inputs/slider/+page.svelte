@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Slider from '$lib/base/slider/slider.svelte';
+	import Slider from '#lib/base/slider/slider.svelte';
 	import Section from '../../../internal/layout/section.svelte';
 	import CodeSnippet from '../../../internal/layout/code-snippet.svelte';
 	import { SLIDER_USAGE_CODE_SNIPPET } from './snippets.ts';

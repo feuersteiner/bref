@@ -1,5 +1,5 @@
 <script lang="ts">
-	import IconButton from '$lib/base/button/icon-button.svelte';
+	import IconButton from '#lib/base/button/icon-button.svelte';
 
 	const {
 		snippet

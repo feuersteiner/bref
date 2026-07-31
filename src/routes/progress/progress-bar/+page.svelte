@@ -1,8 +1,8 @@
 <script lang="ts">
-	import ProgressBar from '$lib/base/progress-bar/progress-bar.svelte';
+	import ProgressBar from '#lib/base/progress-bar/progress-bar.svelte';
 	import Section from '../../../internal/layout/section.svelte';
 	import CodeSnippet from '../../../internal/layout/code-snippet.svelte';
-	import Button from '$lib/base/button/button.svelte';
+	import Button from '#lib/base/button/button.svelte';
 	import { PROGRESS_BAR_USAGE_CODE_SNIPPET } from './snippets.ts';
 
 	let interactiveValue = $state(50);

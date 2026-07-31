@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Select from '$lib/base/select/select.svelte';
+	import Select from '#lib/base/select/select.svelte';
 	import Section from '../../../internal/layout/section.svelte';
 	import CodeSnippet from '../../../internal/layout/code-snippet.svelte';
 	import { SELECT_USAGE_SNIPPET } from './snippets.js';

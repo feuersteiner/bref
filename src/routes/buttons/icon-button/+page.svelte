@@ -1,5 +1,5 @@
 <script lang="ts">
-	import IconButton from '$lib/base/button/icon-button.svelte';
+	import IconButton from '#lib/base/button/icon-button.svelte';
 	import Section from '../../../internal/layout/section.svelte';
 	import CodeSnippet from '../../../internal/layout/code-snippet.svelte';
 	import { ICON_BUTTON_USAGE_CODE_SNIPPET } from './snippets.ts';

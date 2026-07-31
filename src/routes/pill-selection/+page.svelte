@@ -1,5 +1,5 @@
 <script lang="ts">
-	import PillSelection from '$lib/base/pill-selection/pill-selection.svelte';
+	import PillSelection from '#lib/base/pill-selection/pill-selection.svelte';
 	import Section from '../../internal/layout/section.svelte';
 	import CodeSnippet from '../../internal/layout/code-snippet.svelte';
 	import {

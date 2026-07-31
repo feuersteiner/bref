@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Toggle from '$lib/base/toggle/toggle.svelte';
+	import Toggle from '#lib/base/toggle/toggle.svelte';
 	import Section from '../../../internal/layout/section.svelte';
 	import CodeSnippet from '../../../internal/layout/code-snippet.svelte';
 

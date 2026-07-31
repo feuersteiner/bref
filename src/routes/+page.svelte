@@ -6,7 +6,7 @@
 </script>
 
 <Section>
-	<img src={asset('/favicon.svg')} alt="Logo" />
+	<img src={asset('favicon.svg')} alt="Logo" />
 	<h1>Bref</h1>
 	<p>A Svelte UI Component Library using scoped CSS.</p>
 
