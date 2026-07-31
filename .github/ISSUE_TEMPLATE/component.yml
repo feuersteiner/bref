@@ -2,7 +2,7 @@ name: Component
 description: Propose or plan a Bref UI component using the shared API and accessibility contract.
 title: '[Component]: '
 labels:
-  - component
+  - enhancement
 body:
   - type: markdown
     attributes:
