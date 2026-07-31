@@ -2,6 +2,24 @@
 
 Guidelines for adding new components to the library.
 
+## Code organization and formatting
+
+- Use kebab-case for source files and folders. SvelteKit's `+page.svelte`, `+layout.svelte`,
+  `+error.svelte`, `+server.ts`, and dotted route folders such as `llms.txt` keep their framework
+  names.
+- Keep TypeScript type and interface names in PascalCase. Prefer interfaces for object shapes and
+  `import type` for type-only imports.
+- Use tabs, single quotes, no trailing commas, and a 100-character print width. Run `bun run format`
+  before committing and `bun run lint` to verify formatting and ESLint rules.
+- Keep TypeScript modules to 100 non-blank, non-comment lines. A Svelte component may reach 300 lines
+  because its scoped CSS lives beside its markup; split non-style-heavy components instead.
+- `src/lib/base/icon/types.ts` is the generated Material Symbols name union and is exempt from the
+  line limit. If it moves to `icon-names.ts`, that generated file remains exempt.
+- `src/internal/layout/types.ts` and `src/routes/llms.txt/+server.ts` are declarative registries and
+  are also exempt from the line limit; keep them declarative rather than adding application logic.
+- Scoped Svelte selectors must correspond to markup in the component. Delete unused classes rather
+  than suppressing the lint rule.
+
 ## Checklist
 
 - [ ] Component folder with `.svelte`, `types.ts`, `index.ts`

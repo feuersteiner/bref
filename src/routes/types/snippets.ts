@@ -21,6 +21,6 @@ export const TYPES_USAGE_CODE_SNIPPET = `<script lang="ts">
   let color: Color = 'primary';
   let size: Size = 'medium';
   let variant: Variant = 'filled';
-<\/script>
+<${'/script'}>
 
 <Button label="Click me" {color} {size} {variant} />`;

@@ -1,4 +1,4 @@
-import type { Color, Size } from '../types.ts';
+import type { Size } from '../types.ts';
 import type { IconName, IconProps } from '../icon/types.ts';
 
 export interface NodeDataProps {

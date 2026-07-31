@@ -4,6 +4,7 @@
 	import AreaTextInput from '$lib/base/text-input/area-text-input.svelte';
 	import Slider from '$lib/base/slider/slider.svelte';
 	import Toggle from '$lib/base/toggle/toggle.svelte';
+	import { resolve } from '$app/paths';
 	import navigateTo from '../../internal/navigate.ts';
 
 	let textValue = $state('');
@@ -23,7 +24,7 @@
 		onChange={(v) => (textValue = v)}
 	/>
 	<a
-		href="/inputs/text-input"
+		href={resolve('/inputs/text-input')}
 		onclick={(e) => {
 			e.preventDefault();
 			navigateTo('/inputs/text-input');
@@ -39,7 +40,7 @@
 		onChange={(v) => (areaValue = v)}
 	/>
 	<a
-		href="/inputs/area-text-input"
+		href={resolve('/inputs/area-text-input')}
 		onclick={(e) => {
 			e.preventDefault();
 			navigateTo('/inputs/area-text-input');
@@ -50,7 +51,7 @@
 <Section title="Slider" description="Range slider for selecting numeric values.">
 	<Slider value={sliderValue} onChange={(v) => (sliderValue = v)} />
 	<a
-		href="/inputs/slider"
+		href={resolve('/inputs/slider')}
 		onclick={(e) => {
 			e.preventDefault();
 			navigateTo('/inputs/slider');
@@ -61,7 +62,7 @@
 <Section title="Toggle" description="Minimal toggle switch for binary on/off states.">
 	<Toggle checked={toggleValue} onChange={(v) => (toggleValue = v)} />
 	<a
-		href="/inputs/toggle"
+		href={resolve('/inputs/toggle')}
 		onclick={(e) => {
 			e.preventDefault();
 			navigateTo('/inputs/toggle');

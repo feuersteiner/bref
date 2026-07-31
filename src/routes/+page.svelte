@@ -1,7 +1,7 @@
 <script lang="ts">
 	import CodeSnippet from '../internal/layout/code-snippet.svelte';
 	import Section from '../internal/layout/section.svelte';
-	import { asset } from '$app/paths';
+	import { asset, resolve } from '$app/paths';
 	import { NPM_INSTALL_CODE_SNIPPET } from './snippets.ts';
 </script>
 
@@ -55,8 +55,8 @@
 </Section>
 <Section title="For LLMs" description="AI-friendly documentation for code assistants.">
 	<p>
-		Use <a href="./llms.txt">/llms.txt</a> for a token-optimized reference when working with AI coding
-		assistants. It provides concise props and examples for all components.
+		Use <a href={resolve('/llms.txt')}>/llms.txt</a> for a token-optimized reference when working with
+		AI coding assistants. It provides concise props and examples for all components.
 	</p>
 </Section>
 <Section title="Roadmap" description="We're building Bref in phases:">

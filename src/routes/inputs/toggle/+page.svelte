@@ -7,7 +7,7 @@
 
 	const usageSnippet = `<script lang="ts">
   let checked = $state(false);
-<\/script>
+<${'/script'}>
 
 <Toggle
   checked={checked}

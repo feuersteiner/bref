@@ -42,14 +42,14 @@
 		<strong>saturated</strong>, and <strong>contrast</strong>.
 	</p>
 	<div class="color-grid">
-		{#each paletteColors as [name, hex]}
+		{#each paletteColors as [name, hex] (name)}
 			<div class="color-card">
 				<div class="color-header">
 					<span class="color-name">{name}</span>
 					<span class="color-hex">{hex}</span>
 				</div>
 				<div class="color-variants">
-					{#each variants as variant}
+					{#each variants as variant (variant)}
 						{@const cssVar = variant === 'base' ? `--color-${name}` : `--color-${name}-${variant}`}
 						<div class="color-swatch" style:background={`var(${cssVar})`}>
 							<span class="swatch-label">{variant}</span>
@@ -67,7 +67,7 @@
 		Surface colors define the base canvas of your application and also generate variants.
 	</p>
 	<div class="color-grid surface-grid">
-		{#each surfaceColors as name}
+		{#each surfaceColors as name (name)}
 			{@const hex = DEFAULT_THEME.surfaceHex[name]}
 			<div class="color-card">
 				<div class="color-header">
@@ -75,7 +75,7 @@
 					<span class="color-hex">{hex}</span>
 				</div>
 				<div class="color-variants">
-					{#each variants as variant}
+					{#each variants as variant (variant)}
 						{@const cssVar = variant === 'base' ? `--color-${name}` : `--color-${name}-${variant}`}
 						<div class="color-swatch" style:background={`var(${cssVar})`}>
 							<span class="swatch-label">{variant}</span>
