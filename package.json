@@ -21,6 +21,7 @@
 		"prepack": "svelte-kit sync && svelte-package && publint",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"validate:button-colors": "playwright install chromium && bun scripts/validate-button-color-states.mjs",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint ."
 	},
@@ -61,6 +62,7 @@
 		"globals": "^16.5.0",
 		"prettier": "^3.7.4",
 		"prettier-plugin-svelte": "^3.4.0",
+		"playwright": "^1.62.1",
 		"publint": "^0.3.15",
 		"svelte": "^5.45.6",
 		"svelte-check": "^4.3.4",
@@ -78,7 +80,6 @@
 		"css"
 	],
 	"dependencies": {
-		"@fontsource-variable/material-symbols-rounded": "^5.2.30",
-		"colord": "^2.9.3"
+		"@fontsource-variable/material-symbols-rounded": "^5.2.30"
 	}
 }

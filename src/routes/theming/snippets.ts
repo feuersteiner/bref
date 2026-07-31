@@ -1,40 +1,45 @@
 export const THEME_USAGE_CODE_SNIPPET = `<script lang="ts">
-  import { Theme } from 'bref-ui/base/theme';
-<\/script>
+  import { Theme } from 'bref-ui';
+</script>
 
-<!-- Use default theme -->
-<Theme />
+<!-- Add once at the application root. -->
+<Theme />`;
 
-<!-- Or customize with your own colors -->
-<Theme
-  paletteHex={{
-    primary: '#6366f1',
-    secondary: '#ec4899',
-    success: '#22c55e',
-    warning: '#f59e0b',
-    danger: '#ef4444',
-    info: '#3b82f6'
-  }}
-  surfaceHex={{
-    background: '#f8fafc',
-    foreground: '#1e293b'
-  }}
-  border={{ widthPx: 1, radiusRem: 0.5, colorHex: '#e2e8f0' }}
-  spacingRem={1}
-/>`;
-
-export const CSS_VARIABLES_CODE_SNIPPET = `/* Palette colors - each generates 4 variants */
---color-primary          /* Base color */
---color-primary-soft     /* Lighter, subtle version */
---color-primary-saturated /* More vibrant version */
---color-primary-contrast /* Text color for use on base */
-
-/* Surface colors */
+export const CSS_VARIABLES_CODE_SNIPPET = `/* Semantic colors */
 --color-background
+--color-background-soft
+--color-background-saturated
+--color-background-contrast
+--color-surface
+--color-surface-hover
+--color-border
 --color-foreground
+--color-foreground-soft
+--color-foreground-saturated
+--color-foreground-contrast
+--color-muted
+--color-accent
+--color-focus
 
-/* Layout tokens */
---border-width
---border-radius
---border-color
---spacing`;
+/* Component color aliases */
+--color-primary, --color-primary-soft, --color-primary-saturated, --color-primary-contrast
+--color-secondary, --color-secondary-soft, --color-secondary-contrast
+--color-success, --color-success-soft, --color-success-contrast
+--color-warning, --color-warning-soft, --color-warning-contrast
+--color-danger, --color-danger-soft, --color-danger-contrast
+--color-info, --color-info-soft, --color-info-contrast
+
+/* Foundation tokens */
+--space-1, --space-2, --space-3, --space-4, --space-6, --space-8
+--spacing
+--control-small, --control-medium, --control-large
+--font-family, --font-family-display
+--font-size-small, --font-size-medium, --font-size-large
+--font-weight-normal, --font-weight-semibold
+--line-height-tight, --line-height-normal
+--radius-small, --radius-medium, --radius-large
+--border-width, --border-radius
+--shadow-small, --shadow-medium, --shadow-control, --shadow-control-hover
+--motion-fast, --motion-normal, --motion-slow
+--motion-ease
+--focus-ring`;

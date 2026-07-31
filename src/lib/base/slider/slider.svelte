@@ -130,7 +130,7 @@
 		background: var(--internal-thumb-color);
 		cursor: pointer;
 		border: none;
-		box-shadow: 0 0.03rem 0.125rem rgba(0, 0, 0, 0.08);
+		box-shadow: var(--shadow-control);
 		transition:
 			transform 0.2s ease,
 			box-shadow 0.2s ease;
@@ -138,7 +138,7 @@
 
 	input::-webkit-slider-thumb:hover {
 		transform: scale(1.2);
-		box-shadow: 0 0.0625rem 0.25rem rgba(0, 0, 0, 0.1);
+		box-shadow: var(--shadow-control-hover);
 	}
 
 	input::-webkit-slider-thumb:active {
@@ -153,7 +153,7 @@
 		background: var(--internal-thumb-color);
 		cursor: pointer;
 		border: none;
-		box-shadow: 0 0.03rem 0.125rem rgba(0, 0, 0, 0.08);
+		box-shadow: var(--shadow-control);
 		transition:
 			transform 0.2s ease,
 			box-shadow 0.2s ease;
@@ -161,7 +161,7 @@
 
 	input::-moz-range-thumb:hover {
 		transform: scale(1.2);
-		box-shadow: 0 0.0625rem 0.25rem rgba(0, 0, 0, 0.1);
+		box-shadow: var(--shadow-control-hover);
 	}
 
 	input::-moz-range-thumb:active {

@@ -34,8 +34,7 @@
 
 <Section title="Color" description="Semantic color options for component styling.">
 	<p class="description">
-		Colors are mapped to CSS custom properties, allowing them to adapt to light and dark themes
-		automatically.
+		Colors are mapped to explicit semantic CSS custom properties from Bref's dark theme foundation.
 	</p>
 	<div class="type-grid">
 		{#each colors as color}
