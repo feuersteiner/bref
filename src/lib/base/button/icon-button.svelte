@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import type { IconButtonProps } from './types.ts';
+	import { BUTTON_COLOR_VARIABLES } from './color-variables.ts';
 	import Icon from '../icon/icon.svelte';
 
 	const {
@@ -13,12 +14,22 @@
 		disabled = false,
 		rounded = false,
 		onClick,
+		style,
 		...rest
 	}: IconButtonProps & SvelteHTMLElements['button'] = $props();
+
+	const iconColor = $derived(color === 'background' && variant === 'ghost' ? 'foreground' : color);
 </script>
 
-<button {...rest} class={`${size} ${color} ${variant}`} class:rounded {disabled} onclick={onClick}>
-	<Icon {name} contrastMode={variant === 'filled'} {color} {filled} {ariaLabel} {size} />
+<button
+	{...rest}
+	class={`${size} ${color} ${variant}`}
+	class:rounded
+	style={`${BUTTON_COLOR_VARIABLES[color]}; ${style ?? ''}`}
+	{disabled}
+	onclick={onClick}
+>
+	<Icon {name} contrastMode={variant === 'filled'} color={iconColor} {filled} {ariaLabel} {size} />
 </button>
 
 <style>
@@ -90,55 +101,6 @@
 
 	.rounded {
 		border-radius: 50%;
-	}
-
-	/* Color mappings - set current color variables per color class */
-	.primary {
-		--internal-current-color: var(--color-primary);
-		--internal-current-color-soft: var(--color-primary-soft);
-		--internal-current-contrast: var(--color-primary-contrast);
-	}
-
-	.secondary {
-		--internal-current-color: var(--color-secondary);
-		--internal-current-color-soft: var(--color-secondary-soft);
-		--internal-current-contrast: var(--color-secondary-contrast);
-	}
-
-	.success {
-		--internal-current-color: var(--color-success);
-		--internal-current-color-soft: var(--color-success-soft);
-		--internal-current-contrast: var(--color-success-contrast);
-	}
-
-	.warning {
-		--internal-current-color: var(--color-warning);
-		--internal-current-color-soft: var(--color-warning-soft);
-		--internal-current-contrast: var(--color-warning-contrast);
-	}
-
-	.danger {
-		--internal-current-color: var(--color-danger);
-		--internal-current-color-soft: var(--color-danger-soft);
-		--internal-current-contrast: var(--color-danger-contrast);
-	}
-
-	.info {
-		--internal-current-color: var(--color-info);
-		--internal-current-color-soft: var(--color-info-soft);
-		--internal-current-contrast: var(--color-info-contrast);
-	}
-
-	.foreground {
-		--internal-current-color: var(--color-foreground);
-		--internal-current-color-soft: var(--color-background-saturated);
-		--internal-current-contrast: var(--color-background);
-	}
-
-	.background {
-		--internal-current-color: var(--color-background);
-		--internal-current-color-soft: var(--color-foreground-saturated);
-		--internal-current-contrast: var(--color-foreground);
 	}
 
 	/* Filled variant */
@@ -221,6 +183,23 @@
 			in srgb,
 			var(--color-foreground) var(--internal-btn-ghost-active-opacity),
 			var(--color-background)
+		);
+	}
+
+	/* Public neutral aliases need their own visible interaction treatment. */
+	.background.ghost {
+		color: var(--color-foreground);
+	}
+
+	.foreground.soft:not(:disabled):hover {
+		background-color: var(--color-background-soft);
+	}
+
+	.foreground.soft:not(:disabled):active {
+		background-color: color-mix(
+			in oklch,
+			var(--color-background-soft) 75%,
+			var(--color-foreground)
 		);
 	}
 </style>

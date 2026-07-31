@@ -130,7 +130,7 @@
 	}
 
 	.background-demo {
-		background-color: gray;
+		background-color: var(--color-background-saturated);
 		padding: 0.5rem;
 		border-radius: 0.5rem;
 	}
