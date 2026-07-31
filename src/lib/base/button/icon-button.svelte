@@ -33,7 +33,7 @@
 		--internal-btn-hover-mix: 85%;
 		--internal-btn-active-mix: 70%;
 		--internal-btn-ghost-hover-opacity: 10%;
-		--internal-btn-ghost-active-opacity: 25%;
+		--internal-btn-ghost-active-opacity: 20%;
 
 		/* Size defaults (medium) */
 		--internal-btn-size: calc(var(--spacing) * 2.5);
@@ -151,7 +151,7 @@
 		background-color: color-mix(
 			in oklch,
 			var(--internal-current-color) var(--internal-btn-hover-mix),
-			var(--color-background-saturated)
+			var(--color-foreground-saturated)
 		);
 	}
 
@@ -159,7 +159,7 @@
 		background-color: color-mix(
 			in oklch,
 			var(--internal-current-color) var(--internal-btn-active-mix),
-			var(--color-background-saturated)
+			var(--color-foreground-saturated)
 		);
 	}
 
@@ -173,7 +173,7 @@
 		background-color: color-mix(
 			in oklch,
 			var(--internal-current-color-soft) var(--internal-btn-hover-mix),
-			var(--internal-current-color)
+			var(--color-background)
 		);
 	}
 
@@ -181,7 +181,7 @@
 		background-color: color-mix(
 			in oklch,
 			var(--internal-current-color-soft) var(--internal-btn-active-mix),
-			var(--internal-current-color)
+			var(--color-background)
 		);
 	}
 
