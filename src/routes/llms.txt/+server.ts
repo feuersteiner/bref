@@ -1,6 +1,6 @@
 export const prerender = true;
 
-export function GET() {
+export const GET = () => {
 	const content = `# Bref-UI
 
 Minimal Svelte 5 UI component library. Scoped CSS, no dependencies, batteries-included theming.
@@ -572,4 +572,4 @@ home, settings, search, menu, close, check, add, delete, edit, refresh, download
 			'Content-Type': 'text/plain; charset=utf-8'
 		}
 	});
-}
+};

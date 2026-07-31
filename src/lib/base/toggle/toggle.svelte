@@ -1,12 +1,7 @@
 <script lang="ts">
 	import type { ToggleProps } from './types.ts';
 
-	const {
-		checked = false,
-		disabled = false,
-		size = 'medium',
-		onChange
-	}: ToggleProps = $props();
+	const { checked = false, disabled = false, size = 'medium', onChange }: ToggleProps = $props();
 
 	const handleClick = () => {
 		if (!disabled) {

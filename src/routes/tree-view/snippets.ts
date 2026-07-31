@@ -26,7 +26,7 @@ export const TREE_VIEW_BASIC_CODE_SNIPPET = `<script lang="ts">
   const onSelect = (id: string) => {
     selectedIds = new Set([id]);
   };
-<\/script>
+<${'/script'}>
 
 <TreeView {data} {selectedIds} {onSelect} />`;
 
@@ -39,7 +39,7 @@ export const TREE_VIEW_SELECTION_CODE_SNIPPET = `<script lang="ts">
     selectedIds = new Set([id]);
     console.log('Selected:', id);
   };
-<\/script>
+<${'/script'}>
 
 <TreeView {data} {selectedIds} {onSelect} />
 

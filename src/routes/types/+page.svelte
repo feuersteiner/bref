@@ -38,7 +38,7 @@
 		automatically.
 	</p>
 	<div class="type-grid">
-		{#each colors as color}
+		{#each colors as color (color)}
 			<div class="type-item color-item" style="--item-color: var(--color-{color})">
 				<span class="color-swatch"></span>
 				<code>{color}</code>
@@ -53,7 +53,7 @@
 		Variants control the visual weight and emphasis of components like buttons and inputs.
 	</p>
 	<div class="type-grid variant-grid">
-		{#each variants as variant}
+		{#each variants as variant (variant)}
 			<div class="type-item variant-item" data-variant={variant}>
 				<code>{variant}</code>
 				<span class="variant-desc">
@@ -77,7 +77,7 @@
 		UI contexts.
 	</p>
 	<div class="type-grid size-grid">
-		{#each sizes as size}
+		{#each sizes as size (size)}
 			<div class="type-item size-item" data-size={size}>
 				<code>{size}</code>
 			</div>
@@ -91,7 +91,7 @@
 		Speed types control animation timing for components like loading indicators.
 	</p>
 	<div class="type-grid">
-		{#each speeds as speed}
+		{#each speeds as speed (speed)}
 			<div class="type-item">
 				<code>{speed}</code>
 				<span class="speed-indicator" data-speed={speed}></span>

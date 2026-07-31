@@ -1,6 +1,6 @@
 export const THEME_USAGE_CODE_SNIPPET = `<script lang="ts">
   import { Theme } from 'bref-ui/base/theme';
-<\/script>
+<${'/script'}>
 
 <!-- Use default theme -->
 <Theme />

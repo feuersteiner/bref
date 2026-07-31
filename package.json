@@ -22,7 +22,8 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint ."
+		"lint": "prettier --check . && eslint .",
+		"test:lint-rules": "node scripts/verify-lint-rules.mjs"
 	},
 	"files": [
 		"dist",
@@ -57,6 +58,7 @@
 		"@types/node": "^22",
 		"eslint": "^9.39.1",
 		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-check-file": "^3.3.2",
 		"eslint-plugin-svelte": "^3.13.1",
 		"globals": "^16.5.0",
 		"prettier": "^3.7.4",

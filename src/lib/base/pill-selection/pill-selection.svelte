@@ -25,7 +25,7 @@
 </script>
 
 <div>
-	{#each items as item}
+	{#each items as item (item.id)}
 		{@const selected = selection.includes(item.id)}
 		<Pill
 			label={item.label}
