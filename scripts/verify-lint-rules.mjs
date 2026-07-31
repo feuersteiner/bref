@@ -78,8 +78,8 @@ try {
 		'export const validName = true;\n'
 	);
 
-	const goodNames =
-		'good-name.ts good-name.svelte good-name.svelte.ts good-name.js good-name.svelte.js'.split(' ');
+	// prettier-ignore
+	const goodNames = 'good-name.ts good-name.svelte good-name.svelte.ts good-name.js good-name.svelte.js'.split(' ');
 	const badNames = ['BadName.ts', 'BadName.js', 'BadName.svelte.js', 'bad_name.svelte'];
 	await Promise.all([
 		...goodNames.map((name) => expect(name, lintFixture(name))),
@@ -94,10 +94,10 @@ try {
 		expect('ordinary-component.svelte', lintFixture('ordinary-component.svelte'), 'max-lines'),
 		expect('orphan-selector.svelte', lintFixture('orphan-selector.svelte'), 'svelte/valid-compile')
 	]);
-	const routeResetComponents =
-		'+page@.svelte +layout@.svelte +page@segment.svelte +layout@segment.svelte'
-			.split(' ')
-			.map((name) => [name, name.includes('layout') ? '<slot />\n' : '<p>reset</p>\n']);
+	// prettier-ignore
+	const routeResetComponents = '+page@.svelte +layout@.svelte +page@segment.svelte +layout@segment.svelte'.split(' ').map((name) => [name, name.includes('layout') ? '<slot />\n' : '<p>reset</p>\n']);
+	// prettier-ignore
+	const adjacentRoutes = 'x-param/[x+61][slug] param-x/[slug][x+61] u-param/[u+0061][slug] param-u/[slug][u+0061] x-escape/[x+61][x+62] u-escape/[u+0061][u+0062] embedded-x/foo-[x+61][slug] embedded-u/foo-[slug][u+0061]'.split(' ').map((route) => [`route-adjacent-${route}/+page.svelte`, '<p>valid</p>\n']);
 	const routes = [
 		['route-groups/(group)/+layout.svelte', '<slot />\n'],
 		['route-groups/(group)/page/+page@(group).svelte', '<p>group page reset</p>\n'],
@@ -110,7 +110,8 @@ try {
 		[`route-matcher/[slug=${matcherName}]/+page.svelte`, '<p>matched parameter</p>\n'],
 		['route-combined/(group)/foo-[slug]-[id]/+page.svelte', '<p>combined route segment</p>\n'],
 		['route-unicode/[u+abcd]/+page.svelte', '<p>unicode escape</p>\n'],
-		['route-unicode/[u+61-62]/+page.svelte', '<p>unicode escapes</p>\n']
+		['route-unicode/[u+61-62]/+page.svelte', '<p>unicode escapes</p>\n'],
+		...adjacentRoutes
 	];
 	await Promise.all(routes.map(([name, contents]) => lintRouteFixture(name, contents)));
 	await lintVirtualFixture(
@@ -132,7 +133,7 @@ try {
 		...badModules.map(([name, contents]) =>
 			expectRoute(name, contents, 'check-file/filename-naming-convention')
 		),
-		...'BadFolder [bad-name] [[...rest]] [slug][id] (group -foo-[slug] foo--[slug] [slug]- [slug]--foo [slug]--[id]'
+		...'BadFolder [bad-name] [[...rest]] [slug][id] [x+6][slug] [slug][x+6] [u+061][slug] [slug][u+061] [x+6][x+62] [u+061][u+0062] foo-[x+6][slug] foo-[slug][u+061] (group -foo-[slug] foo--[slug] [slug]- [slug]--foo [slug]--[id]'
 			.split(' ')
 			.map((folder) =>
 				expectRoute(
