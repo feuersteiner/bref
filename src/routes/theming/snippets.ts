@@ -16,7 +16,7 @@ export const CSS_VARIABLES_CODE_SNIPPET = `/* Semantic colors */
 --color-focus
 
 /* Foundation tokens */
---space-1 … --space-8
+--space-1, --space-2, --space-3, --space-4, --space-6, --space-8
 --font-family, --font-family-display
 --font-size-small … --font-size-large
 --radius-small … --radius-large

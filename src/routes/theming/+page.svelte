@@ -38,7 +38,11 @@
 
 <Section title="Foundation tokens" description="Stable tokens for dense, accessible interfaces.">
 	<ul>
-		<li><strong>Spacing:</strong> <code>--space-1</code> through <code>--space-8</code>.</li>
+		<li>
+			<strong>Spacing:</strong> <code>--space-1</code>, <code>--space-2</code>,
+			<code>--space-3</code>, <code>--space-4</code>, <code>--space-6</code>, and
+			<code>--space-8</code>.
+		</li>
 		<li><strong>Typography:</strong> font family, sizes, weights, and line heights.</li>
 		<li>
 			<strong>Radius:</strong> <code>--radius-small</code> through <code>--radius-large</code>.
