@@ -1,0 +1,68 @@
+name: Component
+description: Propose or plan a Bref UI component using the shared API and accessibility contract.
+title: '[Component]: '
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for one component only. See CONTRIBUTING.md for the binding-first API and
+        native interaction conventions.
+  - type: input
+    id: component-name
+    attributes:
+      label: Component name
+      description: Use the proposed public component name.
+      placeholder: Select
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and scope
+      description: Describe the user need and the smallest component scope that solves it.
+    validations:
+      required: true
+  - type: textarea
+    id: api
+    attributes:
+      label: Public API
+      description: List required props, optional props, bindable state, and callbacks. State whether callbacks represent committed actions.
+      placeholder: |
+        - `value`: bindable selected value
+        - `options`: available options
+        - `onChange`: optional callback after a committed selection
+    validations:
+      required: true
+  - type: checkboxes
+    id: native-interaction
+    attributes:
+      label: Native interaction model
+      description: Prefer a native element or platform API before introducing a custom ARIA pattern.
+      options:
+        - label: The native element or API to use is identified, or the reason a custom pattern is required is documented.
+          required: true
+        - label: Applicable native attributes and event handlers will be forwarded.
+          required: true
+        - label: Generated control relationships will use stable IDs from `$props.id()`.
+          required: true
+  - type: textarea
+    id: accessibility
+    attributes:
+      label: Accessibility and keyboard behavior
+      description: Describe labels, descriptions, focus movement, state announcements, keyboard commands, reduced motion, and non-color state indicators.
+      placeholder: Include Arrow/Home/End/Enter/Space/Escape behavior for a custom listbox, tabs, or tree.
+    validations:
+      required: true
+  - type: checkboxes
+    id: implementation
+    attributes:
+      label: Implementation checklist
+      options:
+        - label: Reactive behavior will live in `controller.svelte.ts` and pure calculations in `logic.ts` where those concerns are needed.
+          required: true
+        - label: The component, exports, demo route, navigation entry, and LLM documentation will be added.
+          required: true
+        - label: Keyboard and pointer interaction will be tested before completion.
+          required: true
