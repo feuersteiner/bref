@@ -17,8 +17,15 @@
 	}: IconButtonProps & SvelteHTMLElements['button'] = $props();
 </script>
 
-<button {...rest} class={`${size} ${color} ${variant}`} class:rounded {disabled} onclick={onClick}>
-	<Icon {name} contrastMode={variant === 'filled'} {color} {filled} {ariaLabel} {size} />
+<button
+	{...rest}
+	class={`${size} ${color} ${variant}`}
+	class:rounded
+	{disabled}
+	aria-label={ariaLabel}
+	onclick={onClick}
+>
+	<Icon {name} color={variant === 'filled' ? undefined : color} {filled} {size} />
 </button>
 
 <style>

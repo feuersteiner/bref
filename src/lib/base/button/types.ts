@@ -1,4 +1,4 @@
-import type { IconProps } from '../icon/types.ts';
+import type { GlyphProps, IconProps } from '../icon/types.ts';
 import type { Color, Size, Variant } from '../types.ts';
 
 export interface BaseButtonProps {
@@ -9,13 +9,13 @@ export interface BaseButtonProps {
 	variant?: Variant;
 }
 
-export interface IconButtonProps
-	extends BaseButtonProps, Pick<IconProps, 'name' | 'filled' | 'ariaLabel'> {
+export interface IconButtonProps extends BaseButtonProps, Pick<GlyphProps, 'name' | 'filled'> {
+	ariaLabel?: string;
 	rounded?: boolean;
 }
 
 export interface ButtonProps extends BaseButtonProps {
 	label: string;
 	wide?: boolean;
-	icon?: Pick<IconProps, 'name' | 'filled' | 'ariaLabel'>;
+	icon?: Pick<IconProps, 'name' | 'filled' | 'label'>;
 }

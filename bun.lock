@@ -5,7 +5,6 @@
     "": {
       "name": "bref",
       "dependencies": {
-        "@fontsource-variable/material-symbols-rounded": "^5.2.30",
         "colord": "^2.9.3",
       },
       "devDependencies": {
@@ -109,8 +108,6 @@
     "@eslint/object-schema": ["@eslint/object-schema@2.1.7", "", {}, "sha512-VtAOaymWVfZcmZbp6E2mympDIHvyjXs/12LqWYjVw6qjrfF+VK+fyG33kChz3nnK+SU5/NeHOqrTEHS8sXO3OA=="],
 
     "@eslint/plugin-kit": ["@eslint/plugin-kit@0.4.1", "", { "dependencies": { "@eslint/core": "^0.17.0", "levn": "^0.4.1" } }, "sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA=="],
-
-    "@fontsource-variable/material-symbols-rounded": ["@fontsource-variable/material-symbols-rounded@5.2.30", "", {}, "sha512-gBzw/YCbbz9j4nJXx8Qsp6fsoTAc1VctB5dRlpcGi4i17lETUENsRNudp/ba5p7SVEsvV/MmnUvMJUUWcSzzYQ=="],
 
     "@fontsource/meow-script": ["@fontsource/meow-script@5.2.8", "", {}, "sha512-CU9fHmlE4FAhTmL0AA0hH9N0CkEfyDTMbMLYd7cRJhk/s95jng0PrgZ4tkUOczHieCzPMWJ7FQLja/VmK20NAQ=="],
 

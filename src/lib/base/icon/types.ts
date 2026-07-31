@@ -1,5 +1,7 @@
 import type { Color, Size } from '../types.ts';
 
+// Generated from the Material Symbols Rounded codepoints (Fontsource v5.2.30).
+// Do not edit this union manually.
 export type IconName =
 	| 'search'
 	| 'home'
@@ -3787,11 +3789,16 @@ export type IconName =
 	| 'nest_farsight_eco'
 	| 'nest_farsight_heat';
 
-export interface IconProps {
+export interface GlyphProps {
 	name: IconName;
+	label?: string;
 	filled?: boolean;
+	weight?: number;
+	grade?: number;
+}
+
+export interface IconProps extends GlyphProps {
 	size?: Size;
 	color?: Color;
-	ariaLabel?: string;
-	contrastMode?: boolean;
+	background?: Color;
 }

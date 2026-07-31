@@ -113,8 +113,8 @@ Google Material Symbols Rounded icons.
 - \`filled?\`: boolean
 - \`size?\`: Size
 - \`color?\`: Color
-- \`ariaLabel?\`: string
-- \`contrastMode?\`: boolean
+- \`label?\`: string
+- \`background?\`: Color
 
 \`\`\`svelte
 <Icon

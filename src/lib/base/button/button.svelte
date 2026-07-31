@@ -20,10 +20,9 @@
 	{#if icon}
 		<Icon
 			name={icon.name}
-			contrastMode={variant === 'filled'}
-			{color}
+			color={variant === 'filled' ? undefined : color}
 			filled={icon.filled}
-			ariaLabel={icon.ariaLabel}
+			label={icon.label}
 			{size}
 		/>
 	{/if}

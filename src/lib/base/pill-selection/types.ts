@@ -4,7 +4,7 @@ import type { Color, Size } from '../types.ts';
 export interface PillSelectionItem {
 	id: string;
 	label: string;
-	icon?: Pick<IconProps, 'name' | 'filled' | 'ariaLabel'>;
+	icon?: Pick<IconProps, 'name' | 'filled' | 'label'>;
 }
 
 export interface PillSelectionProps {

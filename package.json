@@ -26,6 +26,8 @@
 	},
 	"files": [
 		"dist",
+		"LICENSES",
+		"NOTICE",
 		"!dist/**/*.test.*",
 		"!dist/**/*.spec.*"
 	],
@@ -78,7 +80,6 @@
 		"css"
 	],
 	"dependencies": {
-		"@fontsource-variable/material-symbols-rounded": "^5.2.30",
 		"colord": "^2.9.3"
 	}
 }
