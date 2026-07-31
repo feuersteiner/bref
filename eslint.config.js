@@ -1,5 +1,6 @@
 import prettier from 'eslint-config-prettier';
 import { fileURLToPath } from 'node:url';
+import { dirname, relative, sep } from 'node:path';
 import { includeIgnoreFile } from '@eslint/compat';
 import js from '@eslint/js';
 import checkFile from 'eslint-plugin-check-file';
@@ -10,6 +11,7 @@ import ts from 'typescript-eslint';
 import svelteConfig from './svelte.config.js';
 
 const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
+const routesPath = fileURLToPath(new URL('./src/routes/', import.meta.url));
 
 // These components exceed 100 non-blank, non-comment lines only because their scoped CSS belongs
 // with their markup. Each remains within the limit when its scoped style block is excluded.
@@ -39,6 +41,32 @@ const svelteKitRouteResetComponents = [
 	'src/routes/**/[+]page@*.svelte',
 	'src/routes/**/[+]layout@*.svelte'
 ];
+
+const routeParameter = String.raw`(?:\[\w+(?:=\w+)?\]|\[\[\w+(?:=\w+)?\]\]|\[\.\.\.\w+(?:=\w+)?\]|\[(?:x\+[0-9a-f]{2}|u\+[0-9a-f]{4,6})\])`;
+const svelteKitRouteSegment = new RegExp(
+	String.raw`^(?:llms\.txt|[a-z0-9]+(?:-[a-z0-9]+)*|\([^)]+\)|[a-z0-9-]*${routeParameter}(?:[a-z0-9-]+${routeParameter})*[a-z0-9-]*)$`
+);
+const svelteKitRouteFolders = {
+	rules: {
+		'folder-naming': {
+			meta: {
+				messages: { invalid: 'Route folder "{{folder}}" is not valid SvelteKit route syntax.' },
+				type: 'layout'
+			},
+			create: (context) => ({
+				Program: (node) => {
+					const folders = relative(routesPath, dirname(context.physicalFilename))
+						.split(sep)
+						.filter(Boolean);
+					for (const folder of folders) {
+						if (!svelteKitRouteSegment.test(folder))
+							context.report({ node, messageId: 'invalid', data: { folder } });
+					}
+				}
+			})
+		}
+	}
+};
 
 const sharedRules = {
 	'func-style': ['error', 'expression'],
@@ -117,14 +145,13 @@ export default defineConfig(
 		}
 	},
 	{
-		// llms.txt is a published SvelteKit route, not a blanket exception for .txt folders.
-		files: ['src/routes/**/llms.txt/**/*.{js,ts,svelte}'],
+		// SvelteKit permits groups, params, optional/rest params and escaped segments below routes.
+		// Elsewhere, and for ordinary route folders, the kebab-case policy remains in force.
+		files: ['src/routes/**/*.{js,ts,svelte}'],
+		plugins: { sveltekit: svelteKitRouteFolders },
 		rules: {
-			'check-file/folder-naming-convention': [
-				'error',
-				{ 'src/**/': 'KEBAB_CASE' },
-				{ ignoreWords: ['llms.txt'] }
-			]
+			'check-file/folder-naming-convention': 'off',
+			'sveltekit/folder-naming': 'error'
 		}
 	},
 	{

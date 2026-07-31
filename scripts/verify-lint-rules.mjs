@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, join, relative } from 'node:path';
 import { ESLint } from 'eslint';
@@ -40,6 +41,8 @@ const lintTextFixture = async (name, contents) =>
 	(await eslint.lintText(contents, { filePath: join(projectDirectory, name) }))[0].messages;
 const lintRouteFixture = (name, contents) =>
 	lintVirtualFixture(`src/routes/${fixtureName}/${name}`, contents);
+const expectRoute = (name, contents, ruleId) =>
+	expect(`src/routes/${fixtureName}/${name}`, lintRouteFixture(name, contents), ruleId);
 const expect = async (name, messagesPromise, ruleId) => {
 	const messages = await messagesPromise;
 	const failed = ruleId
@@ -74,23 +77,18 @@ try {
 		'export const validName = true;\n'
 	);
 
+	const goodNames = [
+		'good-name.ts',
+		'good-name.svelte',
+		'good-name.svelte.ts',
+		'good-name.js',
+		'good-name.svelte.js'
+	];
+	const badNames = ['BadName.ts', 'BadName.js', 'BadName.svelte.js', 'bad_name.svelte'];
 	await Promise.all([
-		expect('good-name.ts', lintFixture('good-name.ts')),
-		expect('good-name.svelte', lintFixture('good-name.svelte')),
-		expect('good-name.svelte.ts', lintFixture('good-name.svelte.ts')),
-		expect('good-name.js', lintFixture('good-name.js')),
-		expect('good-name.svelte.js', lintFixture('good-name.svelte.js')),
-		expect('BadName.ts', lintFixture('BadName.ts'), 'check-file/filename-naming-convention'),
-		expect('BadName.js', lintFixture('BadName.js'), 'check-file/filename-naming-convention'),
-		expect(
-			'BadName.svelte.js',
-			lintFixture('BadName.svelte.js'),
-			'check-file/filename-naming-convention'
-		),
-		expect(
-			'bad_name.svelte',
-			lintFixture('bad_name.svelte'),
-			'check-file/filename-naming-convention'
+		...goodNames.map((name) => expect(name, lintFixture(name))),
+		...badNames.map((name) =>
+			expect(name, lintFixture(name), 'check-file/filename-naming-convention')
 		),
 		expect(
 			'BadFolder/good-name.ts',
@@ -106,35 +104,42 @@ try {
 		['+page@segment.svelte', '<p>segment reset</p>\n'],
 		['+layout@segment.svelte', '<slot />\n']
 	];
+	const routeSegmentComponents = [
+		['route-groups/(group)/+layout.svelte', '<slot />\n'],
+		['route-groups/(group)/page/+page@(group).svelte', '<p>group page reset</p>\n'],
+		['route-groups/(group)/layout/+layout@(group).svelte', '<slot />\n'],
+		['route-slug/[slug]/+layout.svelte', '<slot />\n'],
+		['route-slug/[slug]/page/+page@[slug].svelte', '<p>parameter page reset</p>\n'],
+		['route-slug/[slug]/layout/+layout@[slug].svelte', '<slot />\n'],
+		['route-optional/[[optional]]/+page.svelte', '<p>optional parameter</p>\n'],
+		['route-rest/[...rest]/+page.svelte', '<p>rest parameter</p>\n'],
+		['route-combined/(group)/foo-[slug]-[id]/+page.svelte', '<p>combined route segment</p>\n']
+	];
+	await Promise.all(
+		routeSegmentComponents.map(([name, contents]) => lintRouteFixture(name, contents))
+	);
+	execFileSync(join(projectDirectory, 'node_modules/.bin/svelte-kit'), ['sync'], {
+		cwd: projectDirectory
+	});
 	const invalidNamedLayoutModules = [
 		['+page@segment.ts', 'export const load = () => ({});\n'],
 		['+layout@segment.js', 'export const load = () => ({});\n'],
 		['+error@segment.svelte', '<p>invalid special name</p>\n']
 	];
 	await Promise.all([
-		...routeResetComponents.map(([name, contents]) =>
-			expect(`src/routes/${fixtureName}/${name}`, lintRouteFixture(name, contents))
-		),
-		expect(
-			`src/routes/${fixtureName}/+page.svelte`,
-			lintRouteFixture('+page.svelte', '<p>route</p>\n')
-		),
-		expect(
-			`src/routes/${fixtureName}/+layout.server.ts`,
-			lintVirtualFixture(
-				`src/routes/${fixtureName}/+layout.server.ts`,
-				'export const load = () => ({});\n'
-			)
-		),
-		expect(
-			`src/routes/${fixtureName}/+page.js`,
-			lintVirtualFixture(`src/routes/${fixtureName}/+page.js`, 'export const load = () => ({});\n')
-		),
+		...routeResetComponents.map(([name, contents]) => expectRoute(name, contents)),
+		...routeSegmentComponents.map(([name, contents]) => expectRoute(name, contents)),
+		expectRoute('+page.svelte', '<p>route</p>\n'),
+		expectRoute('+layout.server.ts', 'export const load = () => ({});\n'),
+		expectRoute('+page.js', 'export const load = () => ({});\n'),
 		...invalidNamedLayoutModules.map(([name, contents]) =>
-			expect(
-				`src/routes/${fixtureName}/${name}`,
-				lintRouteFixture(name, contents),
-				'check-file/filename-naming-convention'
+			expectRoute(name, contents, 'check-file/filename-naming-convention')
+		),
+		...['BadFolder', '[bad-name]', '[[...rest]]', '[slug][id]', '(group'].map((folder) =>
+			expectRoute(
+				`${folder}/+page.svelte`,
+				'<p>invalid route segment</p>\n',
+				'sveltekit/folder-naming'
 			)
 		),
 		expect(
@@ -194,7 +199,7 @@ try {
 				`src/routes/llms.txt/${fixtureName}/BadFolder/good-name.ts`,
 				'export const validName = true;\n'
 			),
-			'check-file/folder-naming-convention'
+			'sveltekit/folder-naming'
 		)
 	]);
 
