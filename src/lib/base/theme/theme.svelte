@@ -80,6 +80,8 @@
 		--border-radius: var(--radius-medium);
 		--shadow-small: 0 1px 2px rgb(0 0 0 / 0.3);
 		--shadow-medium: 0 4px 12px rgb(0 0 0 / 0.35);
+		--shadow-control: 0 0.03rem 0.125rem rgb(0 0 0 / 0.08);
+		--shadow-control-hover: 0 0.0625rem 0.25rem rgb(0 0 0 / 0.1);
 		--motion-fast: 120ms;
 		--motion-normal: 200ms;
 		--motion-slow: 320ms;

@@ -151,7 +151,7 @@
 		background-color: color-mix(
 			in oklch,
 			var(--internal-current-color) var(--internal-btn-hover-mix),
-			black
+			var(--color-background-saturated)
 		);
 	}
 
@@ -159,7 +159,7 @@
 		background-color: color-mix(
 			in oklch,
 			var(--internal-current-color) var(--internal-btn-active-mix),
-			black
+			var(--color-background-saturated)
 		);
 	}
 

@@ -13,6 +13,21 @@
 		['accent', '--color-accent'],
 		['focus', '--color-focus']
 	] as const;
+
+	const componentColors = [
+		[
+			'primary',
+			'--color-primary',
+			'--color-primary-soft',
+			'--color-primary-saturated',
+			'--color-primary-contrast'
+		],
+		['secondary', '--color-secondary', '--color-secondary-soft', '--color-secondary-contrast'],
+		['success', '--color-success', '--color-success-soft', '--color-success-contrast'],
+		['warning', '--color-warning', '--color-warning-soft', '--color-warning-contrast'],
+		['danger', '--color-danger', '--color-danger-soft', '--color-danger-contrast'],
+		['info', '--color-info', '--color-info-soft', '--color-info-contrast']
+	] as const;
 </script>
 
 <Section>
@@ -20,6 +35,23 @@
 		Bref provides one explicit dark theme. The Theme component sets semantic CSS tokens without
 		runtime color generation or mode switching.
 	</p>
+</Section>
+
+<Section
+	title="Component color aliases"
+	description="Use these aliases for component intent and variants."
+>
+	<ul class="alias-list">
+		{#each componentColors as [name, ...tokens] (name)}
+			<li>
+				<strong>{name}:</strong>
+				{#each tokens as token, index (token)}
+					<code>{token}</code>{#if index < tokens.length - 1},
+					{/if}
+				{/each}
+			</li>
+		{/each}
+	</ul>
 </Section>
 
 <Section title="Semantic colors" description="Use intent-based tokens instead of raw color values.">
@@ -47,7 +79,10 @@
 		<li>
 			<strong>Radius:</strong> <code>--radius-small</code> through <code>--radius-large</code>.
 		</li>
-		<li><strong>Shadow:</strong> <code>--shadow-small</code> and <code>--shadow-medium</code>.</li>
+		<li>
+			<strong>Shadow:</strong> <code>--shadow-small</code>, <code>--shadow-medium</code>,
+			<code>--shadow-control</code>, and <code>--shadow-control-hover</code>.
+		</li>
 		<li><strong>Motion:</strong> duration and easing tokens.</li>
 		<li>
 			<strong>Focus:</strong> <code>--focus-ring</code>, applied with <code>:focus-visible</code>.
@@ -103,5 +138,17 @@
 		display: grid;
 		gap: var(--space-2);
 		padding-left: var(--space-6);
+	}
+
+	.alias-list {
+		list-style: none;
+		padding-left: 0;
+	}
+
+	.alias-list li {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-1);
+		align-items: baseline;
 	}
 </style>

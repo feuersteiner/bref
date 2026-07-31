@@ -78,7 +78,6 @@
 		"css"
 	],
 	"dependencies": {
-		"@fontsource-variable/material-symbols-rounded": "^5.2.30",
-		"colord": "^2.9.3"
+		"@fontsource-variable/material-symbols-rounded": "^5.2.30"
 	}
 }
