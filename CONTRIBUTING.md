@@ -60,7 +60,73 @@ export * from './my-component/index.ts';
 
 ---
 
-## 2. CSS Patterns
+## 2. Component API and accessibility contract
+
+Every interactive component must have a binding-first API and a documented native interaction
+model. Follow this contract before adding component-specific options.
+
+### Bind mutable values
+
+Expose user-editable state as bindable props. The component updates the binding, while an optional
+callback reports a useful, committed action rather than duplicating every state change.
+
+```svelte
+<script lang="ts">
+	import type { SelectProps } from './types.ts';
+
+	const { options, onChange, value = $bindable() }: SelectProps = $props();
+
+	function select(next: string) {
+		value = next;
+		onChange?.(next);
+	}
+</script>
+
+<Select bind:value {options} />
+```
+
+- Use `bind:value`, `bind:checked`, `bind:open`, or a component-specific state name as appropriate.
+- Keep callbacks for actions consumers may want to react to, such as a committed selection or a
+  submit; do not require a callback to keep bound state in sync.
+- Document whether a callback fires for keyboard, pointer, and programmatic interactions.
+
+### Preserve native APIs
+
+- Use the semantic native element first: `button`, `input`, `textarea`, `select`, `dialog`, and
+  the popover API cover most controls.
+- Forward applicable native attributes and event handlers to the underlying element. Component props
+  take precedence where a name conflicts, and any intentionally unsupported native attribute must
+  be documented.
+- Generate internal label, description, and control IDs with `$props.id()` rather than counters or
+  random values.
+- Prefer `$derived` for values computed from props or state. Do not use effects only to synchronize
+  derived state.
+
+### Keep behavior maintainable
+
+- Put meaningful interactive state transitions and event handling in `controller.svelte.ts`.
+- Put deterministic, framework-independent calculations in `logic.ts`.
+- Prefer attachments for reusable DOM behavior; do not add legacy actions to new components.
+- Keep the component markup focused on semantic structure and rendering.
+
+### Accessible interaction requirements
+
+- Provide a visible keyboard focus indicator, a non-color-only state indicator, and a
+  `prefers-reduced-motion` fallback for non-essential animation.
+- Associate labels, descriptions, and validation messages with their controls. Icon-only controls
+  need an accessible name.
+- Use native dialog, popover, input, button, range, checkbox, and radio behavior whenever it meets
+  the requirement. Do not recreate native behavior with ARIA roles.
+- Custom listboxes, tabs, and trees must implement their expected keyboard behavior internally:
+  arrow-key navigation; Home/End where applicable; Enter/Space activation; and Escape to dismiss
+  a dismissible popup. Tabs also support Left/Right navigation, and trees support Right to expand
+  or enter and Left to collapse or return to the parent.
+- Verify pointer and keyboard operation, focus movement, accessible names, and state announcements
+  before considering an interactive component complete.
+
+---
+
+## 3. CSS Patterns
 
 ### Variable Naming
 
@@ -141,7 +207,7 @@ Map theme colors to generic `--internal-current-*` variables:
 
 ---
 
-## 3. Demo Site
+## 4. Demo Site
 
 ### Add Route
 
@@ -209,7 +275,7 @@ For grouped components, nest under parent with `children`:
 
 ---
 
-## 4. LLM Documentation
+## 5. LLM Documentation
 
 Add component entry to `src/routes/llms.txt/+server.ts`.
 
