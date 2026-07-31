@@ -26,7 +26,7 @@
 	onclick={handleClick}
 >
 	{#if icon}
-		<Icon contrastMode={variant === 'filled'} {color} {...icon} {size} />
+		<Icon color={variant === 'filled' ? undefined : color} {...icon} {size} />
 	{/if}
 	<span>{label}</span>
 </div>

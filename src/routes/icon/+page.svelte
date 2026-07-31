@@ -102,9 +102,9 @@
 
 <Section title="Accessibility" description="Icons with aria labels for screen readers.">
 	<div class="demo">
-		<Icon name="warning" color="warning" size="large" ariaLabel="Warning indicator" />
-		<Icon name="check_circle" color="success" size="large" ariaLabel="Success indicator" />
-		<Icon name="error" color="danger" size="large" ariaLabel="Error indicator" />
+		<Icon name="warning" color="warning" size="large" label="Warning indicator" />
+		<Icon name="check_circle" color="success" size="large" label="Success indicator" />
+		<Icon name="error" color="danger" size="large" label="Error indicator" />
 	</div>
 </Section>
 
