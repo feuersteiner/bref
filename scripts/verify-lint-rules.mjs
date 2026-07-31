@@ -38,6 +38,8 @@ const lintVirtualFixture = async (name, contents) => {
 };
 const lintTextFixture = async (name, contents) =>
 	(await eslint.lintText(contents, { filePath: join(projectDirectory, name) }))[0].messages;
+const lintRouteFixture = (name, contents) =>
+	lintVirtualFixture(`src/routes/${fixtureName}/${name}`, contents);
 const expect = async (name, messagesPromise, ruleId) => {
 	const messages = await messagesPromise;
 	const failed = ruleId
@@ -98,10 +100,24 @@ try {
 		expect('ordinary-component.svelte', lintFixture('ordinary-component.svelte'), 'max-lines'),
 		expect('orphan-selector.svelte', lintFixture('orphan-selector.svelte'), 'svelte/valid-compile')
 	]);
+	const routeResetComponents = [
+		['+page@.svelte', '<p>root reset</p>\n'],
+		['+layout@.svelte', '<slot />\n'],
+		['+page@segment.svelte', '<p>segment reset</p>\n'],
+		['+layout@segment.svelte', '<slot />\n']
+	];
+	const invalidNamedLayoutModules = [
+		['+page@segment.ts', 'export const load = () => ({});\n'],
+		['+layout@segment.js', 'export const load = () => ({});\n'],
+		['+error@segment.svelte', '<p>invalid special name</p>\n']
+	];
 	await Promise.all([
+		...routeResetComponents.map(([name, contents]) =>
+			expect(`src/routes/${fixtureName}/${name}`, lintRouteFixture(name, contents))
+		),
 		expect(
 			`src/routes/${fixtureName}/+page.svelte`,
-			lintVirtualFixture(`src/routes/${fixtureName}/+page.svelte`, '<p>route</p>\n')
+			lintRouteFixture('+page.svelte', '<p>route</p>\n')
 		),
 		expect(
 			`src/routes/${fixtureName}/+layout.server.ts`,
@@ -113,6 +129,13 @@ try {
 		expect(
 			`src/routes/${fixtureName}/+page.js`,
 			lintVirtualFixture(`src/routes/${fixtureName}/+page.js`, 'export const load = () => ({});\n')
+		),
+		...invalidNamedLayoutModules.map(([name, contents]) =>
+			expect(
+				`src/routes/${fixtureName}/${name}`,
+				lintRouteFixture(name, contents),
+				'check-file/filename-naming-convention'
+			)
 		),
 		expect(
 			'src/lib/review-good-folder/good-name.js',
