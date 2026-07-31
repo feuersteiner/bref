@@ -1,3 +1,5 @@
+import type { Component } from 'svelte';
+
 export type Coverage = 'shown' | 'not-applicable';
 
 export interface ApiMember {
@@ -16,13 +18,29 @@ export interface DocumentedExample {
 	title: string;
 	description: string;
 	code: string;
+	demo: LiveDemo;
 }
 
-export interface StateCoverage {
-	name: 'disabled' | 'empty' | 'loading' | 'error' | 'long-content';
-	coverage: Coverage;
-	description: string;
+export interface LiveDemo {
+	component: Component;
 }
+
+export type ExampleCoverage =
+	| { coverage: 'shown'; examples: readonly DocumentedExample[] }
+	| { coverage: 'not-applicable'; rationale: string };
+
+export type StateCoverage =
+	| {
+			name: 'disabled' | 'empty' | 'loading' | 'error' | 'long-content';
+			coverage: 'shown';
+			description: string;
+			demo: LiveDemo;
+	  }
+	| {
+			name: 'disabled' | 'empty' | 'loading' | 'error' | 'long-content';
+			coverage: 'not-applicable';
+			description: string;
+	  };
 
 export interface KeyboardInstruction {
 	keys: string;
@@ -40,8 +58,8 @@ export interface ComponentWorkbench {
 	description: string;
 	api: readonly ApiMember[];
 	types: readonly TypeDefinition[];
-	variants: readonly DocumentedExample[];
-	sizes: readonly DocumentedExample[];
+	variants: ExampleCoverage;
+	sizes: ExampleCoverage;
 	states: readonly StateCoverage[];
 	denseUsage: DocumentedExample;
 	keyboard: readonly KeyboardInstruction[];

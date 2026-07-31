@@ -1,13 +1,21 @@
 <script lang="ts">
 	import Section from '../../internal/layout/section.svelte';
 	import CodeSnippet from '../../internal/layout/code-snippet.svelte';
-	import type { ComponentWorkbench, DocumentedExample } from './types.ts';
+	import type { ComponentWorkbench, DocumentedExample, ExampleCoverage } from './types.ts';
 
 	let { workbench }: { workbench: ComponentWorkbench } = $props();
 
 	const status = (coverage: string) => (coverage === 'shown' ? 'Shown' : 'Not applicable');
-	const renderExamples = (examples: readonly DocumentedExample[]) => examples;
+	const examplesFor = (coverage: ExampleCoverage) =>
+		coverage.coverage === 'shown' ? coverage.examples : [];
 </script>
+
+{#snippet liveDemo(example: DocumentedExample)}
+	{@const Demo = example.demo.component}
+	<div class="demo" aria-label={`Live demo: ${example.title}`}>
+		<Demo />
+	</div>
+{/snippet}
 
 <Section>
 	<p class="intro">{workbench.description}</p>
@@ -31,11 +39,24 @@
 </Section>
 
 <Section title="Variants and sizes" description="Every visual option has an executable example.">
-	{#each renderExamples([...workbench.variants, ...workbench.sizes]) as example (example.title)}
+	{#each examplesFor(workbench.variants) as example (example.title)}
 		<h3>{example.title}</h3>
 		<p>{example.description}</p>
+		{@render liveDemo(example)}
 		<CodeSnippet snippet={example.code} />
 	{/each}
+	{#if workbench.variants.coverage === 'not-applicable'}
+		<p><strong>Variants:</strong> Not applicable — {workbench.variants.rationale}</p>
+	{/if}
+	{#each examplesFor(workbench.sizes) as example (example.title)}
+		<h3>{example.title}</h3>
+		<p>{example.description}</p>
+		{@render liveDemo(example)}
+		<CodeSnippet snippet={example.code} />
+	{/each}
+	{#if workbench.sizes.coverage === 'not-applicable'}
+		<p><strong>Sizes:</strong> Not applicable — {workbench.sizes.rationale}</p>
+	{/if}
 </Section>
 
 <Section
@@ -44,12 +65,19 @@
 >
 	<ul>
 		{#each workbench.states as state (state.name)}
-			<li><strong>{state.name}</strong> ({status(state.coverage)}): {state.description}</li>
+			<li>
+				<strong>{state.name}</strong> ({status(state.coverage)}): {state.description}
+				{#if state.coverage === 'shown'}
+					{@const StateDemo = state.demo.component}
+					<div class="demo" aria-label={`Live ${state.name} state demo`}><StateDemo /></div>
+				{/if}
+			</li>
 		{/each}
 	</ul>
 </Section>
 
 <Section title="Dense usage" description={workbench.denseUsage.description}>
+	{@render liveDemo(workbench.denseUsage)}
 	<CodeSnippet snippet={workbench.denseUsage.code} />
 </Section>
 
@@ -89,5 +117,11 @@
 	}
 	h3 {
 		font-size: 1.25rem;
+	}
+	.demo {
+		margin: 0.75rem 0;
+		padding: 1rem;
+		border: 1px solid color-mix(in srgb, var(--color-foreground) 20%, transparent);
+		border-radius: 0.75rem;
 	}
 </style>

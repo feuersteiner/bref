@@ -1,4 +1,7 @@
 import type { ComponentWorkbench } from '../../../lib/docs/types.ts';
+import ReferenceDemo from './reference-demo.svelte';
+
+const demo = { component: ReferenceDemo };
 
 export const workbench: ComponentWorkbench = {
 	component: 'Reference component',
@@ -17,51 +20,66 @@ export const workbench: ComponentWorkbench = {
 			definition: `interface ReferenceComponentProps {\n\tvalue: string;\n\tdisabled?: boolean;\n}`
 		}
 	],
-	variants: [
-		{
-			title: 'Variants',
-			description: 'Show every supported variant, or explicitly record that variants do not apply.',
-			code: '<Component variant="primary" />\n<Component variant="secondary" />'
-		}
-	],
-	sizes: [
-		{
-			title: 'Sizes',
-			description: 'Show every supported size, or explicitly record that sizes do not apply.',
-			code: '<Component size="small" />\n<Component size="medium" />'
-		}
-	],
+	variants: {
+		coverage: 'shown',
+		examples: [
+			{
+				title: 'Variants',
+				description: 'Switch between every supported variant in the live demo.',
+				code: '<Component variant="primary" />\n<Component variant="secondary" />',
+				demo
+			}
+		]
+	},
+	sizes: {
+		coverage: 'shown',
+		examples: [
+			{
+				title: 'Sizes',
+				description: 'Switch between each supported size in the live demo.',
+				code: '<Component size="small" />\n<Component size="medium" />',
+				demo
+			}
+		]
+	},
 	states: [
 		{
 			name: 'disabled',
 			coverage: 'shown',
-			description: 'Show the disabled control and its explanation.'
+			description:
+				'Toggle the disabled control in the live demo and observe its unavailable state.',
+			demo
 		},
 		{
 			name: 'empty',
 			coverage: 'shown',
-			description: 'Show the empty collection or no-result state.'
+			description: 'The live demo starts with no recorded activations.',
+			demo
 		},
 		{
 			name: 'loading',
 			coverage: 'shown',
-			description: 'Show the loading affordance without hiding context.'
+			description: 'Use the disabled affordance while work is pending without hiding context.',
+			demo
 		},
 		{
 			name: 'error',
 			coverage: 'shown',
-			description: 'Show recovery guidance with the error state.'
+			description: 'Keep the action and its status message available for recovery.',
+			demo
 		},
 		{
 			name: 'long-content',
 			coverage: 'shown',
-			description: 'Show long labels, values, and descriptions without clipping essential content.'
+			description: 'The status text remains visible as its activation count grows.',
+			demo
 		}
 	],
 	denseUsage: {
 		title: 'Dense productivity surface',
 		description: 'Use realistic compact content, adjacent controls, and a constrained width.',
-		code: `<Component value="Quarterly planning" size="small" />\n<Component value="Review pull request #42" size="small" />`
+		code: `<Component value="Quarterly planning" size="small" />\n<Component value="Review pull request #42" size="small" />`,
+		demo
 	},
 	keyboard: [
 		{ keys: 'Tab / Shift+Tab', behavior: 'Moves focus into and out of the component.' },
