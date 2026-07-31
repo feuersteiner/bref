@@ -4,6 +4,7 @@ import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, join, relative } from 'node:path';
 import { ESLint } from 'eslint';
 import { compile } from 'svelte/compiler';
+import { verifySvelteKitSyncMatrix } from './verify-sveltekit-sync-matrix.mjs';
 
 const projectDirectory = process.cwd();
 const fixtureName = `lint-fixtures-${randomUUID()}`;
@@ -119,6 +120,7 @@ try {
 		'export const match = (value: string) => !!value;\n'
 	);
 	execFileSync('node_modules/.bin/svelte-kit', ['sync']);
+	await verifySvelteKitSyncMatrix({ fixtureName, lintRouteFixture, projectDirectory });
 	const badModules = [
 		['+page@segment.ts', 'export const load = () => ({});\n'],
 		['+layout@segment.js', 'export const load = () => ({});\n'],

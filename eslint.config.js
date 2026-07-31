@@ -8,6 +8,7 @@ import svelte from 'eslint-plugin-svelte';
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import ts from 'typescript-eslint';
+import { svelteKitRouteSegment } from './scripts/sveltekit-route-segment.mjs';
 import svelteConfig from './svelte.config.js';
 
 const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
@@ -42,51 +43,6 @@ const svelteKitRouteResetComponents = [
 	'src/routes/**/[+]layout@*.svelte'
 ];
 
-// This mirrors the parser: Unicode escapes have 4–6 total hexadecimal-or-hyphen characters,
-// then SvelteKit splits their code points on hyphens (so `[u+61-62]` is valid).
-// prettier-ignore
-const routeEscape = String.raw`\[(?:x\+[0-9a-f]{2}|u\+(?=[0-9a-f-]{4,6}\])[0-9a-f-]*[0-9a-f][0-9a-f-]*)\]`;
-const routeParameter = String.raw`\[(?:\w+(?:=\w+)?|\[\w+(?:=\w+)?\]|\.\.\.\w+(?:=\w+)?)\]`;
-const routeToken = new RegExp(`${routeEscape}|${routeParameter}`, 'y');
-
-const tokenizeRouteSegment = (segment) => {
-	const tokens = [];
-	for (let index = 0; index < segment.length; ) {
-		if (segment[index] !== '[') {
-			const end = segment.indexOf('[', index);
-			const value = segment.slice(index, end === -1 ? undefined : end);
-			if (!/^[a-z0-9-]+$/.test(value)) return null;
-			tokens.push({ type: 'static', value });
-			index += value.length;
-			continue;
-		}
-
-		routeToken.lastIndex = index;
-		const match = routeToken.exec(segment);
-		if (!match) return null;
-		tokens.push({
-			type: match[0].startsWith('[x+') || match[0].startsWith('[u+') ? 'escape' : 'parameter'
-		});
-		index = routeToken.lastIndex;
-	}
-	return tokens;
-};
-
-const svelteKitRouteSegment = (segment, isRoot) => {
-	if ((isRoot && segment === 'llms.txt') || /^\([^)]+\)$/.test(segment)) return true;
-	const tokens = tokenizeRouteSegment(segment);
-	if (!tokens) return false;
-
-	return tokens.every((token, index) => {
-		const previous = tokens[index - 1];
-		const next = tokens[index + 1];
-		if (token.type === 'parameter')
-			return previous?.type !== 'parameter' && next?.type !== 'parameter';
-		if (token.type === 'escape') return true;
-		// prettier-ignore
-		return !token.value.includes('--') && (!token.value.startsWith('-') || previous?.type === 'parameter' || previous?.type === 'escape') && (!token.value.endsWith('-') || next?.type === 'parameter' || next?.type === 'escape') && !(/[a-z0-9]$/.test(token.value) && next?.type === 'parameter') && !(/^[a-z0-9]/.test(token.value) && previous?.type === 'parameter');
-	});
-};
 const svelteKitRouteFolders = {
 	rules: {
 		'folder-naming': {
