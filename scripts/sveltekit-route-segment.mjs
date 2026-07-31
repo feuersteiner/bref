@@ -1,9 +1,11 @@
-// This mirrors the pinned SvelteKit parser's escape decoding and generated route regexp.
+import { hasValidSvelteKitManifestSyntax } from './sveltekit-manifest-syntax.mjs';
+
+// SvelteKit 2.49.2 parse_route_id splits `u+` payloads, unlike the earlier manifest stage.
 // prettier-ignore
 const routeEscape = String.raw`\[(?:x\+[0-9a-f]{2}|u\+(?=[0-9a-f-]{4,6}\])[0-9a-f-]*[0-9a-f][0-9a-f-]*)\]`;
 const routeParameter = String.raw`\[(?:\w+(?:=\w+)?|\[\w+(?:=\w+)?\]|\.\.\.\w+(?:=\w+)?)\]`;
 const routeToken = new RegExp(`${routeEscape}|${routeParameter}`, 'y');
-const decodeEscape = (value) =>
+const decodeRouteEscape = (value) =>
 	String.fromCharCode(
 		...(value.startsWith('[u+') ? value.slice(3, -1).split('-') : [value.slice(3, -1)]).map(
 			(code) => parseInt(code, 16)
@@ -13,10 +15,10 @@ const escapeRoutePattern = (value) =>
 	value
 		.normalize()
 		.replace(/[[\]]/g, '\\$&')
-		.replace(/%/g, '%25')
-		.replace(/\//g, '%2[Ff]')
-		.replace(/\?/g, '%3[Ff]')
-		.replace(/#/g, '%23')
+		.replace(
+			/[%/?#]/g,
+			(character) => ({ '%': '%25', '/': '%2[Ff]', '?': '%3[Ff]', '#': '%23' })[character]
+		)
 		.replace(/[.*+?^${}()|\\]/g, '\\$&');
 const tokenize = (segment) => {
 	const tokens = [];
@@ -36,7 +38,7 @@ const tokenize = (segment) => {
 		const isEscape = value.startsWith('[x+') || value.startsWith('[u+');
 		tokens.push({
 			type: isEscape ? 'escape' : 'parameter',
-			value: isEscape ? decodeEscape(value) : value
+			value: isEscape ? decodeRouteEscape(value) : value
 		});
 		index = routeToken.lastIndex;
 	}
@@ -57,19 +59,12 @@ const canParse = (tokens) => {
 		return false;
 	}
 };
-
 export const svelteKitRouteSegment = (segment, isRoot) => {
-	if ((isRoot && segment === 'llms.txt') || /^\([^)]+\)$/.test(segment)) return true;
+	if (isRoot && segment === 'llms.txt') return true;
+	if (!hasValidSvelteKitManifestSyntax(segment)) return false;
+	if (/^\([^)]+\)$/.test(segment)) return true;
 	const tokens = tokenize(segment);
-	if (
-		!tokens ||
-		tokens
-			.map((token) => token.value)
-			.join('')
-			.includes('][') ||
-		!canParse(tokens)
-	)
-		return false;
+	if (!tokens || !canParse(tokens)) return false;
 	return tokens.every((token, index) => {
 		const previous = tokens[index - 1];
 		const next = tokens[index + 1];
@@ -78,10 +73,8 @@ export const svelteKitRouteSegment = (segment, isRoot) => {
 		if (token.type === 'escape') return true;
 		return (
 			!token.value.includes('--') &&
-			(!token.value.startsWith('-') ||
-				previous?.type === 'parameter' ||
-				previous?.type === 'escape') &&
-			(!token.value.endsWith('-') || next?.type === 'parameter' || next?.type === 'escape') &&
+			(!token.value.startsWith('-') || (previous !== undefined && previous.type !== 'static')) &&
+			(!token.value.endsWith('-') || (next !== undefined && next.type !== 'static')) &&
 			!(/[a-z0-9]$/.test(token.value) && next?.type === 'parameter') &&
 			!(/^[a-z0-9]/.test(token.value) && previous?.type === 'parameter')
 		);
