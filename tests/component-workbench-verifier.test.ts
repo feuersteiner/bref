@@ -16,7 +16,7 @@ describe('component workbench verifier', () => {
 		expect(errors).toContain(
 			'workbench/+page.svelte must import and render ComponentPage with local workbench.'
 		);
-		expect(errors).toContain('workbench/snippets.ts must export workbench.');
+		expect(errors).toContain('workbench/snippets.ts must export a valid workbench contract.');
 		expect(errors).toContain('missing is registered but has no workbench directory.');
 	});
 
@@ -39,10 +39,22 @@ describe('component workbench verifier', () => {
 
 	it('rejects numeric workbench exports and registry entries omitted from navigation', () => {
 		expect(verifyComponentWorkbenches(fixture('numeric-workbench'))).toContain(
-			'workbench/snippets.ts must export workbench.'
+			'workbench/snippets.ts must export a valid workbench contract.'
 		);
 		expect(verifyComponentWorkbenches(fixture('navigation-drift'))).toContain(
 			'second is registered but missing navigation metadata.'
+		);
+	});
+
+	it('rejects type-asserted workbench values that cannot satisfy the real contract', () => {
+		expect(verifyComponentWorkbenches(fixture('contract-value-spoof'))).toContain(
+			'workbench/snippets.ts must export a valid workbench contract.'
+		);
+	});
+
+	it('rejects extensionless and indirect navigation imports of route-local demos', () => {
+		expect(verifyComponentWorkbenches(fixture('navigation-eager-import'))).toContain(
+			'navigation manifest must not import route-local workbenches or registry.'
 		);
 	});
 });
