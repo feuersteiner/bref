@@ -7,6 +7,7 @@ import { compile } from 'svelte/compiler';
 
 const projectDirectory = process.cwd();
 const fixtureName = `lint-fixtures-${randomUUID()}`;
+const matcherName = `lintfixture${randomUUID().replaceAll('-', '')}`;
 const fixtureDirectories = [
 	join(projectDirectory, 'src', fixtureName),
 	join(projectDirectory, 'src', 'routes', fixtureName),
@@ -77,13 +78,8 @@ try {
 		'export const validName = true;\n'
 	);
 
-	const goodNames = [
-		'good-name.ts',
-		'good-name.svelte',
-		'good-name.svelte.ts',
-		'good-name.js',
-		'good-name.svelte.js'
-	];
+	const goodNames =
+		'good-name.ts good-name.svelte good-name.svelte.ts good-name.js good-name.svelte.js'.split(' ');
 	const badNames = ['BadName.ts', 'BadName.js', 'BadName.svelte.js', 'bad_name.svelte'];
 	await Promise.all([
 		...goodNames.map((name) => expect(name, lintFixture(name))),
@@ -98,13 +94,11 @@ try {
 		expect('ordinary-component.svelte', lintFixture('ordinary-component.svelte'), 'max-lines'),
 		expect('orphan-selector.svelte', lintFixture('orphan-selector.svelte'), 'svelte/valid-compile')
 	]);
-	const routeResetComponents = [
-		['+page@.svelte', '<p>root reset</p>\n'],
-		['+layout@.svelte', '<slot />\n'],
-		['+page@segment.svelte', '<p>segment reset</p>\n'],
-		['+layout@segment.svelte', '<slot />\n']
-	];
-	const routeSegmentComponents = [
+	const routeResetComponents =
+		'+page@.svelte +layout@.svelte +page@segment.svelte +layout@segment.svelte'
+			.split(' ')
+			.map((name) => [name, name.includes('layout') ? '<slot />\n' : '<p>reset</p>\n']);
+	const routes = [
 		['route-groups/(group)/+layout.svelte', '<slot />\n'],
 		['route-groups/(group)/page/+page@(group).svelte', '<p>group page reset</p>\n'],
 		['route-groups/(group)/layout/+layout@(group).svelte', '<slot />\n'],
@@ -113,35 +107,40 @@ try {
 		['route-slug/[slug]/layout/+layout@[slug].svelte', '<slot />\n'],
 		['route-optional/[[optional]]/+page.svelte', '<p>optional parameter</p>\n'],
 		['route-rest/[...rest]/+page.svelte', '<p>rest parameter</p>\n'],
-		['route-combined/(group)/foo-[slug]-[id]/+page.svelte', '<p>combined route segment</p>\n']
+		[`route-matcher/[slug=${matcherName}]/+page.svelte`, '<p>matched parameter</p>\n'],
+		['route-combined/(group)/foo-[slug]-[id]/+page.svelte', '<p>combined route segment</p>\n'],
+		['route-unicode/[u+abcd]/+page.svelte', '<p>unicode escape</p>\n'],
+		['route-unicode/[u+61-62]/+page.svelte', '<p>unicode escapes</p>\n']
 	];
-	await Promise.all(
-		routeSegmentComponents.map(([name, contents]) => lintRouteFixture(name, contents))
+	await Promise.all(routes.map(([name, contents]) => lintRouteFixture(name, contents)));
+	await lintVirtualFixture(
+		`src/params/${matcherName}.ts`,
+		'export const match = (value: string) => !!value;\n'
 	);
-	execFileSync(join(projectDirectory, 'node_modules/.bin/svelte-kit'), ['sync'], {
-		cwd: projectDirectory
-	});
-	const invalidNamedLayoutModules = [
+	execFileSync('node_modules/.bin/svelte-kit', ['sync']);
+	const badModules = [
 		['+page@segment.ts', 'export const load = () => ({});\n'],
 		['+layout@segment.js', 'export const load = () => ({});\n'],
 		['+error@segment.svelte', '<p>invalid special name</p>\n']
 	];
 	await Promise.all([
 		...routeResetComponents.map(([name, contents]) => expectRoute(name, contents)),
-		...routeSegmentComponents.map(([name, contents]) => expectRoute(name, contents)),
+		...routes.map(([name, contents]) => expectRoute(name, contents)),
 		expectRoute('+page.svelte', '<p>route</p>\n'),
 		expectRoute('+layout.server.ts', 'export const load = () => ({});\n'),
 		expectRoute('+page.js', 'export const load = () => ({});\n'),
-		...invalidNamedLayoutModules.map(([name, contents]) =>
+		...badModules.map(([name, contents]) =>
 			expectRoute(name, contents, 'check-file/filename-naming-convention')
 		),
-		...['BadFolder', '[bad-name]', '[[...rest]]', '[slug][id]', '(group'].map((folder) =>
-			expectRoute(
-				`${folder}/+page.svelte`,
-				'<p>invalid route segment</p>\n',
-				'sveltekit/folder-naming'
-			)
-		),
+		...'BadFolder [bad-name] [[...rest]] [slug][id] (group -foo-[slug] foo--[slug] [slug]- [slug]--foo [slug]--[id]'
+			.split(' ')
+			.map((folder) =>
+				expectRoute(
+					`${folder}/+page.svelte`,
+					'<p>invalid route segment</p>\n',
+					'sveltekit/folder-naming'
+				)
+			),
 		expect(
 			'src/lib/review-good-folder/good-name.js',
 			lintTextFixture('src/lib/review-good-folder/good-name.js', 'export const validName = true;\n')
@@ -200,12 +199,16 @@ try {
 				'export const validName = true;\n'
 			),
 			'sveltekit/folder-naming'
+		),
+		expectRoute(
+			'nested/llms.txt/+page.svelte',
+			'<p>nested dotted route is invalid</p>\n',
+			'sveltekit/folder-naming'
 		)
 	]);
 
-	const cssHeavyConfig = await eslint.calculateConfigForFile('src/lib/base/select/select.svelte');
-	if (cssHeavyConfig.rules['max-lines'][1].max !== 300)
-		throw new Error('CSS-heavy Select exemption is absent');
+	const c = await eslint.calculateConfigForFile('src/lib/base/select/select.svelte');
+	if (c.rules['max-lines'][1].max !== 300) throw Error('CSS-heavy Select exemption absent');
 
 	const selectSource = await readFile('src/lib/base/select/select.svelte', 'utf8');
 	if (!selectSource.includes('{#each options as option, index (index)}')) {
@@ -218,7 +221,8 @@ try {
 
 	console.log(`Lint rule fixtures passed: ${relative(projectDirectory, fixtureDirectory)}`);
 } finally {
-	await Promise.all(
-		fixtureDirectories.map((directory) => rm(directory, { recursive: true, force: true }))
-	);
+	await Promise.all([
+		...fixtureDirectories.map((directory) => rm(directory, { recursive: true, force: true })),
+		rm(join(projectDirectory, 'src', 'params', `${matcherName}.ts`), { force: true })
+	]);
 }

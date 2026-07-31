@@ -42,10 +42,16 @@ const svelteKitRouteResetComponents = [
 	'src/routes/**/[+]layout@*.svelte'
 ];
 
-const routeParameter = String.raw`(?:\[\w+(?:=\w+)?\]|\[\[\w+(?:=\w+)?\]\]|\[\.\.\.\w+(?:=\w+)?\]|\[(?:x\+[0-9a-f]{2}|u\+[0-9a-f]{4,6})\])`;
-const svelteKitRouteSegment = new RegExp(
-	String.raw`^(?:llms\.txt|[a-z0-9]+(?:-[a-z0-9]+)*|\([^)]+\)|[a-z0-9-]*${routeParameter}(?:[a-z0-9-]+${routeParameter})*[a-z0-9-]*)$`
-);
+// This mirrors the parser: Unicode escapes have 4–6 total hexadecimal-or-hyphen characters,
+// then SvelteKit splits their code points on hyphens (so `[u+61-62]` is valid).
+const routeParameter = String.raw`\[(?:\w+(?:=\w+)?|\[\w+(?:=\w+)?\]|\.\.\.\w+(?:=\w+)?|x\+[0-9a-f]{2}|u\+(?=[0-9a-f-]{4,6}\])[0-9a-f-]*[0-9a-f][0-9a-f-]*)\]`;
+const svelteKitRouteSegment = (segment, isRoot) =>
+	(isRoot && segment === 'llms.txt') ||
+	/^\([^)]+\)$/.test(segment) ||
+	(!/\]\[/.test(segment) &&
+		/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(
+			segment.replaceAll(new RegExp(routeParameter, 'g'), 'parameter')
+		));
 const svelteKitRouteFolders = {
 	rules: {
 		'folder-naming': {
@@ -58,8 +64,8 @@ const svelteKitRouteFolders = {
 					const folders = relative(routesPath, dirname(context.physicalFilename))
 						.split(sep)
 						.filter(Boolean);
-					for (const folder of folders) {
-						if (!svelteKitRouteSegment.test(folder))
+					for (const [index, folder] of folders.entries()) {
+						if (!svelteKitRouteSegment(folder, index === 0))
 							context.report({ node, messageId: 'invalid', data: { folder } });
 					}
 				}
