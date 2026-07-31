@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Icon from '$lib/base/icon/icon.svelte';
-	import { PAGES, type PageProps } from '../layout/types.ts';
+	import type { PageProps } from '../layout/types.ts';
+	import { pageForPath } from './navigation.ts';
 	import { page } from '$app/state';
 
 	const { title, description, icon } = $derived.by((): PageProps => {
@@ -12,10 +13,7 @@
 				href: ''
 			};
 		}
-		const firstPage = PAGES[0];
-		const allPages = PAGES.flatMap((p) => [p, ...(p.children || [])]);
-		const currentPage = allPages.find((p) => page.url.pathname.endsWith(p.href));
-		return currentPage || firstPage;
+		return pageForPath(page.url.pathname);
 	});
 </script>
 

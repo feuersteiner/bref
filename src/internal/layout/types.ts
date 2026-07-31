@@ -1,4 +1,5 @@
 import type { IconName } from '../../lib/base/icon/types.ts';
+import { componentWorkbenchPages } from '../../routes/components/navigation.ts';
 
 export interface PageProps {
 	title: string;
@@ -8,7 +9,7 @@ export interface PageProps {
 	children?: PageProps[];
 }
 
-export const PAGES: PageProps[] = [
+const corePages: PageProps[] = [
 	{
 		title: 'Getting Started',
 		description: 'Installation and setup guide',
@@ -147,5 +148,16 @@ export const PAGES: PageProps[] = [
 		description: 'A hierarchical tree component for displaying nested data structures',
 		href: '/tree-view',
 		icon: 'account_tree'
+	}
+];
+
+export const PAGES: PageProps[] = [
+	...corePages,
+	{
+		title: 'Components',
+		description: 'Executable component documentation workbenches',
+		href: '/components',
+		icon: 'view_quilt',
+		children: componentWorkbenchPages
 	}
 ];

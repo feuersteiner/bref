@@ -2,6 +2,7 @@
 	import Logo from './logo.svelte';
 	import Footer from './footer.svelte';
 	import { PAGES, type PageProps } from '../types.ts';
+	import { pageForPath } from '../navigation.ts';
 	import { page } from '$app/state';
 	import TreeView from '$lib/base/tree-view/tree-view.svelte';
 	import type { NodeDataProps } from '../../../lib/index.ts';
@@ -14,8 +15,7 @@
 		children: page.children?.map(pageToNode)
 	});
 	const selectedPage = $derived.by(() => {
-		const allPages = PAGES.flatMap((p) => [p, ...(p.children || [])]);
-		return allPages.find((p) => page.url.pathname.endsWith(p.href)) ?? PAGES[0];
+		return pageForPath(page.url.pathname);
 	});
 	const selectedIds = $derived(new Set([selectedPage.href]));
 	const onSelect = (href: string) => navigateTo(href);
