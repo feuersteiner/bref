@@ -4,8 +4,7 @@ const command = process.argv[2];
 
 if (command === '--help' || command === '-h' || command === undefined) {
 	console.log('Usage: bref <command>');
-	console.log('\nCommands:');
-	console.log('  theme  Generate an editable Bref theme');
+	console.log('\nNo commands are available yet.');
 	process.exit(0);
 }
 

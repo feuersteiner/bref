@@ -15,6 +15,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run svelte-package",
+		"demo-site-build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"prepack": "npm run svelte-package && npm run publint",
@@ -28,9 +29,8 @@
 	},
 	"files": [
 		"bin",
-		"dist",
-		"!dist/**/*.test.*",
-		"!dist/**/*.spec.*"
+		"dist/index.js",
+		"dist/index.d.ts"
 	],
 	"sideEffects": [
 		"**/*.css"
@@ -93,6 +93,5 @@
 		"component-library",
 		"design-system",
 		"css"
-	],
-	"dependencies": {}
+	]
 }
