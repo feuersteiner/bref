@@ -63,9 +63,15 @@ export const validateWorkbench = (workbench: ComponentWorkbench) => {
 	}
 
 	for (const state of requiredStates) {
-		if (!workbench.states.some((entry) => entry.name === state)) {
+		const occurrences = workbench.states.filter((entry) => entry.name === state).length;
+		if (!occurrences) {
 			errors.push(`${state} state coverage is required.`);
+		} else if (occurrences > 1) {
+			errors.push(`${state} state coverage must be documented exactly once.`);
 		}
+	}
+	if (workbench.states.length !== requiredStates.length) {
+		errors.push(`states must contain exactly ${requiredStates.length} unique required entries.`);
 	}
 
 	for (const state of workbench.states) {

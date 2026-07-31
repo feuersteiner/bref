@@ -1,9 +1,19 @@
 import { describe, expect, it } from 'vitest';
-import { resolve } from 'node:path';
+import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+import { tmpdir } from 'node:os';
 import { verifyComponentWorkbenches } from '../scripts/verify-component-workbenches.mjs';
 
 const fixture = (name: string) =>
 	resolve('tests/fixtures/component-workbenches', name, 'components');
+
+const mutatedValidFixture = (mutate: (root: string) => void) => {
+	const temporary = mkdtempSync(join(tmpdir(), 'bref-workbench-verifier-'));
+	const root = join(temporary, 'components');
+	cpSync(fixture('valid'), root, { recursive: true });
+	mutate(root);
+	return { root, cleanup: () => rmSync(temporary, { recursive: true, force: true }) };
+};
 
 describe('component workbench verifier', () => {
 	it('accepts a structural route, workbench value, registry, and navigation contract', () => {
@@ -56,5 +66,77 @@ describe('component workbench verifier', () => {
 		expect(verifyComponentWorkbenches(fixture('navigation-eager-import'))).toContain(
 			'navigation manifest must not import route-local workbenches or registry.'
 		);
+	});
+
+	it('rejects non-Svelte demo imports and non-object demo props without executing modules', () => {
+		const valueDemo = mutatedValidFixture((root) => {
+			const snippets = join(root, 'workbench/snippets.ts');
+			writeFileSync(
+				join(root, 'workbench/fixture-value.ts'),
+				"import type { Component } from 'svelte';\nexport default 42 as unknown as Component;\n"
+			);
+			writeFileSync(
+				snippets,
+				readFileSync(snippets, 'utf8').replace(
+					"import FixtureDemo from './fixture-demo.svelte';",
+					"import FixtureDemo from './fixture-value.ts';"
+				)
+			);
+		});
+		const invalidProps = mutatedValidFixture((root) => {
+			const snippets = join(root, 'workbench/snippets.ts');
+			writeFileSync(
+				snippets,
+				readFileSync(snippets, 'utf8').replace(
+					'demo: { component: FixtureDemo }',
+					'demo: { component: FixtureDemo, props: 42 }'
+				)
+			);
+		});
+		try {
+			expect(verifyComponentWorkbenches(valueDemo.root)).toContain(
+				'workbench/snippets.ts must export a valid workbench contract.'
+			);
+			expect(verifyComponentWorkbenches(invalidProps.root)).toContain(
+				'workbench/snippets.ts must export a valid workbench contract.'
+			);
+		} finally {
+			valueDemo.cleanup();
+			invalidProps.cleanup();
+		}
+	});
+
+	it('rejects duplicate states and type-only registry imports', () => {
+		const duplicateStates = mutatedValidFixture((root) => {
+			const snippets = join(root, 'workbench/snippets.ts');
+			writeFileSync(
+				snippets,
+				readFileSync(snippets, 'utf8').replace(
+					'\n\t],\n\tdenseUsage:',
+					",\n\t\t{\n\t\t\tname: 'disabled',\n\t\t\tcoverage: 'shown',\n\t\t\tdescription: 'Duplicate disabled fixture.',\n\t\t\tdemo: { component: FixtureDemo }\n\t\t}\n\t],\n\tdenseUsage:"
+				)
+			);
+		});
+		const typeOnlyRegistry = mutatedValidFixture((root) => {
+			const registry = join(root, 'registry.ts');
+			writeFileSync(
+				registry,
+				readFileSync(registry, 'utf8').replace(
+					"import { workbench } from './workbench/snippets.ts';",
+					"import type { workbench } from './workbench/snippets.ts';"
+				)
+			);
+		});
+		try {
+			expect(verifyComponentWorkbenches(duplicateStates.root)).toContain(
+				'workbench/snippets.ts must export a valid workbench contract.'
+			);
+			expect(verifyComponentWorkbenches(typeOnlyRegistry.root)).toContain(
+				'workbench registry entry must use its direct workbench import.'
+			);
+		} finally {
+			duplicateStates.cleanup();
+			typeOnlyRegistry.cleanup();
+		}
 	});
 });

@@ -41,6 +41,21 @@ const identifierProperty = (object, name) => {
 const parseTypescript = (filename) =>
 	ts.createSourceFile(filename, readFileSync(filename, 'utf8'), ts.ScriptTarget.Latest, true);
 
+const resolveImport = (from, specifier) => {
+	if (!specifier.startsWith('.')) return undefined;
+	const candidate = resolve(dirname(from), specifier);
+	const extensions = ['', '.ts', '.tsx', '.js', '.mjs', '.cjs', '.svelte'];
+	for (const extension of extensions) {
+		const target = `${candidate}${extension}`;
+		if (existsSync(target)) return target;
+	}
+	for (const extension of extensions.slice(1)) {
+		const target = join(candidate, `index${extension}`);
+		if (existsSync(target)) return target;
+	}
+	return null;
+};
+
 const workbenchFields = [
 	'component',
 	'description',
@@ -86,16 +101,19 @@ const nonEmptyArray = (expression) => {
 		: undefined;
 };
 
-const importedValues = (source) => {
-	const imports = new Set();
+const importedSvelteComponents = (source, filename) => {
+	const imports = new Map();
 	for (const statement of source.statements) {
-		if (!ts.isImportDeclaration(statement) || statement.importClause?.isTypeOnly) continue;
+		if (
+			!ts.isImportDeclaration(statement) ||
+			statement.importClause?.isTypeOnly ||
+			!ts.isStringLiteral(statement.moduleSpecifier)
+		)
+			continue;
 		const clause = statement.importClause;
-		if (clause?.name) imports.add(clause.name.text);
-		if (!clause?.namedBindings || !ts.isNamedImports(clause.namedBindings)) continue;
-		for (const specifier of clause.namedBindings.elements) {
-			if (!specifier.isTypeOnly) imports.add(specifier.name.text);
-		}
+		const target = resolveImport(filename, statement.moduleSpecifier.text);
+		if (!target?.endsWith('.svelte')) continue;
+		if (clause?.name) imports.set(clause.name.text, target);
 	}
 	return imports;
 };
@@ -104,7 +122,13 @@ const validDemo = (expression, imports) => {
 	const demo =
 		exactObject(expression, ['component']) ?? exactObject(expression, ['component', 'props']);
 	const component = demo && unwrap(valueProperty(demo, 'component'));
-	return Boolean(component && ts.isIdentifier(component) && imports.has(component.text));
+	const props = demo && valueProperty(demo, 'props');
+	return Boolean(
+		component &&
+		ts.isIdentifier(component) &&
+		imports.has(component.text) &&
+		(!props || ts.isObjectLiteralExpression(unwrap(props)))
+	);
 };
 
 const validExample = (expression, imports) => {
@@ -148,7 +172,7 @@ const validWorkbenchContract = (filename) => {
 	const initializer = declarations[0].initializer && unwrap(declarations[0].initializer);
 	const workbench = exactObject(initializer, workbenchFields);
 	if (!workbench) return false;
-	const imports = importedValues(source);
+	const imports = importedSvelteComponents(source, filename);
 	const api = nonEmptyArray(valueProperty(workbench, 'api'));
 	const types = nonEmptyArray(valueProperty(workbench, 'types'));
 	const states = nonEmptyArray(valueProperty(workbench, 'states'));
@@ -224,6 +248,7 @@ const validWorkbenchContract = (filename) => {
 				text(valueProperty(state, 'description'))
 			);
 		}) ||
+		states.elements.length !== 5 ||
 		stateNames.size !== 5
 	)
 		return false;
@@ -290,11 +315,16 @@ const registryEntries = (registryFile) => {
 	const source = parseTypescript(registryFile);
 	const imports = new Map();
 	for (const statement of source.statements) {
-		if (!ts.isImportDeclaration(statement) || !ts.isStringLiteral(statement.moduleSpecifier))
+		if (
+			!ts.isImportDeclaration(statement) ||
+			statement.importClause?.isTypeOnly ||
+			!ts.isStringLiteral(statement.moduleSpecifier)
+		)
 			continue;
 		const workbenchSpecifier = statement.importClause?.namedBindings;
 		if (!workbenchSpecifier || !ts.isNamedImports(workbenchSpecifier)) continue;
 		for (const specifier of workbenchSpecifier.elements) {
+			if (specifier.isTypeOnly) continue;
 			imports.set(specifier.name.text, {
 				imported: specifier.propertyName?.text ?? specifier.name.text,
 				target: statement.moduleSpecifier.text
@@ -378,21 +408,6 @@ const hasRuntimeModuleReference = (statement) => {
 	if (!ts.isExportDeclaration(statement) || statement.isTypeOnly) return false;
 	if (!statement.exportClause || !ts.isNamedExports(statement.exportClause)) return true;
 	return statement.exportClause.elements.some((specifier) => !specifier.isTypeOnly);
-};
-
-const resolveImport = (from, specifier) => {
-	if (!specifier.startsWith('.')) return undefined;
-	const candidate = resolve(dirname(from), specifier);
-	const extensions = ['', '.ts', '.tsx', '.js', '.mjs', '.cjs', '.svelte'];
-	for (const extension of extensions) {
-		const target = `${candidate}${extension}`;
-		if (existsSync(target)) return target;
-	}
-	for (const extension of extensions.slice(1)) {
-		const target = join(candidate, `index${extension}`);
-		if (existsSync(target)) return target;
-	}
-	return null;
 };
 
 const navigationImportsRouteLocalCode = (navigationFile, root) => {

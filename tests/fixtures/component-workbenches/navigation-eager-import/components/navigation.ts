@@ -1,5 +1,4 @@
-// @ts-nocheck -- intentionally extensionless to exercise static module resolution.
-import { workbench } from './shared';
+import { workbench } from './shared.js';
 
 void workbench;
 

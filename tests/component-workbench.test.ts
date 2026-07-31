@@ -75,4 +75,19 @@ describe('component workbench contract', () => {
 		expect(validateWorkbench(withoutDemo)).toContain('example demo must render a live component.');
 		expect(validateWorkbench(notApplicable)).toEqual([]);
 	});
+
+	it('rejects duplicate required states before keyed rendering can fail', () => {
+		const workbench = componentWorkbenches[0].workbench;
+		const duplicateStates = {
+			...workbench,
+			states: [...workbench.states, { ...workbench.states[0] }]
+		};
+
+		expect(validateWorkbench(duplicateStates)).toContain(
+			'disabled state coverage must be documented exactly once.'
+		);
+		expect(validateWorkbench(duplicateStates)).toContain(
+			'states must contain exactly 5 unique required entries.'
+		);
+	});
 });
