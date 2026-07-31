@@ -31,7 +31,9 @@ export default defineConfig(
 
 		languageOptions: {
 			parserOptions: {
-				projectService: true,
+				projectService: {
+					allowDefaultProject: ['scripts/button-color-states-fixture.svelte']
+				},
 				extraFileExtensions: ['.svelte'],
 				parser: ts.parser,
 				svelteConfig
