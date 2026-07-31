@@ -11,6 +11,13 @@ import svelteConfig from './svelte.config.js';
 
 const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
 
+// These components exceed 100 non-blank, non-comment lines because their scoped CSS belongs with
+// their markup. Add an entry only when the additional lines are predominantly scoped styles.
+const cssHeavyComponents = [
+	'src/lib/base/{button/{button,icon-button},icon/icon,loading/{morphing-shapes-loading,textual-loading},pill/pill,progress-bar/progress-bar,select/select,slider/slider,text-input/text-input,tree-view/tree-node}.svelte',
+	'src/routes/{+page,buttons/{+page,button/+page,icon-button/+page},icon/+page,inputs/{area-text-input/+page,select/+page,slider/+page,text-input/+page},pill-selection/+page,pill/+page,progress/{morphing-shapes/+page,progress-bar/+page,textual/+page},theming/+page,tree-view/+page,types/+page}.svelte'
+];
+
 const sharedRules = {
 	'func-style': ['error', 'expression'],
 	'@typescript-eslint/consistent-type-definitions': ['warn', 'interface'],
@@ -52,8 +59,9 @@ export default defineConfig(
 			'check-file/filename-naming-convention': [
 				'error',
 				{
-					'**/!+(*).{ts,svelte}': 'KEBAB_CASE'
-				}
+					'src/**/!(+*).{ts,svelte}': 'KEBAB_CASE'
+				},
+				{ ignoreMiddleExtensions: true }
 			],
 			'check-file/folder-naming-convention': [
 				'error',
@@ -78,12 +86,16 @@ export default defineConfig(
 	{
 		files: ['**/*.svelte'],
 		rules: {
-			// A component's template and scoped styles share one file; retain the 100-line limit for
-			// script modules while allowing style-heavy components enough room to remain cohesive.
-			'max-lines': ['error', { max: 300, skipBlankLines: true, skipComments: true }],
 			// Dynamic Svelte class expressions produce an empty placeholder in the parser. Static
 			// classes still require a matching scoped selector.
-			'svelte/no-unused-class-name': ['error', { allowedClassNames: ['/^$/'] }]
+			'svelte/no-unused-class-name': ['error', { allowedClassNames: ['/^$/'] }],
+			'svelte/valid-compile': 'error'
+		}
+	},
+	{
+		files: cssHeavyComponents,
+		rules: {
+			'max-lines': ['error', { max: 300, skipBlankLines: true, skipComments: true }]
 		}
 	},
 	{

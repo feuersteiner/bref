@@ -41,7 +41,7 @@
 		{#if placeholder && !value}
 			<option value="" disabled selected>{placeholder}</option>
 		{/if}
-		{#each options as option (option.value)}
+		{#each options as option, index (index)}
 			<option value={option.value}>
 				{option.label}
 			</option>

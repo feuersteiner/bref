@@ -11,8 +11,10 @@ Guidelines for adding new components to the library.
   `import type` for type-only imports.
 - Use tabs, single quotes, no trailing commas, and a 100-character print width. Run `bun run format`
   before committing and `bun run lint` to verify formatting and ESLint rules.
-- Keep TypeScript modules to 100 non-blank, non-comment lines. A Svelte component may reach 300 lines
-  because its scoped CSS lives beside its markup; split non-style-heavy components instead.
+- Keep TypeScript modules and ordinary Svelte components to 100 non-blank, non-comment lines. The
+  named `cssHeavyComponents` exceptions in `eslint.config.js` may reach 300 lines because their scoped
+  CSS lives beside their markup; only add an exception when the additional lines are predominantly
+  scoped CSS. Split non-style-heavy components instead.
 - `src/lib/base/icon/types.ts` is the generated Material Symbols name union and is exempt from the
   line limit. If it moves to `icon-names.ts`, that generated file remains exempt.
 - `src/internal/layout/types.ts` and `src/routes/llms.txt/+server.ts` are declarative registries and
