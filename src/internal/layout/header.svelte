@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Icon from '$lib/base/icon/icon.svelte';
+	import Icon from '#lib/base/icon/icon.svelte';
 	import { PAGES, type PageProps } from '../layout/types.ts';
 	import { page } from '$app/state';
 

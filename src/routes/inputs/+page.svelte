@@ -1,9 +1,9 @@
 <script lang="ts">
 	import Section from '../../internal/layout/section.svelte';
-	import TextInput from '$lib/base/text-input/text-input.svelte';
-	import AreaTextInput from '$lib/base/text-input/area-text-input.svelte';
-	import Slider from '$lib/base/slider/slider.svelte';
-	import Toggle from '$lib/base/toggle/toggle.svelte';
+	import TextInput from '#lib/base/text-input/text-input.svelte';
+	import AreaTextInput from '#lib/base/text-input/area-text-input.svelte';
+	import Slider from '#lib/base/slider/slider.svelte';
+	import Toggle from '#lib/base/toggle/toggle.svelte';
 	import navigateTo from '../../internal/navigate.ts';
 
 	let textValue = $state('');

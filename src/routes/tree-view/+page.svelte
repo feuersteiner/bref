@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Section from '../../internal/layout/section.svelte';
 	import CodeSnippet from '../../internal/layout/code-snippet.svelte';
-	import TreeView from '$lib/base/tree-view/tree-view.svelte';
-	import type { NodeDataProps } from '../../lib/index.ts';
+	import TreeView from '#lib/base/tree-view/tree-view.svelte';
+	import type { NodeDataProps } from '#lib/base/tree-view/types';
 	import {
 		TREE_VIEW_BASIC_CODE_SNIPPET,
 		TREE_VIEW_SELECTION_CODE_SNIPPET,

@@ -4,7 +4,7 @@
 
 <div class="logo">
 	<div class="icon">
-		<img src={asset('/favicon.svg')} alt="Logo" />
+		<img src={asset('favicon.svg')} alt="Logo" />
 		<span>Bref</span>
 	</div>
 

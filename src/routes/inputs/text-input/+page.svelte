@@ -1,5 +1,5 @@
 <script lang="ts">
-	import TextInput from '$lib/base/text-input/text-input.svelte';
+	import TextInput from '#lib/base/text-input/text-input.svelte';
 	import Section from '../../../internal/layout/section.svelte';
 	import CodeSnippet from '../../../internal/layout/code-snippet.svelte';
 	import {

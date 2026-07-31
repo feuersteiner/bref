@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Section from '../../internal/layout/section.svelte';
-	import ProgressBar from '$lib/base/progress-bar/progress-bar.svelte';
-	import CircularLoading from '$lib/base/loading/circular-loading.svelte';
-	import PulsingDotsLoading from '$lib/base/loading/pulsing-dots-loading.svelte';
-	import MorphingShapesLoading from '$lib/base/loading/morphing-shapes-loading.svelte';
-	import TextualLoading from '$lib/base/loading/textual-loading.svelte';
+	import ProgressBar from '#lib/base/progress-bar/progress-bar.svelte';
+	import CircularLoading from '#lib/base/loading/circular-loading.svelte';
+	import PulsingDotsLoading from '#lib/base/loading/pulsing-dots-loading.svelte';
+	import MorphingShapesLoading from '#lib/base/loading/morphing-shapes-loading.svelte';
+	import TextualLoading from '#lib/base/loading/textual-loading.svelte';
 	import navigateTo from '../../internal/navigate.ts';
 </script>
 

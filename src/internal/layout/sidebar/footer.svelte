@@ -1,12 +1,12 @@
 <script lang="ts">
-	import IconButton from '$lib/base/button/icon-button.svelte';
+	import IconButton from '#lib/base/button/icon-button.svelte';
 	import {
 		type ThemeMode,
 		initializeThemeMode,
 		toggleThemeMode
 	} from '../../../lib/base/theme/index.ts';
 	import { untrack } from 'svelte';
-	import Icon from '$lib/base/icon/icon.svelte';
+	import Icon from '#lib/base/icon/icon.svelte';
 
 	let themeMode: ThemeMode = $state('light');
 

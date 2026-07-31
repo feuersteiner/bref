@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '@fontsource/spectral';
 	import '@fontsource/meow-script';
-	import Theme from '$lib/base/theme/theme.svelte';
+	import Theme from '#lib/base/theme/theme.svelte';
 	import Sidebar from '../internal/layout/sidebar/sidebar.svelte';
 	import Header from '../internal/layout/header.svelte';
 

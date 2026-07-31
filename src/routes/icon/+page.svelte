@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Icon from '$lib/base/icon/icon.svelte';
+	import Icon from '#lib/base/icon/icon.svelte';
 	import Section from '../../internal/layout/section.svelte';
 	import CodeSnippet from '../../internal/layout/code-snippet.svelte';
 	import { ICON_USAGE_CODE_SNIPPET } from './snippets.ts';
