@@ -1,35 +1,8 @@
 <script lang="ts">
-	import IconButton from '$lib/base/button/icon-button.svelte';
-	import {
-		type ThemeMode,
-		initializeThemeMode,
-		toggleThemeMode
-	} from '../../../lib/base/theme/index.ts';
-	import { untrack } from 'svelte';
 	import Icon from '$lib/base/icon/icon.svelte';
-
-	let themeMode: ThemeMode = $state('light');
-
-	$effect.pre(() => {
-		untrack(() => {
-			themeMode = initializeThemeMode();
-		});
-	});
-
-	const onClick = () => {
-		const newMode = themeMode === 'dark' ? 'light' : 'dark';
-		toggleThemeMode(newMode);
-		themeMode = newMode;
-	};
 </script>
 
 <div>
-	<IconButton
-		variant="ghost"
-		name={themeMode === 'dark' ? 'light_mode' : 'dark_mode'}
-		ariaLabel="Toggle theme"
-		{onClick}
-	/>
 	<span>
 		Made with <Icon name="favorite" color="danger" filled size="x-small" /> in Paris, by
 		<a href="https://github.com/feuersteiner" target="_blank" rel="noopener noreferrer"

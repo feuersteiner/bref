@@ -11,7 +11,7 @@ Bref is a Svelte UI component library designed to be minimal, flexible, and easy
 - **Clear naming conventions**: Component names resemble HTML as much as possible to avoid confusion
 - **Section-based components**: For more complex UI needs like navbars, modals, and cards
 - **Marketing site components**: Ready-made components for building landing pages and marketing sites
-- **Theming component**: A simple component to style the entire UI library (colors, padding, spacing, fonts, borders...) to your desires
+- **Dark theme foundation**: Explicit semantic tokens for colors, spacing, typography, radius, shadow, motion, and focus
 - **WIP: CLI tool**: Import components directly into your codebase and customize them at will
 
 ## Installation
@@ -35,20 +35,13 @@ npm install bref-ui
 - **Scoped CSS**: Uses Svelte's built-in scoped styling, each component's styles are encapsulated and won't leak or conflict.
 - **Minimal**: Only essential components, nothing extra.
 - **Flexible**: Use as an npm package or copy components directly into your project with our CLI tool (WIP).
-- **Batteries included theming**: Just provide your base colors and we handle the rest (see below).
+- **Stable semantic tokens**: Components reference shared CSS tokens instead of raw colors.
 
-## Theming: Just Bring Your Colors
+## Theming: Explicit Dark Tokens
 
-Bref is a **batteries included** theming solution. You don't need to be a color theory expert or spend hours crafting the perfect palette.
+Add \`<Theme />\` once at the application root to install Bref's dark-only semantic tokens. The theme is static: it does not calculate colors at runtime and does not provide a light mode.
 
-Simply provide your base theme colors, and Bref automatically generates all the necessary CSS variables with proper contrast ratios, hover states, and luminance variations. No more manually calculating shades, tints, or ensuring accessibility compliance.
-
-Bref handles:
-
-- **Shade generation**: Automatically creates lighter and darker variants
-- **Contrast calculation**: Ensures text remains readable on all backgrounds
-- **State variations**: Hover, active, and disabled states just work
-- **Dark mode**: Seamlessly adapts your palette for dark themes
+The foundation documents tokens for semantic color, spacing, typography, radius, shadow, motion, focus, and dense control sizes. Components consume these tokens rather than embedding color values.
 
 ## Base Components
 

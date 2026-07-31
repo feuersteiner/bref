@@ -1,200 +1,103 @@
 <script lang="ts">
 	import Section from '../../internal/layout/section.svelte';
 	import CodeSnippet from '../../internal/layout/code-snippet.svelte';
-	import { THEME_USAGE_CODE_SNIPPET, CSS_VARIABLES_CODE_SNIPPET } from './snippets.ts';
+	import { CSS_VARIABLES_CODE_SNIPPET, THEME_USAGE_CODE_SNIPPET } from './snippets.ts';
 
-	const DEFAULT_THEME = {
-		paletteHex: {
-			primary: '#736CED',
-			secondary: '#E08D79',
-			success: '#60935D',
-			warning: '#E67F0D',
-			danger: '#F03A47',
-			info: '#4D9DE0'
-		},
-		surfaceHex: {
-			background: '#eee',
-			foreground: '#222'
-		},
-		border: {
-			widthPx: 1,
-			radiusRem: 0.5,
-			colorHex: '#CCCCCC'
-		},
-		spacingRem: 1
-	};
-
-	const paletteColors = Object.entries(DEFAULT_THEME.paletteHex) as [string, string][];
-	const surfaceColors = ['background', 'foreground'] as const;
-	const variants = ['base', 'soft', 'saturated', 'contrast'] as const;
+	const colors = [
+		['background', '--color-background'],
+		['surface', '--color-surface'],
+		['surface hover', '--color-surface-hover'],
+		['border', '--color-border'],
+		['foreground', '--color-foreground'],
+		['muted', '--color-muted'],
+		['accent', '--color-accent'],
+		['focus', '--color-focus']
+	] as const;
 </script>
 
 <Section>
 	<p class="intro">
-		The Theme component generates semantic color tokens from your base colors, handling shade
-		generation, contrast calculation, and dark mode automatically.
+		Bref provides one explicit dark theme. The Theme component sets semantic CSS tokens without
+		runtime color generation or mode switching.
 	</p>
 </Section>
 
-<Section title="Palette Colors" description="Semantic colors for your UI components.">
-	<p class="description">
-		Each palette color generates four variants: <strong>base</strong>, <strong>soft</strong>,
-		<strong>saturated</strong>, and <strong>contrast</strong>.
-	</p>
+<Section title="Semantic colors" description="Use intent-based tokens instead of raw color values.">
 	<div class="color-grid">
-		{#each paletteColors as [name, hex]}
+		{#each colors as [name, token] (token)}
 			<div class="color-card">
-				<div class="color-header">
-					<span class="color-name">{name}</span>
-					<span class="color-hex">{hex}</span>
-				</div>
-				<div class="color-variants">
-					{#each variants as variant}
-						{@const cssVar = variant === 'base' ? `--color-${name}` : `--color-${name}-${variant}`}
-						<div class="color-swatch" style:background={`var(${cssVar})`}>
-							<span class="swatch-label">{variant}</span>
-							<code class="swatch-var">{cssVar}</code>
-						</div>
-					{/each}
+				<span class="swatch" style:background={`var(${token})`}></span>
+				<div>
+					<strong>{name}</strong>
+					<code>{token}</code>
 				</div>
 			</div>
 		{/each}
 	</div>
 </Section>
 
-<Section title="Surface Colors" description="Background and foreground colors for layouts.">
-	<p class="description">
-		Surface colors define the base canvas of your application and also generate variants.
-	</p>
-	<div class="color-grid surface-grid">
-		{#each surfaceColors as name}
-			{@const hex = DEFAULT_THEME.surfaceHex[name]}
-			<div class="color-card">
-				<div class="color-header">
-					<span class="color-name">{name}</span>
-					<span class="color-hex">{hex}</span>
-				</div>
-				<div class="color-variants">
-					{#each variants as variant}
-						{@const cssVar = variant === 'base' ? `--color-${name}` : `--color-${name}-${variant}`}
-						<div class="color-swatch" style:background={`var(${cssVar})`}>
-							<span class="swatch-label">{variant}</span>
-							<code class="swatch-var">{cssVar}</code>
-						</div>
-					{/each}
-				</div>
-			</div>
-		{/each}
-	</div>
+<Section title="Foundation tokens" description="Stable tokens for dense, accessible interfaces.">
+	<ul>
+		<li><strong>Spacing:</strong> <code>--space-1</code> through <code>--space-8</code>.</li>
+		<li><strong>Typography:</strong> font family, sizes, weights, and line heights.</li>
+		<li>
+			<strong>Radius:</strong> <code>--radius-small</code> through <code>--radius-large</code>.
+		</li>
+		<li><strong>Shadow:</strong> <code>--shadow-small</code> and <code>--shadow-medium</code>.</li>
+		<li><strong>Motion:</strong> duration and easing tokens.</li>
+		<li>
+			<strong>Focus:</strong> <code>--focus-ring</code>, applied with <code>:focus-visible</code>.
+		</li>
+		<li><strong>Controls:</strong> 1.5rem, 1.75rem, and 2rem minimum dense sizes.</li>
+	</ul>
 </Section>
 
-<Section title="CSS Variables" description="All generated CSS custom properties.">
-	<p class="description">
-		Use these variables anywhere in your CSS to maintain consistency with your theme.
-	</p>
+<Section title="CSS variables" description="Reference these tokens from component CSS.">
 	<CodeSnippet snippet={CSS_VARIABLES_CODE_SNIPPET} />
 </Section>
 
-<Section title="Usage" description="Add the Theme component at the root of your app.">
-	<p class="description">
-		It generates CSS custom properties and handles light/dark mode switching automatically.
-	</p>
+<Section title="Usage" description="Add Theme once at the root of an application.">
 	<CodeSnippet snippet={THEME_USAGE_CODE_SNIPPET} />
 </Section>
 
 <style>
 	.intro {
+		max-width: 42rem;
 		text-align: center;
-		max-width: 40rem;
-		font-size: 1rem;
-		opacity: 0.8;
-		line-height: 1.6;
-	}
-
-	.description {
-		text-align: center;
-		max-width: 36rem;
-		opacity: 0.7;
-		font-size: 0.95rem;
-		margin-bottom: 1rem;
-	}
-
-	code {
-		background: color-mix(in srgb, var(--color-foreground) 10%, transparent);
-		padding: 0.15rem 0.4rem;
-		border-radius: 0.25rem;
-		font-size: 0.85em;
+		color: var(--color-muted);
 	}
 
 	.color-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		gap: 1rem;
+		grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+		gap: var(--space-3);
 		width: 100%;
-		max-width: 80rem;
-	}
-
-	.surface-grid {
-		max-width: 50rem;
 	}
 
 	.color-card {
 		display: flex;
-		flex-direction: column;
-		border-radius: 0.75rem;
-		overflow: hidden;
-		border: 1px solid color-mix(in srgb, var(--color-foreground) 15%, transparent);
-		background: color-mix(in srgb, var(--color-background) 50%, transparent);
-	}
-
-	.color-header {
-		padding: 0.75rem;
-		display: flex;
-		justify-content: space-between;
 		align-items: center;
-		background: color-mix(in srgb, var(--color-foreground) 5%, transparent);
-		border-bottom: 1px solid color-mix(in srgb, var(--color-foreground) 10%, transparent);
+		gap: var(--space-3);
+		padding: var(--space-3);
+		border: var(--border-width) solid var(--color-border);
+		border-radius: var(--radius-medium);
+		background: var(--color-surface);
 	}
 
-	.color-name {
-		font-weight: 600;
-		text-transform: capitalize;
-		font-size: 0.95rem;
+	.swatch {
+		width: var(--control-large);
+		height: var(--control-large);
+		border-radius: var(--radius-small);
 	}
 
-	.color-hex {
-		font-family: monospace;
-		font-size: 0.75rem;
-		opacity: 0.6;
+	code {
+		display: block;
+		color: var(--color-muted);
 	}
 
-	.color-variants {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.color-swatch {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 0.75rem;
-		min-height: 3rem;
-	}
-
-	.swatch-label {
-		color: var(--color-foreground);
-		padding: 0.2rem 0.5rem;
-		text-transform: capitalize;
-		background: color-mix(in srgb, var(--color-background) 70%, transparent);
-		border-radius: 0.25rem;
-		font-weight: 500;
-		font-size: 0.8rem;
-	}
-
-	.swatch-var {
-		font-size: 0.65rem;
-		padding: 0.15rem 0.35rem;
-		background: color-mix(in srgb, var(--color-background) 70%, transparent);
-		opacity: 0.9;
+	ul {
+		display: grid;
+		gap: var(--space-2);
+		padding-left: var(--space-6);
 	}
 </style>

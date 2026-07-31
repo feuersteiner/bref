@@ -1,40 +1,27 @@
 export const THEME_USAGE_CODE_SNIPPET = `<script lang="ts">
-  import { Theme } from 'bref-ui/base/theme';
-<\/script>
+  import { Theme } from 'bref-ui';
+</script>
 
-<!-- Use default theme -->
-<Theme />
+<!-- Add once at the application root. -->
+<Theme />`;
 
-<!-- Or customize with your own colors -->
-<Theme
-  paletteHex={{
-    primary: '#6366f1',
-    secondary: '#ec4899',
-    success: '#22c55e',
-    warning: '#f59e0b',
-    danger: '#ef4444',
-    info: '#3b82f6'
-  }}
-  surfaceHex={{
-    background: '#f8fafc',
-    foreground: '#1e293b'
-  }}
-  border={{ widthPx: 1, radiusRem: 0.5, colorHex: '#e2e8f0' }}
-  spacingRem={1}
-/>`;
-
-export const CSS_VARIABLES_CODE_SNIPPET = `/* Palette colors - each generates 4 variants */
---color-primary          /* Base color */
---color-primary-soft     /* Lighter, subtle version */
---color-primary-saturated /* More vibrant version */
---color-primary-contrast /* Text color for use on base */
-
-/* Surface colors */
+export const CSS_VARIABLES_CODE_SNIPPET = `/* Semantic colors */
 --color-background
+--color-surface
+--color-surface-hover
+--color-border
 --color-foreground
+--color-muted
+--color-accent
+--color-focus
 
-/* Layout tokens */
---border-width
---border-radius
---border-color
---spacing`;
+/* Foundation tokens */
+--space-1 … --space-8
+--font-family, --font-family-display
+--font-size-small … --font-size-large
+--radius-small … --radius-large
+--shadow-small, --shadow-medium
+--motion-fast, --motion-normal, --motion-slow
+--motion-ease
+--focus-ring
+--control-small, --control-medium, --control-large`;

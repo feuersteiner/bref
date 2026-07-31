@@ -22,28 +22,10 @@ type Speed = 'slow' | 'normal' | 'fast'
 
 ## Theme
 
-Generates CSS custom properties for theming. Add at app root.
-
-**Props:**
-- \`paletteHex\`: { primary, secondary, success, warning, danger, info: string }
-- \`surfaceHex\`: { background, foreground: string }
-- \`border\`: { widthPx: number, radiusRem: number, colorHex: string }
-- \`spacingRem\`: number
+Provides one explicit dark-only set of semantic CSS custom properties. Add \`<Theme />\` once at the app root. It has no theme props, mode switching, or runtime color calculation.
 
 \`\`\`svelte
-<Theme
-  paletteHex={{
-    primary: '#6366f1',
-    secondary: '#ec4899',
-    success: '#22c55e',
-    warning: '#f59e0b',
-    danger: '#ef4444',
-    info: '#3b82f6'
-  }}
-  surfaceHex={{ background: '#f8fafc', foreground: '#1e293b' }}
-  border={{ widthPx: 1, radiusRem: 0.5, colorHex: '#e2e8f0' }}
-  spacingRem={1}
-/>
+<Theme />
 \`\`\`
 
 ---

@@ -48,8 +48,8 @@
 			with our CLI tool.
 		</li>
 		<li>
-			<strong>Batteries Included Theming</strong>: Just provide your base colors and Bref handles
-			shade generation, contrast calculation, and dark mode automatically.
+			<strong>Explicit Dark Theme</strong>: Shared semantic tokens provide consistent colors,
+			spacing, typography, focus, and motion without runtime theme calculation.
 		</li>
 	</ul>
 </Section>
