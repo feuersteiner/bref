@@ -5,16 +5,19 @@ Guidelines for adding new components to the library.
 ## Code organization and formatting
 
 - Use kebab-case for source files and folders. SvelteKit's `+page.svelte`, `+layout.svelte`,
-  `+error.svelte`, `+server.ts`, and dotted route folders such as `llms.txt` keep their framework
-  names.
+  `+error.svelte`, and `+server.ts` keep their framework names only beneath `src/routes`; the
+  published `src/routes/llms.txt` route is the sole dotted-folder exception.
 - Keep TypeScript type and interface names in PascalCase. Prefer interfaces for object shapes and
   `import type` for type-only imports.
 - Use tabs, single quotes, no trailing commas, and a 100-character print width. Run `bun run format`
   before committing and `bun run lint` to verify formatting and ESLint rules.
 - Keep TypeScript modules and ordinary Svelte components to 100 non-blank, non-comment lines. The
-  named `cssHeavyComponents` exceptions in `eslint.config.js` may reach 300 lines because their scoped
-  CSS lives beside their markup; only add an exception when the additional lines are predominantly
-  scoped CSS. Split non-style-heavy components instead.
+  named `cssHeavyComponents` exceptions in `eslint.config.js` may reach 300 lines only when the
+  component fits the limit without its scoped CSS. The separately named `demoPageComponents` list is
+  limited to canonical documentation routes that keep complete, copyable examples together; do not
+  classify those routes as CSS-heavy or add ordinary components to either list. The lint policy and
+  its adversarial verifier have a bounded 200-line allowance for their declarative rule and fixture
+  tables; application modules do not share that allowance.
 - `src/lib/base/icon/types.ts` is the generated Material Symbols name union and is exempt from the
   line limit. If it moves to `icon-names.ts`, that generated file remains exempt.
 - `src/internal/layout/types.ts` and `src/routes/llms.txt/+server.ts` are declarative registries and

@@ -11,11 +11,26 @@ import svelteConfig from './svelte.config.js';
 
 const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
 
-// These components exceed 100 non-blank, non-comment lines because their scoped CSS belongs with
-// their markup. Add an entry only when the additional lines are predominantly scoped styles.
+// These components exceed 100 non-blank, non-comment lines only because their scoped CSS belongs
+// with their markup. Each remains within the limit when its scoped style block is excluded.
 const cssHeavyComponents = [
 	'src/lib/base/{button/{button,icon-button},icon/icon,loading/{morphing-shapes-loading,textual-loading},pill/pill,progress-bar/progress-bar,select/select,slider/slider,text-input/text-input,tree-view/tree-node}.svelte',
-	'src/routes/{+page,buttons/{+page,button/+page,icon-button/+page},icon/+page,inputs/{area-text-input/+page,select/+page,slider/+page,text-input/+page},pill-selection/+page,pill/+page,progress/{morphing-shapes/+page,progress-bar/+page,textual/+page},theming/+page,tree-view/+page,types/+page}.svelte'
+	'src/routes/{+page,buttons/{+page,button/+page},inputs/area-text-input/+page,progress/{morphing-shapes/+page,progress-bar/+page,textual/+page},theming/+page,tree-view/+page}.svelte'
+];
+
+// These documentation pages intentionally keep complete, copyable examples in one route. They are
+// not CSS-heavy and must be considered separately from cssHeavyComponents.
+const demoPageComponents = [
+	'src/routes/{buttons/icon-button/+page,icon/+page,inputs/{select/+page,slider/+page,text-input/+page},pill-selection/+page,pill/+page,types/+page}.svelte'
+];
+
+const svelteKitSpecialFiles = [
+	'src/routes/**/[+]page.{svelte,ts}',
+	'src/routes/**/[+]page.server.ts',
+	'src/routes/**/[+]layout.{svelte,ts}',
+	'src/routes/**/[+]layout.server.ts',
+	'src/routes/**/[+]error.svelte',
+	'src/routes/**/[+]server.ts'
 ];
 
 const sharedRules = {
@@ -59,16 +74,34 @@ export default defineConfig(
 			'check-file/filename-naming-convention': [
 				'error',
 				{
-					'src/**/!(+*).{ts,svelte}': 'KEBAB_CASE'
+					'src/**/*.{ts,svelte}': 'KEBAB_CASE'
 				},
 				{ ignoreMiddleExtensions: true }
 			],
 			'check-file/folder-naming-convention': [
 				'error',
 				{
-					'**/!(*.txt)/': 'KEBAB_CASE'
+					'src/**/': 'KEBAB_CASE'
 				}
 			]
+		}
+	},
+	{
+		// SvelteKit's supported special modules are allowed only below src/routes.
+		files: svelteKitSpecialFiles,
+		rules: {
+			'check-file/filename-naming-convention': [
+				'error',
+				{ 'src/routes/**/[+]*.{ts,svelte}': '[+]@(page|layout|error|server)' },
+				{ ignoreMiddleExtensions: true }
+			]
+		}
+	},
+	{
+		// llms.txt is a published SvelteKit route, not a blanket exception for .txt folders.
+		files: ['src/routes/**/llms.txt/**/*.{ts,svelte}'],
+		rules: {
+			'check-file/folder-naming-convention': ['error', { 'src/routes/**/llms.txt/': 'llms[.]txt' }]
 		}
 	},
 	{
@@ -87,10 +120,23 @@ export default defineConfig(
 		files: ['**/*.svelte'],
 		rules: {
 			// Dynamic Svelte class expressions produce an empty placeholder in the parser. Static
-			// classes still require a matching scoped selector.
-			'svelte/no-unused-class-name': ['error', { allowedClassNames: ['/^$/'] }],
+			// classes still require a matching scoped selector. `container` is consumed by the
+			// intentional :global(.container) rule in src/routes/+layout.svelte.
+			'svelte/no-unused-class-name': ['error', { allowedClassNames: ['/^$/', 'container'] }],
 			'svelte/valid-compile': 'error'
 		}
+	},
+	{
+		files: demoPageComponents,
+		rules: {
+			'max-lines': ['error', { max: 300, skipBlankLines: true, skipComments: true }]
+		}
+	},
+	{
+		// The policy declaration and its adversarial verifier enumerate rules and fixtures rather than
+		// application logic; retain a bounded allowance while keeping source modules at 100 lines.
+		files: ['eslint.config.js', 'scripts/verify-lint-rules.mjs'],
+		rules: { 'max-lines': ['error', { max: 200, skipBlankLines: true, skipComments: true }] }
 	},
 	{
 		files: cssHeavyComponents,

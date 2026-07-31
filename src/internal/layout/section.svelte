@@ -14,7 +14,7 @@
 	} = $props();
 </script>
 
-<section {id}>
+<section {id} class="container">
 	{#if title}
 		<h2>{title}</h2>
 	{/if}

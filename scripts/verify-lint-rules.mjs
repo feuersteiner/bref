@@ -1,27 +1,49 @@
+import { randomUUID } from 'node:crypto';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
-import { join, relative } from 'node:path';
+import { dirname, join, relative } from 'node:path';
 import { ESLint } from 'eslint';
 import { compile } from 'svelte/compiler';
 
 const projectDirectory = process.cwd();
-const fixtureDirectory = join(projectDirectory, 'src/lint-fixtures');
-await rm(fixtureDirectory, { recursive: true, force: true });
-await mkdir(fixtureDirectory);
+const fixtureName = `lint-fixtures-${randomUUID()}`;
+const fixtureDirectories = [
+	join(projectDirectory, 'src', fixtureName),
+	join(projectDirectory, 'src', 'routes', fixtureName),
+	join(projectDirectory, 'src', 'lib', fixtureName)
+];
+const fixtureDirectory = fixtureDirectories[0];
+
+if (
+	fixtureDirectories.some(
+		(directory) =>
+			!directory.startsWith(join(projectDirectory, 'src', '')) || !directory.endsWith(fixtureName)
+	)
+) {
+	throw new Error(
+		`Refusing to use unexpected fixture directories: ${fixtureDirectories.join(', ')}`
+	);
+}
+await Promise.all(fixtureDirectories.map((directory) => mkdir(directory)));
 const eslint = new ESLint({ cwd: projectDirectory });
 
 const writeFixture = (name, contents) => writeFile(join(fixtureDirectory, name), contents);
 const lintFixture = async (name) =>
 	(await eslint.lintFiles([join(fixtureDirectory, name)]))[0].messages;
-const expectRule = async (name, ruleId) => {
-	const messages = await lintFixture(name);
-	if (!messages.some((message) => message.ruleId === ruleId)) {
-		throw new Error(`${name} did not report ${ruleId}: ${JSON.stringify(messages)}`);
-	}
+const lintVirtualFixture = async (name, contents) => {
+	const path = join(projectDirectory, name);
+	await mkdir(dirname(path), { recursive: true });
+	await writeFile(path, contents);
+	return (await eslint.lintFiles([path]))[0].messages;
 };
-const expectClean = async (name) => {
-	const messages = await lintFixture(name);
-	if (messages.length > 0)
-		throw new Error(`${name} unexpectedly failed: ${JSON.stringify(messages)}`);
+const expect = async (name, messagesPromise, ruleId) => {
+	const messages = await messagesPromise;
+	const failed = ruleId
+		? !messages.some((message) => message.ruleId === ruleId)
+		: messages.length > 0;
+	if (failed)
+		throw new Error(
+			`${name} did not ${ruleId ? `report ${ruleId}` : 'pass'}: ${JSON.stringify(messages)}`
+		);
 };
 
 try {
@@ -29,7 +51,6 @@ try {
 		writeFixture('good-name.ts', 'export const validName = true;\n'),
 		writeFixture('good-name.svelte', '<p>valid</p>\n'),
 		writeFixture('good-name.svelte.ts', 'export const validName = true;\n'),
-		writeFixture('+page.svelte', '<p>route</p>\n'),
 		writeFixture('BadName.ts', 'export const validName = true;\n'),
 		writeFixture('bad_name.svelte', '<p>invalid</p>\n'),
 		writeFixture(
@@ -45,15 +66,48 @@ try {
 	);
 
 	await Promise.all([
-		expectClean('good-name.ts'),
-		expectClean('good-name.svelte'),
-		expectClean('good-name.svelte.ts'),
-		expectClean('+page.svelte'),
-		expectRule('BadName.ts', 'check-file/filename-naming-convention'),
-		expectRule('bad_name.svelte', 'check-file/filename-naming-convention'),
-		expectRule('BadFolder/good-name.ts', 'check-file/folder-naming-convention'),
-		expectRule('ordinary-component.svelte', 'max-lines'),
-		expectRule('orphan-selector.svelte', 'svelte/valid-compile')
+		expect('good-name.ts', lintFixture('good-name.ts')),
+		expect('good-name.svelte', lintFixture('good-name.svelte')),
+		expect('good-name.svelte.ts', lintFixture('good-name.svelte.ts')),
+		expect('BadName.ts', lintFixture('BadName.ts'), 'check-file/filename-naming-convention'),
+		expect(
+			'bad_name.svelte',
+			lintFixture('bad_name.svelte'),
+			'check-file/filename-naming-convention'
+		),
+		expect(
+			'BadFolder/good-name.ts',
+			lintFixture('BadFolder/good-name.ts'),
+			'check-file/folder-naming-convention'
+		),
+		expect('ordinary-component.svelte', lintFixture('ordinary-component.svelte'), 'max-lines'),
+		expect('orphan-selector.svelte', lintFixture('orphan-selector.svelte'), 'svelte/valid-compile')
+	]);
+	await Promise.all([
+		expect(
+			`src/routes/${fixtureName}/+page.svelte`,
+			lintVirtualFixture(`src/routes/${fixtureName}/+page.svelte`, '<p>route</p>\n')
+		),
+		expect(
+			`src/routes/${fixtureName}/+layout.server.ts`,
+			lintVirtualFixture(
+				`src/routes/${fixtureName}/+layout.server.ts`,
+				'export const load = () => ({});\n'
+			)
+		),
+		expect(
+			`src/lib/${fixtureName}/+BadName.svelte`,
+			lintVirtualFixture(`src/lib/${fixtureName}/+BadName.svelte`, '<p>invalid</p>\n'),
+			'check-file/filename-naming-convention'
+		),
+		expect(
+			`src/lib/${fixtureName}/BadFolder.txt/good-name.ts`,
+			lintVirtualFixture(
+				`src/lib/${fixtureName}/BadFolder.txt/good-name.ts`,
+				'export const validName = true;\n'
+			),
+			'check-file/folder-naming-convention'
+		)
 	]);
 
 	const cssHeavyConfig = await eslint.calculateConfigForFile('src/lib/base/select/select.svelte');
@@ -71,5 +125,7 @@ try {
 
 	console.log(`Lint rule fixtures passed: ${relative(projectDirectory, fixtureDirectory)}`);
 } finally {
-	await rm(fixtureDirectory, { recursive: true, force: true });
+	await Promise.all(
+		fixtureDirectories.map((directory) => rm(directory, { recursive: true, force: true }))
+	);
 }
