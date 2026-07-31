@@ -94,19 +94,24 @@ function accessibleTextColor(preferred, background) {
 }
 
 function colorTokens(name, seed, background) {
-	const base = ensureContrast(seed, background, MIN_UI_CONTRAST);
+	// Semantic base colors are used as text in ghost variants, so they must meet
+	// the text threshold against the page background rather than only UI contrast.
+	const base = ensureContrast(seed, background, MIN_TEXT_CONTRAST);
 	const contrast = accessibleTextColor(
 		contrastRatio('#ffffff', base) >= contrastRatio('#000000', base) ? '#ffffff' : '#000000',
 		base
 	);
+	// Soft variants use the semantic base as their text color. Adjust the soft
+	// background itself so that pairing remains readable for every seed.
+	const soft = ensureContrast(mix(base, background, 0.78), base, MIN_TEXT_CONTRAST);
 
 	return {
 		[`--color-${name}`]: base,
-		[`--color-${name}-soft`]: mix(base, background, 0.78),
+		[`--color-${name}-soft`]: soft,
 		[`--color-${name}-saturated`]: ensureContrast(
 			mix(base, contrast, 0.15),
 			background,
-			MIN_UI_CONTRAST
+			MIN_TEXT_CONTRAST
 		),
 		[`--color-${name}-contrast`]: contrast
 	};
@@ -148,7 +153,7 @@ export function generateTokens(seeds) {
 		...colorTokens('primary', values.accent, values.background),
 		...colorTokens('success', values.success, values.background),
 		...colorTokens('warning', values.warning, values.background),
-		...colorTokens('danger', values.error, values.background)
+		...colorTokens('error', values.error, values.background)
 	};
 }
 

@@ -22,7 +22,7 @@ async function temporaryDirectory() {
 }
 
 describe('theme generation', () => {
-	it('creates explicit tokens with accessible foreground and component contrast', () => {
+	it('creates explicit v1 tokens with accessible foreground and component contrast', () => {
 		const tokens = generateTokens({
 			background: '#ffffff',
 			foreground: '#aaaaaa',
@@ -35,8 +35,75 @@ describe('theme generation', () => {
 		expect(
 			contrastRatio(tokens['--color-primary-contrast'], tokens['--color-primary'])
 		).toBeGreaterThanOrEqual(4.5);
+		expect(tokens).toHaveProperty('--color-error');
+		expect(tokens).toHaveProperty('--color-error-soft');
+		expect(tokens).toHaveProperty('--color-error-saturated');
+		expect(tokens).toHaveProperty('--color-error-contrast');
+		expect(tokens).not.toHaveProperty('--color-danger');
+		expect(renderTheme({ error: '#dc2626' })).toContain('--color-error:');
+		expect(renderTheme({ error: '#dc2626' })).not.toContain('--color-danger:');
 		expect(tokens['--color-primary']).toMatch(/^#[\da-f]{6}$/);
 		expect(renderTheme({ accent: '#0ea5e9' })).toContain('--color-focus:');
+	});
+
+	it('keeps semantic text accessible in filled, soft, and ghost states for default and near-background seeds', () => {
+		const semanticNames = ['primary', 'success', 'warning', 'error'];
+		const palettes = [
+			{},
+			{
+				background: '#181818',
+				accent: '#484848',
+				success: '#484848',
+				warning: '#484848',
+				error: '#484848'
+			}
+		];
+
+		for (const palette of palettes) {
+			const tokens = generateTokens(palette);
+
+			for (const name of semanticNames) {
+				const base = tokens[`--color-${name}`];
+
+				expect(contrastRatio(base, tokens['--color-background'])).toBeGreaterThanOrEqual(4.5);
+				expect(contrastRatio(base, tokens[`--color-${name}-soft`])).toBeGreaterThanOrEqual(4.5);
+				expect(contrastRatio(tokens[`--color-${name}-contrast`], base)).toBeGreaterThanOrEqual(4.5);
+			}
+		}
+	});
+
+	it('preserves semantic contrast across randomized palettes', () => {
+		const semanticNames = ['primary', 'success', 'warning', 'error'];
+		let state = 0x6d2b79f5;
+		const nextHex = () => {
+			state = Math.imul(state ^ (state >>> 15), 1 | state);
+			state ^= state + Math.imul(state ^ (state >>> 7), 61 | state);
+			const value = (state ^ (state >>> 14)) >>> 0;
+
+			return `#${(value & 0xffffff).toString(16).padStart(6, '0')}`;
+		};
+
+		for (let index = 0; index < 1_000; index += 1) {
+			const tokens = generateTokens({
+				background: nextHex(),
+				foreground: nextHex(),
+				accent: nextHex(),
+				success: nextHex(),
+				warning: nextHex(),
+				error: nextHex()
+			});
+
+			for (const name of semanticNames) {
+				const base = tokens[`--color-${name}`];
+
+				expect(contrastRatio(base, tokens['--color-background'])).toBeGreaterThanOrEqual(4.5);
+				expect(contrastRatio(base, tokens[`--color-${name}-soft`])).toBeGreaterThanOrEqual(4.5);
+				expect(contrastRatio(tokens[`--color-${name}-contrast`], base)).toBeGreaterThanOrEqual(4.5);
+				expect(
+					contrastRatio(tokens[`--color-${name}-saturated`], tokens['--color-background'])
+				).toBeGreaterThanOrEqual(4.5);
+			}
+		}
 	});
 
 	it('creates a new theme without overwriting an existing one', async () => {
