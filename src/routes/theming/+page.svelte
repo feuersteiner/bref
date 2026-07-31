@@ -5,10 +5,16 @@
 
 	const colors = [
 		['background', '--color-background'],
+		['background soft', '--color-background-soft'],
+		['background saturated', '--color-background-saturated'],
+		['background contrast', '--color-background-contrast'],
 		['surface', '--color-surface'],
 		['surface hover', '--color-surface-hover'],
 		['border', '--color-border'],
 		['foreground', '--color-foreground'],
+		['foreground soft', '--color-foreground-soft'],
+		['foreground saturated', '--color-foreground-saturated'],
+		['foreground contrast', '--color-foreground-contrast'],
 		['muted', '--color-muted'],
 		['accent', '--color-accent'],
 		['focus', '--color-focus']
@@ -72,22 +78,35 @@
 	<ul>
 		<li>
 			<strong>Spacing:</strong> <code>--space-1</code>, <code>--space-2</code>,
-			<code>--space-3</code>, <code>--space-4</code>, <code>--space-6</code>, and
-			<code>--space-8</code>.
+			<code>--space-3</code>, <code>--space-4</code>, <code>--space-6</code>,
+			<code>--space-8</code>, and <code>--spacing</code>.
 		</li>
-		<li><strong>Typography:</strong> font family, sizes, weights, and line heights.</li>
 		<li>
-			<strong>Radius:</strong> <code>--radius-small</code> through <code>--radius-large</code>.
+			<strong>Controls:</strong> <code>--control-small</code>, <code>--control-medium</code>, and
+			<code>--control-large</code>.
+		</li>
+		<li>
+			<strong>Typography:</strong> <code>--font-family</code>, <code>--font-family-display</code>,
+			<code>--font-size-small</code>, <code>--font-size-medium</code>,
+			<code>--font-size-large</code>, <code>--font-weight-normal</code>,
+			<code>--font-weight-semibold</code>, <code>--line-height-tight</code>, and
+			<code>--line-height-normal</code>.
+		</li>
+		<li>
+			<strong>Shape:</strong> <code>--radius-small</code>, <code>--radius-medium</code>,
+			<code>--radius-large</code>, <code>--border-width</code>, and <code>--border-radius</code>.
 		</li>
 		<li>
 			<strong>Shadow:</strong> <code>--shadow-small</code>, <code>--shadow-medium</code>,
 			<code>--shadow-control</code>, and <code>--shadow-control-hover</code>.
 		</li>
-		<li><strong>Motion:</strong> duration and easing tokens.</li>
+		<li>
+			<strong>Motion:</strong> <code>--motion-fast</code>, <code>--motion-normal</code>,
+			<code>--motion-slow</code>, and <code>--motion-ease</code>.
+		</li>
 		<li>
 			<strong>Focus:</strong> <code>--focus-ring</code>, applied with <code>:focus-visible</code>.
 		</li>
-		<li><strong>Controls:</strong> 1.5rem, 1.75rem, and 2rem minimum dense sizes.</li>
 	</ul>
 </Section>
 

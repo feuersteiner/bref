@@ -42,7 +42,7 @@
 		--color-warning: #e6a73a;
 		--color-warning-soft: #4d3815;
 		--color-warning-contrast: #181205;
-		--color-danger: #f06b76;
+		--color-danger: #f2767e;
 		--color-danger-soft: #4e2428;
 		--color-danger-contrast: #1b090b;
 		--color-info: #62b3e8;

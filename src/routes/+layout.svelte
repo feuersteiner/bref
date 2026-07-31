@@ -21,6 +21,7 @@
 		display: flex;
 		gap: 1rem;
 		max-width: 60rem;
+		margin-inline: auto;
 		height: 100vh;
 		max-height: 100vh;
 		width: 100%;
