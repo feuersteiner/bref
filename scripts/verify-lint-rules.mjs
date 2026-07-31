@@ -9,6 +9,7 @@ const fixtureName = `lint-fixtures-${randomUUID()}`;
 const fixtureDirectories = [
 	join(projectDirectory, 'src', fixtureName),
 	join(projectDirectory, 'src', 'routes', fixtureName),
+	join(projectDirectory, 'src', 'routes', 'llms.txt', fixtureName),
 	join(projectDirectory, 'src', 'lib', fixtureName)
 ];
 const fixtureDirectory = fixtureDirectories[0];
@@ -35,6 +36,8 @@ const lintVirtualFixture = async (name, contents) => {
 	await writeFile(path, contents);
 	return (await eslint.lintFiles([path]))[0].messages;
 };
+const lintTextFixture = async (name, contents) =>
+	(await eslint.lintText(contents, { filePath: join(projectDirectory, name) }))[0].messages;
 const expect = async (name, messagesPromise, ruleId) => {
 	const messages = await messagesPromise;
 	const failed = ruleId
@@ -51,7 +54,11 @@ try {
 		writeFixture('good-name.ts', 'export const validName = true;\n'),
 		writeFixture('good-name.svelte', '<p>valid</p>\n'),
 		writeFixture('good-name.svelte.ts', 'export const validName = true;\n'),
+		writeFixture('good-name.js', 'export const validName = true;\n'),
+		writeFixture('good-name.svelte.js', 'export const validName = true;\n'),
 		writeFixture('BadName.ts', 'export const validName = true;\n'),
+		writeFixture('BadName.js', 'export const validName = true;\n'),
+		writeFixture('BadName.svelte.js', 'export const validName = true;\n'),
 		writeFixture('bad_name.svelte', '<p>invalid</p>\n'),
 		writeFixture(
 			'ordinary-component.svelte',
@@ -69,7 +76,15 @@ try {
 		expect('good-name.ts', lintFixture('good-name.ts')),
 		expect('good-name.svelte', lintFixture('good-name.svelte')),
 		expect('good-name.svelte.ts', lintFixture('good-name.svelte.ts')),
+		expect('good-name.js', lintFixture('good-name.js')),
+		expect('good-name.svelte.js', lintFixture('good-name.svelte.js')),
 		expect('BadName.ts', lintFixture('BadName.ts'), 'check-file/filename-naming-convention'),
+		expect('BadName.js', lintFixture('BadName.js'), 'check-file/filename-naming-convention'),
+		expect(
+			'BadName.svelte.js',
+			lintFixture('BadName.svelte.js'),
+			'check-file/filename-naming-convention'
+		),
 		expect(
 			'bad_name.svelte',
 			lintFixture('bad_name.svelte'),
@@ -96,6 +111,34 @@ try {
 			)
 		),
 		expect(
+			`src/routes/${fixtureName}/+page.js`,
+			lintVirtualFixture(`src/routes/${fixtureName}/+page.js`, 'export const load = () => ({});\n')
+		),
+		expect(
+			'src/lib/review-good-folder/good-name.js',
+			lintTextFixture('src/lib/review-good-folder/good-name.js', 'export const validName = true;\n')
+		),
+		expect(
+			'src/lib/review-good-folder/good-name.svelte.js',
+			lintTextFixture(
+				'src/lib/review-good-folder/good-name.svelte.js',
+				'export const validName = true;\n'
+			)
+		),
+		expect(
+			'src/lib/ReviewBadFolder/BadName.js',
+			lintTextFixture('src/lib/ReviewBadFolder/BadName.js', 'export const validName = true;\n'),
+			'check-file/filename-naming-convention'
+		),
+		expect(
+			'src/lib/ReviewBadFolder/BadName.svelte.js',
+			lintTextFixture(
+				'src/lib/ReviewBadFolder/BadName.svelte.js',
+				'export const validName = true;\n'
+			),
+			'check-file/filename-naming-convention'
+		),
+		expect(
 			`src/lib/${fixtureName}/+BadName.svelte`,
 			lintVirtualFixture(`src/lib/${fixtureName}/+BadName.svelte`, '<p>invalid</p>\n'),
 			'check-file/filename-naming-convention'
@@ -104,6 +147,28 @@ try {
 			`src/lib/${fixtureName}/BadFolder.txt/good-name.ts`,
 			lintVirtualFixture(
 				`src/lib/${fixtureName}/BadFolder.txt/good-name.ts`,
+				'export const validName = true;\n'
+			),
+			'check-file/folder-naming-convention'
+		),
+		expect(
+			`src/routes/llms.txt/${fixtureName}/good-name.ts`,
+			lintVirtualFixture(
+				`src/routes/llms.txt/${fixtureName}/good-name.ts`,
+				'export const validName = true;\n'
+			)
+		),
+		expect(
+			`src/routes/llms.txt/${fixtureName}/good-name.js`,
+			lintVirtualFixture(
+				`src/routes/llms.txt/${fixtureName}/good-name.js`,
+				'export const validName = true;\n'
+			)
+		),
+		expect(
+			`src/routes/llms.txt/${fixtureName}/BadFolder/good-name.ts`,
+			lintVirtualFixture(
+				`src/routes/llms.txt/${fixtureName}/BadFolder/good-name.ts`,
 				'export const validName = true;\n'
 			),
 			'check-file/folder-naming-convention'

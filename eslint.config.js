@@ -25,12 +25,12 @@ const demoPageComponents = [
 ];
 
 const svelteKitSpecialFiles = [
-	'src/routes/**/[+]page.{svelte,ts}',
-	'src/routes/**/[+]page.server.ts',
-	'src/routes/**/[+]layout.{svelte,ts}',
-	'src/routes/**/[+]layout.server.ts',
+	'src/routes/**/[+]page.{js,svelte,ts}',
+	'src/routes/**/[+]page.server.{js,ts}',
+	'src/routes/**/[+]layout.{js,svelte,ts}',
+	'src/routes/**/[+]layout.server.{js,ts}',
 	'src/routes/**/[+]error.svelte',
-	'src/routes/**/[+]server.ts'
+	'src/routes/**/[+]server.{js,ts}'
 ];
 
 const sharedRules = {
@@ -68,13 +68,13 @@ export default defineConfig(
 		}
 	},
 	{
-		files: ['src/**/*.{ts,svelte}'],
+		files: ['src/**/*.{js,ts,svelte}'],
 		plugins: { 'check-file': checkFile },
 		rules: {
 			'check-file/filename-naming-convention': [
 				'error',
 				{
-					'src/**/*.{ts,svelte}': 'KEBAB_CASE'
+					'src/**/*.{js,ts,svelte}': 'KEBAB_CASE'
 				},
 				{ ignoreMiddleExtensions: true }
 			],
@@ -92,24 +92,40 @@ export default defineConfig(
 		rules: {
 			'check-file/filename-naming-convention': [
 				'error',
-				{ 'src/routes/**/[+]*.{ts,svelte}': '[+]@(page|layout|error|server)' },
+				{ 'src/routes/**/[+]*.{js,ts,svelte}': '[+]@(page|layout|error|server)' },
 				{ ignoreMiddleExtensions: true }
 			]
 		}
 	},
 	{
 		// llms.txt is a published SvelteKit route, not a blanket exception for .txt folders.
-		files: ['src/routes/**/llms.txt/**/*.{ts,svelte}'],
+		files: ['src/routes/**/llms.txt/**/*.{js,ts,svelte}'],
 		rules: {
-			'check-file/folder-naming-convention': ['error', { 'src/routes/**/llms.txt/': 'llms[.]txt' }]
+			'check-file/folder-naming-convention': [
+				'error',
+				{ 'src/**/': 'KEBAB_CASE' },
+				{ ignoreWords: ['llms.txt'] }
+			]
 		}
 	},
 	{
-		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
+		files: ['**/*.svelte', '**/*.svelte.ts'],
 
 		languageOptions: {
 			parserOptions: {
 				projectService: true,
+				extraFileExtensions: ['.svelte'],
+				parser: ts.parser,
+				svelteConfig
+			}
+		}
+	},
+	{
+		// TypeScript's project service does not include compound .svelte.js extensions, but they
+		// remain valid Svelte parser inputs and must receive the same filename policy above.
+		files: ['**/*.svelte.js'],
+		languageOptions: {
+			parserOptions: {
 				extraFileExtensions: ['.svelte'],
 				parser: ts.parser,
 				svelteConfig
