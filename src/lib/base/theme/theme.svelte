@@ -106,7 +106,14 @@
 	}
 
 	:global(*:focus-visible) {
-		outline: none;
+		outline: 2px solid var(--color-focus);
+		outline-offset: 2px;
 		box-shadow: var(--focus-ring);
+	}
+
+	@media (forced-colors: active) {
+		:global(*:focus-visible) {
+			outline-color: Highlight;
+		}
 	}
 </style>

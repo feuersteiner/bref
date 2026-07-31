@@ -39,7 +39,7 @@ npm install bref-ui
 
 ## Theming: Explicit Dark Tokens
 
-Add \`<Theme />\` once at the application root to install Bref's dark-only semantic tokens. The theme is static: it does not calculate colors at runtime and does not provide a light mode.
+Add `<Theme />` once at the application root to install Bref's dark-only semantic tokens. The theme is static: it does not calculate colors at runtime and does not provide a light mode.
 
 The foundation documents tokens for semantic color, spacing, typography, radius, shadow, motion, focus, and dense control sizes. Components consume these tokens rather than embedding color values.
 
