@@ -15,5 +15,19 @@ export const componentWorkbenches = [
 		description: 'A stale entry',
 		icon: 'view_quilt',
 		workbench: unrelated
-	}
+	},
+	{
+		slug: 'workbench',
+		title: 'Duplicate',
+		description: 'A duplicate fixture',
+		icon: 'view_quilt',
+		workbench: unrelated
+	},
+	{
+		slug: 'broken',
+		title: 'Broken',
+		description: 'An incomplete fixture',
+		icon: 'view_quilt'
+	},
+	42
 ];

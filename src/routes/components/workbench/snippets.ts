@@ -2,6 +2,10 @@ import type { ComponentWorkbench } from '../../../lib/docs/types.ts';
 import ReferenceDemo from './reference-demo.svelte';
 
 const demo = { component: ReferenceDemo };
+const stateDemo = (state: 'disabled' | 'empty' | 'loading' | 'error' | 'long-content') => ({
+	component: ReferenceDemo,
+	props: { state }
+});
 
 export const workbench: ComponentWorkbench = {
 	component: 'Reference component',
@@ -48,31 +52,31 @@ export const workbench: ComponentWorkbench = {
 			coverage: 'shown',
 			description:
 				'Toggle the disabled control in the live demo and observe its unavailable state.',
-			demo
+			demo: stateDemo('disabled')
 		},
 		{
 			name: 'empty',
 			coverage: 'shown',
 			description: 'The live demo starts with no recorded activations.',
-			demo
+			demo: stateDemo('empty')
 		},
 		{
 			name: 'loading',
 			coverage: 'shown',
 			description: 'Use the disabled affordance while work is pending without hiding context.',
-			demo
+			demo: stateDemo('loading')
 		},
 		{
 			name: 'error',
 			coverage: 'shown',
 			description: 'Keep the action and its status message available for recovery.',
-			demo
+			demo: stateDemo('error')
 		},
 		{
 			name: 'long-content',
 			coverage: 'shown',
 			description: 'The status text remains visible as its activation count grows.',
-			demo
+			demo: stateDemo('long-content')
 		}
 	],
 	denseUsage: {

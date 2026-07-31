@@ -1,5 +1,5 @@
 import type { IconName } from '../../lib/base/icon/types.ts';
-import { componentWorkbenchPages } from '../../routes/components/registry.ts';
+import { componentWorkbenchPages } from '../../routes/components/navigation.ts';
 
 export interface PageProps {
 	title: string;

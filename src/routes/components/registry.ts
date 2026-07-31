@@ -1,6 +1,5 @@
 import type { ComponentWorkbench } from '../../lib/docs/types.ts';
 import type { IconName } from '../../lib/base/icon/types.ts';
-import type { PageProps } from '../../internal/layout/types.ts';
 import { workbench } from './workbench/snippets.ts';
 
 export const componentWorkbenches = [
@@ -18,12 +17,3 @@ export const componentWorkbenches = [
 	icon: IconName;
 	workbench: ComponentWorkbench;
 }[];
-
-export const componentWorkbenchPages: PageProps[] = componentWorkbenches.map(
-	({ slug, title, description, icon }) => ({
-		title,
-		description,
-		href: `/components/${slug}`,
-		icon
-	})
-);

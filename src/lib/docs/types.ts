@@ -23,6 +23,7 @@ export interface DocumentedExample {
 
 export interface LiveDemo {
 	component: Component;
+	props?: Record<string, unknown>;
 }
 
 export type ExampleCoverage =

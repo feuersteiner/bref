@@ -107,30 +107,72 @@ const registryEntries = (registryFile) => {
 		const workbenchSpecifier = statement.importClause?.namedBindings;
 		if (!workbenchSpecifier || !ts.isNamedImports(workbenchSpecifier)) continue;
 		for (const specifier of workbenchSpecifier.elements) {
-			if ((specifier.propertyName?.text ?? specifier.name.text) === 'workbench') {
-				imports.set(specifier.name.text, statement.moduleSpecifier.text);
-			}
+			imports.set(specifier.name.text, {
+				imported: specifier.propertyName?.text ?? specifier.name.text,
+				target: statement.moduleSpecifier.text
+			});
 		}
 	}
 
-	const declaration = source.statements
-		.filter(ts.isVariableStatement)
+	const declarations = source.statements
+		.filter(
+			(statement) =>
+				ts.isVariableStatement(statement) &&
+				statement.modifiers?.some((modifier) => modifier.kind === ts.SyntaxKind.ExportKeyword)
+		)
 		.flatMap((statement) => statement.declarationList.declarations)
-		.find((entry) => ts.isIdentifier(entry.name) && entry.name.text === 'componentWorkbenches');
+		.filter((entry) => ts.isIdentifier(entry.name) && entry.name.text === 'componentWorkbenches');
+	if (declarations.length !== 1) {
+		return {
+			imports,
+			entries: [],
+			errors: ['registry must export exactly one componentWorkbenches array declaration.']
+		};
+	}
+	const declaration = declarations[0];
 	const initializer = declaration?.initializer && unwrap(declaration.initializer);
 	if (!initializer || !ts.isArrayLiteralExpression(initializer)) {
-		return { imports, entries: [], error: 'registry must export a componentWorkbenches array.' };
+		return { imports, entries: [], errors: ['registry must export a componentWorkbenches array.'] };
 	}
-	const entries = initializer.elements.flatMap((entry) => {
-		if (!ts.isObjectLiteralExpression(entry)) return [];
+	const errors = [];
+	const entries = [];
+	const requiredFields = ['slug', 'title', 'description', 'icon', 'workbench'];
+	for (const [index, entry] of initializer.elements.entries()) {
+		const label = `registry entry ${index + 1}`;
+		if (!ts.isObjectLiteralExpression(entry)) {
+			errors.push(`${label} must be an object.`);
+			continue;
+		}
+		const names = entry.properties.flatMap((property) =>
+			ts.isPropertyAssignment(property) || ts.isShorthandPropertyAssignment(property)
+				? [property.name.getText(source)]
+				: []
+		);
+		if (
+			entry.properties.length !== requiredFields.length ||
+			names.some((name) => !requiredFields.includes(name))
+		) {
+			errors.push(`${label} must contain exactly slug, title, description, icon, and workbench.`);
+			continue;
+		}
+		if (
+			requiredFields.some((name) => names.filter((candidate) => candidate === name).length !== 1)
+		) {
+			errors.push(`${label} must contain each required field exactly once.`);
+			continue;
+		}
 		const slug = stringProperty(entry, 'slug');
 		const title = stringProperty(entry, 'title');
 		const description = stringProperty(entry, 'description');
 		const icon = stringProperty(entry, 'icon');
 		const workbench = identifierProperty(entry, 'workbench');
-		return slug && title && description && icon && workbench ? [{ slug, workbench }] : [];
-	});
-	return { imports, entries };
+		if (!slug || !title || !description || !icon || !workbench) {
+			errors.push(`${label} must use string metadata and an imported workbench identifier.`);
+			continue;
+		}
+		entries.push({ slug, workbench });
+	}
+	return { imports, entries, errors };
 };
 
 export const verifyComponentWorkbenches = (root = resolve('src/routes/components')) => {
@@ -141,9 +183,17 @@ export const verifyComponentWorkbenches = (root = resolve('src/routes/components
 	const workbenches = readdirSync(root, { withFileTypes: true })
 		.filter((entry) => entry.isDirectory())
 		.map((entry) => entry.name);
-	const { imports, entries, error } = registryEntries(registryFile);
-	if (error) errors.push(error);
-	const entryBySlug = new Map(entries.map((entry) => [entry.slug, entry]));
+	const { imports, entries, errors: registryErrors } = registryEntries(registryFile);
+	errors.push(...registryErrors);
+	const entriesBySlug = new Map();
+	for (const entry of entries) {
+		const matches = entriesBySlug.get(entry.slug) ?? [];
+		matches.push(entry);
+		entriesBySlug.set(entry.slug, matches);
+	}
+	for (const [slug, matches] of entriesBySlug) {
+		if (matches.length > 1) errors.push(`${slug} is registered more than once.`);
+	}
 
 	for (const slug of workbenches) {
 		const directory = join(root, slug);
@@ -160,12 +210,14 @@ export const verifyComponentWorkbenches = (root = resolve('src/routes/components
 				`${slug}/+page.svelte must import and render ComponentPage with local workbench.`
 			);
 		}
-		const entry = entryBySlug.get(slug);
-		if (!entry) {
+		const matches = entriesBySlug.get(slug) ?? [];
+		if (!matches.length) {
 			errors.push(`${slug} must be registered in registry.ts.`);
 			continue;
 		}
-		if (imports.get(entry.workbench) !== `./${slug}/snippets.ts`) {
+		const entry = matches[0];
+		const imported = imports.get(entry.workbench);
+		if (imported?.imported !== 'workbench' || imported.target !== `./${slug}/snippets.ts`) {
 			errors.push(`${slug} registry entry must use its direct workbench import.`);
 		}
 	}

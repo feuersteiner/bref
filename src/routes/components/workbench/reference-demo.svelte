@@ -1,11 +1,27 @@
 <script lang="ts">
+	type DemoState = 'default' | 'disabled' | 'empty' | 'loading' | 'error' | 'long-content';
+
+	let { state: demoState = 'default' }: { state?: DemoState } = $props();
 	let variant = $state<'primary' | 'secondary'>('primary');
 	let size = $state<'small' | 'medium'>('medium');
 	let disabled = $state(false);
 	let presses = $state(0);
+	const forcedDisabled = $derived(demoState === 'disabled');
+	const loading = $derived(demoState === 'loading');
+	const error = $derived(demoState === 'error');
+	const longContent = $derived(demoState === 'long-content');
+	const actionLabel = $derived(loading ? 'Working…' : error ? 'Try again' : 'Reference action');
 
 	const label = $derived(
-		disabled ? 'Reference action unavailable' : `Reference action pressed ${presses} times`
+		disabled || forcedDisabled || loading
+			? 'Reference action unavailable'
+			: error
+				? 'The reference action needs attention. Try again to recover.'
+				: longContent
+					? `Reference action pressed ${presses} times. This deliberately long status message remains readable in a constrained documentation example while explaining the complete next step for the user.`
+					: presses === 0
+						? 'No reference actions yet'
+						: `Reference action pressed ${presses} times`
 	);
 </script>
 
@@ -24,16 +40,19 @@
 			<option value="medium">Medium</option>
 		</select>
 	</label>
-	<label><input type="checkbox" bind:checked={disabled} /> Disabled</label>
+	{#if demoState === 'default'}
+		<label><input type="checkbox" bind:checked={disabled} /> Disabled</label>
+	{/if}
 	<button
 		class:secondary={variant === 'secondary'}
 		class:small={size === 'small'}
-		disabled
+		disabled={disabled || forcedDisabled || loading}
+		aria-busy={loading}
 		onclick={() => (presses += 1)}
 	>
-		Reference action
+		{actionLabel}
 	</button>
-	<p aria-live="polite">{label}</p>
+	<p aria-live="polite" role={error ? 'alert' : undefined}>{label}</p>
 </div>
 
 <style>

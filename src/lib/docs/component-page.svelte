@@ -13,7 +13,7 @@
 {#snippet liveDemo(example: DocumentedExample)}
 	{@const Demo = example.demo.component}
 	<div class="demo" aria-label={`Live demo: ${example.title}`}>
-		<Demo />
+		<Demo {...example.demo.props} />
 	</div>
 {/snippet}
 
@@ -69,7 +69,9 @@
 				<strong>{state.name}</strong> ({status(state.coverage)}): {state.description}
 				{#if state.coverage === 'shown'}
 					{@const StateDemo = state.demo.component}
-					<div class="demo" aria-label={`Live ${state.name} state demo`}><StateDemo /></div>
+					<div class="demo" aria-label={`Live ${state.name} state demo`}>
+						<StateDemo {...state.demo.props} />
+					</div>
 				{/if}
 			</li>
 		{/each}

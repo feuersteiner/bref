@@ -30,6 +30,22 @@ describe('component workbench contract', () => {
 		expect(body).toContain('aria-label="Live demo: Variants"');
 		expect(body).toContain('aria-label="Live disabled state demo"');
 		expect(body).toContain('Reference action');
+		expect(body).toContain('No reference actions yet');
+		expect(body).toContain('Working…');
+		expect(body).toContain('role="alert"');
+		expect(body).toContain('This deliberately long status message remains readable');
+		expect(body).toContain('disabled aria-busy="true"');
+	});
+
+	it('keeps root navigation free of route-local demo manifests', async () => {
+		const { readFile } = await import('node:fs/promises');
+		const [layoutTypes, navigation] = await Promise.all([
+			readFile('src/internal/layout/types.ts', 'utf8'),
+			readFile('src/routes/components/navigation.ts', 'utf8')
+		]);
+
+		expect(layoutTypes).not.toContain('components/registry.ts');
+		expect(navigation).not.toContain('./workbench/snippets.ts');
 	});
 
 	it('requires executable examples and allows explicit not-applicable coverage', () => {
